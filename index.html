@@ -24,6 +24,7 @@
       --tag-blue-bg: #DBEAFE; --tag-blue-text: #1E3A8A;
       --tag-mint-bg: #D1FAE5; --tag-mint-text: #14532D;
       --tag-peach-bg: #FCE7D3; --tag-peach-text: #7C2D12;
+      --tag-purple-bg: #EDE9FE; --tag-purple-text: #5B21B6;
       --ok: #166534; --bad: #991B1B; --cur: #92400E;
       --radius: 14px;
       --wrap: 1120px;
@@ -45,6 +46,7 @@
       --tag-blue-bg: #1E3A8A; --tag-blue-text: #DBEAFE;
       --tag-mint-bg: #14532D; --tag-mint-text: #D1FAE5;
       --tag-peach-bg: #7C2D12; --tag-peach-text: #FCE7D3;
+      --tag-purple-bg: #5B21B6; --tag-purple-text: #EDE9FE;
       --ok: #86EFAC; --bad: #FCA5A5; --cur: #FCD34D;
     }
 
@@ -176,7 +178,7 @@
     .section-desc { color: var(--text-muted); font-size: 1.05rem; }
 
     /* ============ Work cards ============ */
-    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
     .card {
       background: var(--surface); border: 2px solid var(--border-soft);
       border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column;
@@ -191,6 +193,7 @@
     .preview-lia { background: var(--tag-blue-bg); }
     .preview-corn { background: var(--tag-peach-bg); }
     .preview-en { background: var(--tag-mint-bg); }
+    .preview-ko { background: var(--tag-purple-bg); }
     .card-preview::after {
       content: ""; position: absolute; inset: 0; pointer-events: none;
       background-image: repeating-linear-gradient(45deg, rgba(255,255,255,.28) 0 8px, transparent 8px 18px);
@@ -205,6 +208,7 @@
     .tag-blue { background: var(--tag-blue-bg); color: var(--tag-blue-text); }
     .tag-mint { background: var(--tag-mint-bg); color: var(--tag-mint-text); }
     .tag-peach { background: var(--tag-peach-bg); color: var(--tag-peach-text); }
+    .tag-purple { background: var(--tag-purple-bg); color: var(--tag-purple-text); }
     .card p { color: var(--text-muted); font-size: .96rem; margin-bottom: 20px; }
     .features { list-style: none; padding: 0; margin: 0 0 22px; display: flex; flex-wrap: wrap; gap: 8px; }
     .features li { font-size: .82rem; font-weight: 600; color: var(--text-muted); background: var(--surface-2); padding: 4px 10px; border-radius: 6px; }
@@ -320,7 +324,7 @@
           </p>
           <h1 id="hero-title">你好，我是 <span class="hl">oo</span>。</h1>
           <p class="hero-lead">我用 AI 把想法做成能用、好玩、也照顾到每个人的产品。</p>
-          <p class="hero-sub">这里收录了我的三个 AI 作品——从社区运营工具，到环保教育小游戏，再到语言学习应用。</p>
+          <p class="hero-sub">这里收录了我的四个 AI 作品——从社区运营工具，到环保教育小游戏，再到英语与韩语情境学习应用。</p>
           <div class="hero-cta">
             <a class="btn btn-primary" href="#works">
               查看作品
@@ -332,8 +336,8 @@
             </a>
           </div>
           <ul class="hero-meta">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>3 个上线作品</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>教育 · 社区 · 语言</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>4 个上线作品</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>教育 · 社区 · 语言 · 环保</li>
           </ul>
         </div>
         <div class="hero-art">
@@ -440,6 +444,35 @@
               <p>十个真实情境，用英语把一件事办成。进度条反映任务完成度，决策点用符号区分对错，AI 点评即时反馈。</p>
               <ul class="features" aria-label="作品特点"><li>情境闯关</li><li>AI 点评</li><li>生词本</li></ul>
               <a class="card-link" href="https://wintermoon123.github.io/Englishroleplay" target="_blank" rel="noopener noreferrer" aria-label="查看英语情境闯关（在新窗口打开）">
+                查看作品
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="card reveal">
+            <div class="card-preview preview-ko" aria-hidden="true">
+              <div class="mock">
+                <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-url">korean roleplay / level</span></div>
+                <div class="mock-pad">
+                  <div class="mock-en-head"><span class="mock-line dark w45"></span><span class="mock-line green w25"></span></div>
+                  <div class="mock-progress"><span class="s1"></span><span class="s2"></span><span class="s3"></span><span class="s4"></span><span class="s5"></span></div>
+                  <div class="mock-bubble left">커피 한 잔 주세요.</div>
+                  <div class="mock-bubble right">사이즈는 어떻게 하시겠어요?</div>
+                  <div class="mock-feedback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>정답 · 진행 60%</div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <ul class="tags" aria-label="作品分类">
+                <li class="tag tag-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/></svg>语言学习</li>
+                <li class="tag tag-blue">AI 应用</li>
+              </ul>
+              <h3>韩语情境闯关</h3>
+              <p>十个真实情境，用韩语把一件事办成。不只说对，还要说得体——进度条反映任务完成度，AI 点评即时反馈。</p>
+              <ul class="features" aria-label="作品特点"><li>情境闯关</li><li>AI 点评</li><li>生词本</li></ul>
+              <a class="card-link" href="https://wintermoon123.github.io/Koreanroleplay" target="_blank" rel="noopener noreferrer" aria-label="查看韩语情境闯关（在新窗口打开）">
                 查看作品
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
               </a>
