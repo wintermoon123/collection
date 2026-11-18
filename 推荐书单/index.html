@@ -246,7 +246,13 @@
       .book-desc { font-size: .78rem; margin-bottom: 10px; }
       .book-link { font-size: .8rem; min-height: 36px; padding: 6px 10px; }
     }
-    @media (max-width: 380px) { .books { grid-template-columns: 1fr; } }
+    @media (max-width: 400px) {
+      .books { gap: 12px 10px; }
+      .book-body { padding: 10px 11px 12px; }
+      .book-title { font-size: .88rem; }
+      .book-desc { font-size: .74rem; }
+      .book-link { font-size: .76rem; padding: 5px 9px; }
+    }
   </style>
 </head>
 <body>
