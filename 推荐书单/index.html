@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>推荐书单 · oo design</title>
+  <meta name="description" content="oo 的推荐书单：社会科学与心理自助两类值得一读的好书，点击封面直达豆瓣。">
+  <style>
+    /* ============ Design tokens（与主站一致） ============ */
+    :root {
+      --bg: #FAFAF8;
+      --surface: #FFFFFF;
+      --surface-2: #F2F2EE;
+      --text: #111827;
+      --text-muted: #374151;
+      --border: #6B7280;
+      --border-soft: #D4D4CE;
+      --primary: #1E40AF;
+      --primary-hover: #172E7E;
+      --on-primary: #FFFFFF;
+      --focus: #B91C1C;
+      --stripe: rgba(17, 24, 39, 0.055);
+      --shadow: 0 1px 2px rgba(17,24,39,.06), 0 8px 24px rgba(17,24,39,.05);
+      --tag-blue-bg: #DBEAFE; --tag-blue-text: #1E3A8A;
+      --tag-mint-bg: #D1FAE5; --tag-mint-text: #14532D;
+      --tag-peach-bg: #FCE7D3; --tag-peach-text: #7C2D12;
+      --rating: #B45309;
+      --radius: 14px;
+      --wrap: 1120px;
+    }
+    [data-theme="dark"] {
+      --bg: #0C1424;
+      --surface: #142033;
+      --surface-2: #1B2A41;
+      --text: #F8FAFC;
+      --text-muted: #D5DEEB;
+      --border: #94A3B8;
+      --border-soft: #334155;
+      --primary: #93C5FD;
+      --primary-hover: #BFDBFE;
+      --on-primary: #0C1424;
+      --focus: #FCA5A5;
+      --stripe: rgba(248, 250, 252, 0.06);
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.25);
+      --tag-blue-bg: #1E3A8A; --tag-blue-text: #DBEAFE;
+      --tag-mint-bg: #14532D; --tag-mint-text: #D1FAE5;
+      --tag-peach-bg: #7C2D12; --tag-peach-text: #FCE7D3;
+      --rating: #FCD34D;
+    }
+
+    /* ============ Base ============ */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--primary); }
+    h1, h2, h3 { line-height: 1.25; letter-spacing: -0.02em; }
+    h1 { font-size: clamp(2.1rem, 5.5vw, 3.4rem); margin: 0 0 16px; }
+    p { margin: 0 0 16px; }
+    .wrap { width: min(var(--wrap), calc(100% - 48px)); margin-inline: auto; }
+
+    /* ============ Accessibility ============ */
+    .skip-link {
+      position: absolute; left: 16px; top: -100px; z-index: 1000;
+      background: var(--primary); color: var(--on-primary);
+      padding: 12px 20px; border-radius: 8px; font-weight: 700; text-decoration: none;
+    }
+    .skip-link:focus { top: 12px; }
+    :focus-visible { outline: 4px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
+
+    /* ============ Header ============ */
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .header-inner { display: flex; align-items: center; gap: 24px; min-height: 72px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.03em; }
+    .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 9px; background: var(--primary); color: var(--on-primary); }
+    .site-nav { margin-left: auto; display: flex; gap: 4px; align-items: center; }
+    .site-nav a {
+      color: var(--text-muted); text-decoration: none; font-weight: 600;
+      padding: 10px 14px; border-radius: 8px; min-height: 44px; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .site-nav a:hover { background: var(--surface-2); color: var(--text); }
+    .site-nav a.current { color: var(--primary); background: var(--tag-blue-bg); }
+    .icon-btn {
+      width: 44px; height: 44px; display: grid; place-items: center;
+      background: var(--surface); color: var(--text); border: 2px solid var(--border);
+      border-radius: 10px; cursor: pointer;
+    }
+    .icon-btn:hover { background: var(--surface-2); }
+    .icon-btn svg { width: 20px; height: 20px; }
+
+    /* ============ Hero ============ */
+    .hero { position: relative; overflow: hidden; padding: 64px 0 56px; border-bottom: 1px solid var(--border-soft); }
+    .hero::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background-image: repeating-linear-gradient(135deg, var(--stripe) 0 2px, transparent 2px 14px);
+      mask-image: linear-gradient(90deg, transparent 40%, #000 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 40%, #000 100%);
+    }
+    .hero-inner { position: relative; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .85rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--primary); margin-bottom: 18px;
+    }
+    .eyebrow svg { width: 18px; height: 18px; }
+    .hero-lead { font-size: clamp(1.05rem, 2.4vw, 1.25rem); color: var(--text-muted); max-width: 52ch; margin-bottom: 0; }
+
+    /* ============ Section ============ */
+    section { padding: 64px 0 88px; }
+    .section-head { margin-bottom: 32px; }
+    .section-desc { color: var(--text-muted); font-size: 1rem; max-width: 62ch; margin: 0; }
+
+    /* ============ Tabs（二级目录） ============ */
+    .tabs {
+      display: inline-flex; flex-wrap: wrap; gap: 6px; padding: 6px;
+      background: var(--surface-2); border: 2px solid var(--border-soft);
+      border-radius: 12px; margin-bottom: 36px;
+    }
+    .tab {
+      appearance: none; border: 0; cursor: pointer;
+      font: inherit; font-weight: 700; font-size: .98rem;
+      color: var(--text-muted); background: transparent;
+      padding: 10px 20px; border-radius: 8px; min-height: 44px;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: background .18s ease, color .18s ease;
+    }
+    .tab:hover { color: var(--text); }
+    .tab[aria-selected="true"] { background: var(--surface); color: var(--primary); box-shadow: var(--shadow); }
+    .tab .tab-count {
+      font-size: .78rem; font-weight: 800; padding: 1px 8px; border-radius: 999px;
+      background: var(--tag-blue-bg); color: var(--tag-blue-text);
+    }
+
+    /* ============ Book grid ============ */
+    .books { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px 22px; }
+    .book {
+      background: var(--surface); border: 2px solid var(--border-soft);
+      border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column;
+      text-decoration: none; color: inherit;
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    .book:hover { transform: translateY(-6px); border-color: var(--text); box-shadow: var(--shadow); }
+    .book-cover {
+      position: relative; aspect-ratio: 3 / 4; overflow: hidden;
+      background: var(--surface-2); border-bottom: 2px solid var(--border-soft);
+    }
+    .book-cover img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center;
+      transition: transform .35s ease;
+    }
+    .book:hover .book-cover img { transform: scale(1.04); }
+    .book-rating {
+      position: absolute; right: 10px; top: 10px;
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+      color: var(--rating); font-weight: 800; font-size: .82rem;
+      padding: 3px 9px; border-radius: 999px; border: 1px solid var(--border-soft);
+      backdrop-filter: blur(4px);
+    }
+    .book-body { padding: 16px 16px 18px; display: flex; flex-direction: column; flex: 1; }
+    .book-title { font-size: 1.08rem; font-weight: 800; margin: 0 0 4px; line-height: 1.35; }
+    .book-author { color: var(--text-muted); font-size: .86rem; font-weight: 600; margin: 0 0 10px; }
+    .book-desc { color: var(--text-muted); font-size: .86rem; line-height: 1.55; margin: 0 0 14px; flex: 1; }
+    .book-link {
+      display: inline-flex; align-items: center; justify-content: space-between; gap: 8px;
+      font-size: .84rem; font-weight: 800; color: var(--primary);
+      border-top: 1px solid var(--border-soft); padding-top: 12px;
+    }
+    .book-link svg { width: 16px; height: 16px; }
+    .book-empty {
+      grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 48px 20px;
+      border: 2px dashed var(--border); border-radius: var(--radius);
+    }
+
+    /* ============ Footer ============ */
+    .site-footer { border-top: 1px solid var(--border-soft); padding: 30px 0; color: var(--text-muted); font-size: .9rem; }
+    .footer-inner { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; }
+    .footer-inner a { text-decoration: none; font-weight: 600; }
+
+    /* ============ Reveal ============ */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .45s ease, transform .45s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ============ Responsive ============ */
+    @media (max-width: 1040px) { .books { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 780px) { .books { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 680px) {
+      body { font-size: 16px; }
+      .wrap { width: min(var(--wrap), calc(100% - 32px)); }
+      .site-nav { display: none; }
+      .hero { padding: 48px 0 44px; }
+      section { padding: 48px 0 64px; }
+      .books { grid-template-columns: repeat(2, 1fr); gap: 18px 14px; }
+      .book-body { padding: 12px; }
+      .book-desc { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html" aria-label="oo design，返回主页">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1 1.2 2.2 1.8 3.5 1.8s2.5-.6 3.5-1.8"/><path d="M9 9.5h.01M15 9.5h.01"/></svg>
+        </span>
+        <span>oo design</span>
+      </a>
+      <nav class="site-nav" aria-label="页面导航">
+        <a href="../index.html">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+          返回主页
+        </a>
+      </nav>
+      <button id="themeToggle" class="icon-btn" type="button" aria-pressed="false" aria-label="切换到深色模式" title="切换深浅色模式">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="page-title">
+      <div class="wrap hero-inner">
+        <p class="eyebrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          READING LIST · 2026
+        </p>
+        <h1 id="page-title">推荐书单</h1>
+        <p class="hero-lead">一些反复想推荐给别人、也值得自己反复读的书。按主题分成两类，点击封面即可到豆瓣查看详情。</p>
+      </div>
+    </section>
+
+    <!-- BOOKS -->
+    <section aria-label="书单列表">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2 style="font-size:clamp(1.5rem,3.5vw,2rem);margin:0 0 8px;">按主题挑选</h2>
+          <p class="section-desc">社会科学帮你看懂世界，心理自助帮你看清自己——正好对应我一直带着的两条线索。</p>
+        </div>
+
+        <div class="tabs reveal" role="tablist" aria-label="书单分类">
+          <button class="tab" type="button" role="tab" id="tab-she" aria-controls="bookPanel" aria-selected="true" data-cat="社科">
+            社会科学 <span class="tab-count" id="count-she">0</span>
+          </button>
+          <button class="tab" type="button" role="tab" id="tab-xin" aria-controls="bookPanel" aria-selected="false" data-cat="心理">
+            心理自助 <span class="tab-count" id="count-xin">0</span>
+          </button>
+        </div>
+
+        <div id="bookPanel" role="tabpanel" aria-labelledby="tab-she">
+          <div class="books" id="bookGrid">
+            <p class="book-empty">书单正在加载……</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 oo design · 书单封面图来自豆瓣，仅作推荐展示</span>
+      <span><a href="#main">回到顶部 ↑</a></span>
+    </div>
+  </footer>
+
+  <!-- 书单数据：由「推荐书单/books.js」提供，更新数据文件即可更新本页 -->
+  <script src="./books.js"></script>
+
+  <script>
+    (function () {
+      'use strict';
+      var root = document.documentElement;
+      var toggle = document.getElementById('themeToggle');
+      var icon = document.getElementById('themeIcon');
+      var stored = null;
+      try { stored = localStorage.getItem('oo-design-theme'); } catch (e) {}
+      var theme = stored === 'dark' || stored === 'light' ? stored : 'light';
+
+      function applyTheme(next) {
+        root.setAttribute('data-theme', next);
+        var isDark = next === 'dark';
+        toggle.setAttribute('aria-pressed', String(isDark));
+        toggle.setAttribute('aria-label', isDark ? '切换到浅色模式' : '切换到深色模式');
+        icon.innerHTML = isDark
+          ? '<circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/>'
+          : '<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/>';
+        try { localStorage.setItem('oo-design-theme', next); } catch (e) {}
+      }
+      applyTheme(theme);
+      toggle.addEventListener('click', function () {
+        theme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(theme);
+      });
+
+      // ===== 渲染书单 =====
+      var grid = document.getElementById('bookGrid');
+      var books = window.RECOMMEND_BOOKS || [];
+      var CAT_LABEL = { '社科': '社会科学', '心理': '心理自助' };
+
+      function el(tag, cls, text) {
+        var n = document.createElement(tag);
+        if (cls) n.className = cls;
+        if (text != null) n.textContent = text;
+        return n;
+      }
+
+      function makeBook(b) {
+        var a = el('a', 'book reveal');
+        a.href = b.url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.setAttribute('aria-label', '查看《' + b.title + '》在豆瓣的页面（在新窗口打开）');
+
+        var cover = el('div', 'book-cover');
+        if (b.cover) {
+          var img = el('img');
+          img.src = b.cover;
+          img.alt = '《' + b.title + '》封面';
+          cover.appendChild(img);
+        }
+        if (b.rating) {
+          var r = el('span', 'book-rating', '★ ' + b.rating);
+          cover.appendChild(r);
+        }
+        a.appendChild(cover);
+
+        var body = el('div', 'book-body');
+        body.appendChild(el('h3', 'book-title', b.title));
+        body.appendChild(el('p', 'book-author', b.author));
+        if (b.desc) body.appendChild(el('p', 'book-desc', b.desc));
+        var link = el('span', 'book-link');
+        link.appendChild(el('span', '', '去豆瓣查看'));
+        link.insertAdjacentHTML('beforeend', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>');
+        body.appendChild(link);
+        a.appendChild(body);
+        return a;
+      }
+
+      function render(cat) {
+        grid.innerHTML = '';
+        var list = books.filter(function (b) { return b.cat === cat; });
+        if (!list.length) {
+          grid.appendChild(el('p', 'book-empty', '这一类还没有书，去 books.js 里加几本吧。'));
+          return;
+        }
+        list.forEach(function (b) { grid.appendChild(makeBook(b)); });
+        revealCards();
+      }
+
+      // 分类计数
+      function count(cat) { return books.filter(function (b) { return b.cat === cat; }).length; }
+      document.getElementById('count-she').textContent = count('社科');
+      document.getElementById('count-xin').textContent = count('心理');
+
+      // Tab 切换
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+      var panel = document.getElementById('bookPanel');
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          tabs.forEach(function (t) { t.setAttribute('aria-selected', 'false'); });
+          tab.setAttribute('aria-selected', 'true');
+          panel.setAttribute('aria-labelledby', tab.id);
+          render(tab.getAttribute('data-cat'));
+        });
+        tab.addEventListener('keydown', function (e) {
+          if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+          e.preventDefault();
+          var i = tabs.indexOf(tab);
+          var next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+          next.focus(); next.click();
+        });
+      });
+
+      // Reveal
+      function revealCards() {
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var items = grid.querySelectorAll('.reveal');
+        if (reduce || !('IntersectionObserver' in window)) {
+          items.forEach(function (n) { n.classList.add('in'); });
+        } else {
+          var io = new IntersectionObserver(function (es) {
+            es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+          }, { threshold: 0.1 });
+          items.forEach(function (n) { io.observe(n); });
+        }
+      }
+
+      render('社科');
+    })();
+  </script>
+</body>
+</html>

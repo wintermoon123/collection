@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>oo的主页</title>
-  <meta name="description" content="oo 的 AI 作品集与费曼 10 问：社区运营平台、百变玉米、英语情境闯关，一组长期带着的问题与它们的成长时间轴。">
+  <meta name="description" content="oo 的 AI 作品集与费曼 10 问：社区运营平台、百变玉米、英语情境闯关，一组长期带着的问题。">
   <style>
     /* ============ Design tokens ============ */
     :root {
@@ -306,66 +306,6 @@
     }
     .q-note strong { color: var(--text); }
 
-    /* ============ Timeline ============ */
-    .tl-wrap { position: relative; max-width: 900px; margin-inline: auto; padding-left: 46px; }
-    .tl-wrap::before {
-      content: ""; position: absolute; left: 15px; top: 6px; bottom: 6px;
-      width: 2px; background: var(--border-soft);
-    }
-    .tl-item { position: relative; padding-bottom: 30px; }
-    .tl-item:last-child { padding-bottom: 0; }
-    .tl-dot {
-      position: absolute; left: -39px; top: 4px;
-      width: 18px; height: 18px; border-radius: 50%;
-      background: var(--surface); border: 3px solid var(--primary);
-      box-shadow: 0 0 0 4px var(--bg);
-    }
-    .tl-item[data-type="资料"] .tl-dot { border-color: var(--tag-mint-text); }
-    .tl-item[data-type="里程碑"] .tl-dot { border-color: var(--tag-peach-text); background: var(--tag-peach-bg); }
-    .tl-card {
-      background: var(--surface); border: 2px solid var(--border-soft);
-      border-radius: 12px; padding: 20px 22px;
-      transition: border-color .18s ease, box-shadow .18s ease;
-    }
-    .tl-card:hover { border-color: var(--text); box-shadow: var(--shadow); }
-    .tl-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 10px; }
-    .tl-date {
-      font-variant-numeric: tabular-nums; font-size: .86rem; font-weight: 800;
-      letter-spacing: .02em; color: var(--text-muted);
-    }
-    .tl-type {
-      font-size: .76rem; font-weight: 800; padding: 3px 10px; border-radius: 999px;
-    }
-    .tl-item[data-type="思考"] .tl-type { background: var(--tag-blue-bg); color: var(--tag-blue-text); }
-    .tl-item[data-type="资料"] .tl-type { background: var(--tag-mint-bg); color: var(--tag-mint-text); }
-    .tl-item[data-type="里程碑"] .tl-type { background: var(--tag-peach-bg); color: var(--tag-peach-text); }
-    .tl-title { margin: 0 0 8px; font-size: 1.18rem; }
-    .tl-text { color: var(--text-muted); margin: 0 0 12px; line-height: 1.65; }
-    .tl-text:last-child { margin-bottom: 0; }
-    .tl-links { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-    .tl-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: .86rem; font-weight: 700; text-decoration: none;
-      color: var(--primary); border-bottom: 2px solid transparent;
-    }
-    .tl-link:hover { border-bottom-color: var(--primary); }
-    .tl-link svg { width: 14px; height: 14px; }
-    .tl-empty {
-      text-align: center; color: var(--text-muted); padding: 40px 20px;
-      border: 2px dashed var(--border); border-radius: var(--radius);
-    }
-
-    /* ============ Duo: questions + timeline side by side ============ */
-    .duo {
-      display: grid; grid-template-columns: 1fr 1fr; align-items: stretch;
-      width: min(1360px, calc(100% - 48px)); margin-inline: auto;
-    }
-    .duo > section { min-width: 0; padding: 72px 0; }
-    .duo > section + section { border-left: 1px solid var(--border-soft); }
-    .duo .q-list { grid-template-columns: 1fr; }
-    .duo .q-intro { max-width: none; }
-    .duo .tl-wrap { padding-left: 42px; }
-
     /* ============ Footer ============ */
     .site-footer { border-top: 1px solid var(--border-soft); padding: 30px 0; color: var(--text-muted); font-size: .9rem; }
     .footer-inner { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; }
@@ -378,9 +318,6 @@
     @media (max-width: 960px) {
       .cards { grid-template-columns: repeat(2, 1fr); }
       .hero-grid { gap: 36px; }
-      .duo { grid-template-columns: 1fr; width: min(var(--wrap), calc(100% - 48px)); }
-      .duo > section + section { border-left: 0; border-top: 1px solid var(--border-soft); }
-      .duo .q-list { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 680px) {
       body { font-size: 16px; }
@@ -392,8 +329,6 @@
       .avatar-frame { width: min(78%, 320px); box-shadow: 7px 7px 0 var(--primary); }
       .cards { grid-template-columns: 1fr; }
       .q-list { grid-template-columns: 1fr; }
-      .duo .q-list { grid-template-columns: 1fr; }
-      .duo .tl-wrap { padding-left: 30px; }
       .q-intro { padding: 18px 20px; }
       section { padding: 64px 0; }
     }
@@ -413,7 +348,10 @@
       <nav class="site-nav" aria-label="主导航">
         <a href="#works">作品</a>
         <a href="#questions">10 问</a>
-        <a href="#timeline">时间轴</a>
+        <a href="./推荐书单/index.html" title="推荐书单">
+          <svg viewBox="0 0 24 24" width="16" height="16" style="margin-right:6px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          书单
+        </a>
       </nav>
       <button id="themeToggle" class="icon-btn" type="button" aria-pressed="false" aria-label="切换到深色模式" title="切换深浅色模式">
         <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
@@ -590,7 +528,6 @@
       </div>
     </section>
 
-    <div class="duo">
     <!-- QUESTIONS -->
     <section id="questions" aria-labelledby="questions-title">
       <div class="wrap">
@@ -682,21 +619,6 @@
       </div>
     </section>
 
-    <!-- TIMELINE -->
-    <section id="timeline" aria-labelledby="timeline-title">
-      <div class="wrap">
-        <header class="section-head reveal">
-          <p class="eyebrow">03 / 时间轴</p>
-          <h2 id="timeline-title">问题在生长</h2>
-          <p class="section-desc">这里记录每一次思考、每一份新资料。日期在左，线索在右——它们是我给这些问题留下的脚印。</p>
-        </header>
-        <div class="tl-wrap reveal" id="timelineList" aria-live="polite">
-          <p class="tl-empty">时间轴正在加载……</p>
-        </div>
-      </div>
-    </section>
-    </div><!-- /.duo -->
-
   </main>
 
   <footer class="site-footer">
@@ -705,9 +627,6 @@
       <span><a href="#top">回到顶部 ↑</a></span>
     </div>
   </footer>
-
-  <!-- 时间轴数据：由「费曼问题/timeline.js」提供，更新数据文件即可更新本页 -->
-  <script src="./费曼问题/timeline.js"></script>
 
   <script>
     (function () {
@@ -748,68 +667,6 @@
         }, { threshold: 0.12 });
         items.forEach(function (el) { io.observe(el); });
       }
-
-      // ===== Timeline: render from window.FEYNMAN_TIMELINE =====
-      var tlList = document.getElementById('timelineList');
-      var entries = window.FEYNMAN_TIMELINE;
-      function el(tag, cls, text) {
-        var n = document.createElement(tag);
-        if (cls) n.className = cls;
-        if (text != null) n.textContent = text;
-        return n;
-      }
-      function renderTimeline(data) {
-        tlList.innerHTML = '';
-        if (!Array.isArray(data) || !data.length) {
-          tlList.appendChild(el('p', 'tl-empty', '还没有记录。第一份思考，等你写下。'));
-          return;
-        }
-        data.forEach(function (item) {
-          var type = ['思考', '资料', '里程碑'].indexOf(item.type) >= 0 ? item.type : '思考';
-          var wrap = el('article', 'tl-item reveal');
-          wrap.setAttribute('data-type', type);
-          wrap.appendChild(el('span', 'tl-dot'));
-
-          var card = el('div', 'tl-card');
-          var meta = el('div', 'tl-meta');
-          meta.appendChild(el('time', 'tl-date', item.date || ''));
-          meta.appendChild(el('span', 'tl-type', type));
-          card.appendChild(meta);
-
-          card.appendChild(el('h3', 'tl-title', item.title || ''));
-          if (item.text) card.appendChild(el('p', 'tl-text', item.text));
-
-          var links = el('div', 'tl-links');
-          if (Array.isArray(item.q) && item.q.length) {
-            var q = el('span', 'q-label', '关联问题 #' + item.q.join(' · #'));
-            links.appendChild(q);
-          }
-          if (item.source && item.source.url) {
-            var a = el('a', 'tl-link');
-            a.href = item.source.url;
-            a.textContent = item.source.label || '查看资料';
-            a.setAttribute('target', '_blank');
-            a.setAttribute('rel', 'noopener noreferrer');
-            a.innerHTML += ' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>';
-            links.appendChild(a);
-          }
-          if (links.childNodes.length) card.appendChild(links);
-          wrap.appendChild(card);
-          tlList.appendChild(wrap);
-        });
-        // 让新插入的卡片也参与滚动显现
-        var reduce2 = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        var items2 = tlList.querySelectorAll('.reveal');
-        if (reduce2 || !('IntersectionObserver' in window)) {
-          items2.forEach(function (n) { n.classList.add('in'); });
-        } else {
-          var io2 = new IntersectionObserver(function (es) {
-            es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io2.unobserve(e.target); } });
-          }, { threshold: 0.12 });
-          items2.forEach(function (n) { io2.observe(n); });
-        }
-      }
-      renderTimeline(entries);
     })();
   </script>
 </body>
