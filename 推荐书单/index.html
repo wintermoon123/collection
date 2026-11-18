@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>推荐书单 · oo design</title>
-  <meta name="description" content="oo 的推荐书单：社会科学与心理自助两类值得一读的好书，点击封面直达豆瓣。">
+  <title>推荐书单 · oo的主页</title>
+  <meta name="description" content="oo 的推荐书单：社会科学与心理自助两类值得一读的书，点击封面直达豆瓣。">
   <style>
-    /* ============ Design tokens（与主站一致） ============ */
+    /* ============ Design tokens（与主页同一套） ============ */
     :root {
       --bg: #FAFAF8;
       --surface: #FFFFFF;
@@ -19,11 +19,11 @@
       --primary-hover: #172E7E;
       --on-primary: #FFFFFF;
       --focus: #B91C1C;
-      --stripe: rgba(17, 24, 39, 0.055);
       --shadow: 0 1px 2px rgba(17,24,39,.06), 0 8px 24px rgba(17,24,39,.05);
       --tag-blue-bg: #DBEAFE; --tag-blue-text: #1E3A8A;
       --tag-mint-bg: #D1FAE5; --tag-mint-text: #14532D;
       --tag-peach-bg: #FCE7D3; --tag-peach-text: #7C2D12;
+      --tag-purple-bg: #EDE9FE; --tag-purple-text: #5B21B6;
       --rating: #B45309;
       --radius: 14px;
       --wrap: 1120px;
@@ -40,11 +40,11 @@
       --primary-hover: #BFDBFE;
       --on-primary: #0C1424;
       --focus: #FCA5A5;
-      --stripe: rgba(248, 250, 252, 0.06);
       --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.25);
       --tag-blue-bg: #1E3A8A; --tag-blue-text: #DBEAFE;
       --tag-mint-bg: #14532D; --tag-mint-text: #D1FAE5;
       --tag-peach-bg: #7C2D12; --tag-peach-text: #FCE7D3;
+      --tag-purple-bg: #5B21B6; --tag-purple-text: #EDE9FE;
       --rating: #FCD34D;
     }
 
@@ -63,9 +63,15 @@
     img { max-width: 100%; display: block; }
     a { color: var(--primary); }
     h1, h2, h3 { line-height: 1.25; letter-spacing: -0.02em; }
-    h1 { font-size: clamp(2.1rem, 5.5vw, 3.4rem); margin: 0 0 16px; }
+    h1 { font-size: clamp(2.4rem, 6vw, 4rem); margin: 0 0 18px; }
+    html[lang="ja"] h1 { font-size: clamp(1.9rem, 4.2vw, 2.8rem); }
+    h2 { font-size: clamp(1.9rem, 4.5vw, 2.6rem); margin: 0 0 12px; }
     p { margin: 0 0 16px; }
     .wrap { width: min(var(--wrap), calc(100% - 48px)); margin-inline: auto; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
 
     /* ============ Accessibility ============ */
     .skip-link {
@@ -90,14 +96,15 @@
     }
     .header-inner { display: flex; align-items: center; gap: 24px; min-height: 72px; }
     .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.03em; }
-    .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 9px; background: var(--primary); color: var(--on-primary); }
+    .brand-mark { width: 30px; height: 30px; display: grid; place-items: center; background: none; color: var(--text); }
+    .brand-mark svg { width: 26px; height: 26px; }
     .site-nav { margin-left: auto; display: flex; gap: 4px; align-items: center; }
     .site-nav a {
       color: var(--text-muted); text-decoration: none; font-weight: 600;
-      padding: 10px 14px; border-radius: 8px; min-height: 44px; display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 14px; border-radius: 8px; min-height: 44px; display: inline-flex; align-items: center;
     }
     .site-nav a:hover { background: var(--surface-2); color: var(--text); }
-    .site-nav a.current { color: var(--primary); background: var(--tag-blue-bg); }
+    .site-nav a[aria-current="page"] { color: var(--primary); background: var(--tag-blue-bg); }
     .icon-btn {
       width: 44px; height: 44px; display: grid; place-items: center;
       background: var(--surface); color: var(--text); border: 2px solid var(--border);
@@ -106,111 +113,138 @@
     .icon-btn:hover { background: var(--surface-2); }
     .icon-btn svg { width: 20px; height: 20px; }
 
-    /* ============ Hero ============ */
-    .hero { position: relative; overflow: hidden; padding: 64px 0 56px; border-bottom: 1px solid var(--border-soft); }
-    .hero::before {
-      content: ""; position: absolute; inset: 0; pointer-events: none;
-      background-image: repeating-linear-gradient(135deg, var(--stripe) 0 2px, transparent 2px 14px);
-      mask-image: linear-gradient(90deg, transparent 40%, #000 100%);
-      -webkit-mask-image: linear-gradient(90deg, transparent 40%, #000 100%);
+    /* ============ Language switcher ============ */
+    .header-tools { display: flex; align-items: center; gap: 10px; }
+    .lang-wrap { position: relative; }
+    .lang-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      height: 44px; padding: 0 11px; border: 2px solid var(--border); border-radius: 10px;
+      background: var(--surface); color: var(--text); font-weight: 700; font-size: .92rem;
+      cursor: pointer; font-family: inherit;
     }
-    .hero-inner { position: relative; }
+    .lang-btn:hover { background: var(--surface-2); }
+    .lang-btn .globe { width: 18px; height: 18px; flex: none; }
+    .lang-btn .chev { width: 12px; height: 12px; flex: none; opacity: .65; transition: transform .18s ease; }
+    .lang-btn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+    .lang-menu {
+      position: absolute; right: 0; top: calc(100% + 8px); z-index: 60;
+      min-width: 168px; margin: 0; padding: 6px; list-style: none;
+      background: var(--surface); border: 2px solid var(--border); border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+    .lang-menu[hidden] { display: none; }
+    .lang-menu button {
+      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 10px 12px; border: 0; border-radius: 8px; background: none; color: var(--text);
+      font-family: inherit; font-size: .92rem; font-weight: 600; text-align: left; cursor: pointer;
+    }
+    .lang-menu button:hover, .lang-menu button:focus-visible { background: var(--surface-2); }
+    .lang-menu button[aria-checked="true"] { font-weight: 800; }
+    .lang-menu button[aria-checked="true"]::after { content: "✓"; font-weight: 800; color: var(--primary); }
+
+    /* ============ Hero ============ */
+    .hero { padding: 72px 0 64px; border-bottom: 1px solid var(--border-soft); }
     .eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
       font-size: .85rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
       color: var(--primary); margin-bottom: 18px;
     }
     .eyebrow svg { width: 18px; height: 18px; }
-    .hero-lead { font-size: clamp(1.05rem, 2.4vw, 1.25rem); color: var(--text-muted); max-width: 52ch; margin-bottom: 0; }
+    .hero-lead { font-size: clamp(1.1rem, 2.4vw, 1.3rem); color: var(--text-muted); max-width: 46ch; margin-bottom: 0; }
 
-    /* ============ Section ============ */
-    section { padding: 64px 0 88px; }
-    .section-head { margin-bottom: 32px; }
-    .section-desc { color: var(--text-muted); font-size: 1rem; max-width: 62ch; margin: 0; }
+    /* ============ Sections ============ */
+    section { padding: 88px 0; }
+    #list { padding: 56px 0 80px; }
+    .section-head { margin-bottom: 26px; max-width: 60ch; }
+    .section-desc { color: var(--text-muted); font-size: 1rem; margin-bottom: 0; }
 
-    /* ============ Tabs（二级目录） ============ */
+    /* ============ Tabs ============ */
     .tabs {
       display: inline-flex; flex-wrap: wrap; gap: 6px; padding: 6px;
       background: var(--surface-2); border: 2px solid var(--border-soft);
-      border-radius: 12px; margin-bottom: 36px;
+      border-radius: 12px; margin-bottom: 26px;
     }
     .tab {
-      appearance: none; border: 0; cursor: pointer;
-      font: inherit; font-weight: 700; font-size: .98rem;
+      appearance: none; border: 0; cursor: pointer; font-family: inherit;
+      font-weight: 700; font-size: .95rem;
       color: var(--text-muted); background: transparent;
-      padding: 10px 20px; border-radius: 8px; min-height: 44px;
+      padding: 9px 18px; border-radius: 8px; min-height: 44px;
       display: inline-flex; align-items: center; gap: 8px;
       transition: background .18s ease, color .18s ease;
     }
     .tab:hover { color: var(--text); }
     .tab[aria-selected="true"] { background: var(--surface); color: var(--primary); box-shadow: var(--shadow); }
-    .tab .tab-count {
-      font-size: .78rem; font-weight: 800; padding: 1px 8px; border-radius: 999px;
+    .tab-count {
+      font-size: .76rem; font-weight: 800; padding: 1px 8px; border-radius: 999px;
       background: var(--tag-blue-bg); color: var(--tag-blue-text);
     }
 
-    /* ============ Book grid ============ */
-    .books { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px 22px; }
+    /* ============ Book cards（沿用主页卡片语言） ============ */
+    .books { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .book {
       background: var(--surface); border: 2px solid var(--border-soft);
       border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column;
       text-decoration: none; color: inherit;
       transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
     }
-    .book:hover { transform: translateY(-6px); border-color: var(--text); box-shadow: var(--shadow); }
+    .book:hover { transform: translateY(-4px); border-color: var(--text); box-shadow: var(--shadow); }
     .book-cover {
       position: relative; aspect-ratio: 3 / 4; overflow: hidden;
       background: var(--surface-2); border-bottom: 2px solid var(--border-soft);
     }
-    .book-cover img {
-      width: 100%; height: 100%; object-fit: cover; object-position: top center;
-      transition: transform .35s ease;
-    }
+    .book-cover img { width: 100%; height: 100%; object-fit: contain; object-position: center; transition: transform .35s ease; }
     .book:hover .book-cover img { transform: scale(1.04); }
     .book-rating {
       position: absolute; right: 10px; top: 10px;
       background: color-mix(in srgb, var(--surface) 92%, transparent);
-      color: var(--rating); font-weight: 800; font-size: .82rem;
+      color: var(--rating); font-weight: 800; font-size: .8rem;
       padding: 3px 9px; border-radius: 999px; border: 1px solid var(--border-soft);
       backdrop-filter: blur(4px);
     }
-    .book-body { padding: 16px 16px 18px; display: flex; flex-direction: column; flex: 1; }
-    .book-title { font-size: 1.08rem; font-weight: 800; margin: 0 0 4px; line-height: 1.35; }
-    .book-author { color: var(--text-muted); font-size: .86rem; font-weight: 600; margin: 0 0 10px; }
+    .book-body { padding: 16px 18px 18px; display: flex; flex-direction: column; flex: 1; }
+    .book-title { font-size: 1.04rem; font-weight: 800; margin: 0 0 4px; line-height: 1.35; }
+    .book-author { color: var(--text-muted); font-size: .84rem; font-weight: 600; margin: 0 0 9px; }
     .book-desc { color: var(--text-muted); font-size: .86rem; line-height: 1.55; margin: 0 0 14px; flex: 1; }
     .book-link {
-      display: inline-flex; align-items: center; justify-content: space-between; gap: 8px;
-      font-size: .84rem; font-weight: 800; color: var(--primary);
-      border-top: 1px solid var(--border-soft); padding-top: 12px;
+      margin-top: auto; display: inline-flex; align-items: center; justify-content: space-between; gap: 10px;
+      min-height: 42px; padding: 8px 13px; border: 2px solid var(--primary); border-radius: 9px;
+      color: var(--primary); font-weight: 800; font-size: .88rem;
     }
+    .book:hover .book-link { background: var(--primary); color: var(--on-primary); }
     .book-link svg { width: 16px; height: 16px; }
     .book-empty {
-      grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 48px 20px;
+      grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 44px 20px;
       border: 2px dashed var(--border); border-radius: var(--radius);
     }
 
     /* ============ Footer ============ */
     .site-footer { border-top: 1px solid var(--border-soft); padding: 30px 0; color: var(--text-muted); font-size: .9rem; }
     .footer-inner { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; }
-    .footer-inner a { text-decoration: none; font-weight: 600; }
+    .footer-inner a { color: var(--text-muted); text-decoration: none; font-weight: 600; }
+    .footer-inner a:hover { color: var(--primary); }
 
     /* ============ Reveal ============ */
     .reveal { opacity: 0; transform: translateY(16px); transition: opacity .45s ease, transform .45s ease; }
     .reveal.in { opacity: 1; transform: none; }
 
     /* ============ Responsive ============ */
-    @media (max-width: 1040px) { .books { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 780px) { .books { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 900px) { .books { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 680px) {
       body { font-size: 16px; }
       .wrap { width: min(var(--wrap), calc(100% - 32px)); }
-      .site-nav { display: none; }
-      .hero { padding: 48px 0 44px; }
-      section { padding: 48px 0 64px; }
-      .books { grid-template-columns: repeat(2, 1fr); gap: 18px 14px; }
-      .book-body { padding: 12px; }
-      .book-desc { display: none; }
+      .header-inner { flex-wrap: wrap; gap: 8px 12px; padding: 10px 0; min-height: 0; }
+      .header-tools { margin-left: auto; }
+      .site-nav { order: 3; width: 100%; margin-left: 0; gap: 2px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .site-nav a { padding: 8px 10px; font-size: .9rem; white-space: nowrap; }
+      .hero { padding: 40px 0 44px; }
+      #list { padding: 40px 0 56px; }
+      .books { gap: 16px 14px; }
+      .book-body { padding: 12px 13px 14px; }
+      .book-title { font-size: 1rem; }
+      .book-desc { font-size: .82rem; margin-bottom: 12px; }
+      .book-link { font-size: .84rem; padding: 7px 11px; }
     }
+    @media (max-width: 420px) { .books { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -218,44 +252,59 @@
 
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="../index.html" aria-label="oo design，返回主页">
+      <a class="brand" href="../index.html" aria-label="oo的主页，返回主页">
         <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1 1.2 2.2 1.8 3.5 1.8s2.5-.6 3.5-1.8"/><path d="M9 9.5h.01M15 9.5h.01"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
         </span>
-        <span>oo design</span>
+        <span>oo的主页</span>
       </a>
-      <nav class="site-nav" aria-label="页面导航">
-        <a href="../index.html">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
-          返回主页
-        </a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="../index.html#works">作品</a>
+        <a href="../index.html#questions">10 问</a>
+        <a href="./index.html" aria-current="page">书单</a>
       </nav>
-      <button id="themeToggle" class="icon-btn" type="button" aria-pressed="false" aria-label="切换到深色模式" title="切换深浅色模式">
-        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
-      </button>
+      <div class="header-tools">
+        <div class="lang-wrap">
+          <button id="langBtn" class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="切换语言">
+            <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M12 2.8a13.5 13.5 0 0 0 0 18.4 13.5 13.5 0 0 0 0-18.4M2.8 12h18.4"/></svg>
+            <span id="langCurrent">简</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <ul id="langMenu" class="lang-menu" role="menu" aria-label="语言" hidden>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="zh-Hans" aria-checked="true">简体中文</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="zh-Hant" aria-checked="false">繁體中文</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="en" aria-checked="false">English</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="ko" aria-checked="false">한국어</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="ja" aria-checked="false">日本語</button></li>
+          </ul>
+        </div>
+        <button id="themeToggle" class="icon-btn" type="button" aria-pressed="false" aria-label="切换到深色模式" title="切换深浅色模式">
+          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+        </button>
+      </div>
     </div>
   </header>
 
   <main id="main">
     <!-- HERO -->
-    <section class="hero" aria-labelledby="page-title">
-      <div class="wrap hero-inner">
+    <section id="top" class="hero" aria-labelledby="page-title">
+      <div class="wrap">
         <p class="eyebrow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          READING LIST · 2026
+          03 / 书单
         </p>
         <h1 id="page-title">推荐书单</h1>
-        <p class="hero-lead">一些反复想推荐给别人、也值得自己反复读的书。按主题分成两类，点击封面即可到豆瓣查看详情。</p>
+        <p class="hero-lead">一些反复想推荐给别人、也值得自己反复读的书。按主题分成两类，点开封面即可到豆瓣看详情。</p>
       </div>
     </section>
 
-    <!-- BOOKS -->
-    <section aria-label="书单列表">
+    <!-- LIST -->
+    <section id="list" aria-labelledby="list-title">
       <div class="wrap">
-        <div class="section-head reveal">
-          <h2 style="font-size:clamp(1.5rem,3.5vw,2rem);margin:0 0 8px;">按主题挑选</h2>
+        <header class="section-head reveal">
+          <h2 id="list-title">按主题挑选</h2>
           <p class="section-desc">社会科学帮你看懂世界，心理自助帮你看清自己——正好对应我一直带着的两条线索。</p>
-        </div>
+        </header>
 
         <div class="tabs reveal" role="tablist" aria-label="书单分类">
           <button class="tab" type="button" role="tab" id="tab-she" aria-controls="bookPanel" aria-selected="true" data-cat="社科">
@@ -277,8 +326,7 @@
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
-      <span>© 2026 oo design · 书单封面图来自豆瓣，仅作推荐展示</span>
-      <span><a href="#main">回到顶部 ↑</a></span>
+      <span><a href="#top">回到顶部 ↑</a></span>
     </div>
   </footer>
 
@@ -291,30 +339,128 @@
       var root = document.documentElement;
       var toggle = document.getElementById('themeToggle');
       var icon = document.getElementById('themeIcon');
+      var langBtn = document.getElementById('langBtn');
+      var langMenu = document.getElementById('langMenu');
+      var langCurrent = document.getElementById('langCurrent');
+
+      var LANGS = [
+        { code: 'zh-Hans', tag: 'zh-CN', short: '简' },
+        { code: 'zh-Hant', tag: 'zh-Hant', short: '繁' },
+        { code: 'en', tag: 'en', short: 'EN' },
+        { code: 'ko', tag: 'ko', short: '한' },
+        { code: 'ja', tag: 'ja', short: '日' }
+      ];
+
+      var UI = {
+        'zh-Hans': { themeDark: '切换到深色模式', themeLight: '切换到浅色模式', langAria: '切换语言', langMenuLabel: '语言', title: '推荐书单 · oo的主页', desc: 'oo 的推荐书单：社会科学与心理自助两类值得一读的书，点击封面直达豆瓣。' },
+        'zh-Hant': { themeDark: '切換到深色模式', themeLight: '切換到淺色模式', langAria: '切換語言', langMenuLabel: '語言', title: '推薦書單 · oo 的首頁', desc: 'oo 的推薦書單：社會科學與心理自助兩類值得一讀的書，點擊封面直達豆瓣。' },
+        'en': { themeDark: 'Switch to dark mode', themeLight: 'Switch to light mode', langAria: 'Change language', langMenuLabel: 'Language', title: "Reading list · oo's home", desc: "oo's reading list: social science and self-help books worth reading, click a cover to open Douban." },
+        'ko': { themeDark: '어두운 모드로 전환', themeLight: '밝은 모드로 전환', langAria: '언어 변경', langMenuLabel: '언어', title: '추천 도서 목록 · oo의 홈', desc: 'oo의 추천 도서 목록: 사회과학과 자기계발 분야의 좋은 책, 표지를 누르면 더우반으로 이동합니다.' },
+        'ja': { themeDark: 'ダークモードに切り替え', themeLight: 'ライトモードに切り替え', langAria: '言語を変更', langMenuLabel: '言語', title: '推薦図書リスト · oo のホーム', desc: 'oo の推薦図書リスト：社会科学と自己啓発の二分野から、読む価値のある本を。表紙をクリックすると豆瓣へ。' }
+      };
+
+      /* 书卡里的文字由 JS 渲染，切语言时按这里取词并重绘 */
+      var BOOK_UI = {
+        'zh-Hans': { view: '去豆瓣查看', aria: '查看《{t}》在豆瓣的页面（在新窗口打开）', empty: '这一类还没有书。' },
+        'zh-Hant': { view: '去豆瓣查看', aria: '查看《{t}》在豆瓣的頁面（在新視窗開啟）', empty: '這一類還沒有書。' },
+        'en': { view: 'View on Douban', aria: 'Open {t} on Douban (opens in a new window)', empty: 'No books in this category yet.' },
+        'ko': { view: '더우반에서 보기', aria: '{t}의 더우반 페이지 열기(새 창에서 열림)', empty: '이 분류에는 아직 책이 없습니다.' },
+        'ja': { view: '豆瓣で見る', aria: '『{t}』の豆瓣ページを開く（新しいウィンドウで開きます）', empty: 'この分類にはまだ本がありません。' }
+      };
+
+      var TEXT = {
+        'zh-Hant': {
+          'oo的主页': 'oo 的首頁', '作品': '作品', '10 问': '10 問', '书单': '書單',
+          '跳到主要内容': '跳到主要內容', '03 / 书单': '03 / 書單', '推荐书单': '推薦書單',
+          '一些反复想推荐给别人、也值得自己反复读的书。按主题分成两类，点开封面即可到豆瓣看详情。': '一些反覆想推薦給別人、也值得自己反覆讀的書。按主題分成兩類，點開封面即可到豆瓣看詳情。',
+          '按主题挑选': '按主題挑選',
+          '社会科学帮你看懂世界，心理自助帮你看清自己——正好对应我一直带着的两条线索。': '社會科學幫你看懂世界，心理自助幫你看清自己——正好對應我一直帶著的兩條線索。',
+          '社会科学': '社會科學', '心理自助': '心理自助', '书单分类': '書單分類',
+          '回到顶部 ↑': '回到頂端 ↑', 'oo的主页，返回主页': 'oo 的首頁，返回首頁', '主导航': '主要導覽',
+          '书单正在加载……': '書單正在載入……'
+        },
+        'en': {
+          'oo的主页': "oo's home", '作品': 'Works', '10 问': '10 questions', '书单': 'Reading list',
+          '跳到主要内容': 'Skip to main content', '03 / 书单': '03 / READING LIST', '推荐书单': 'Reading list',
+          '一些反复想推荐给别人、也值得自己反复读的书。按主题分成两类，点开封面即可到豆瓣看详情。': 'Books I keep recommending to others, and keep re-reading myself. Split into two themes — open a cover to see details on Douban.',
+          '按主题挑选': 'Browse by theme',
+          '社会科学帮你看懂世界，心理自助帮你看清自己——正好对应我一直带着的两条线索。': 'Social science helps you read the world; self-help helps you read yourself — two threads I keep coming back to.',
+          '社会科学': 'Social science', '心理自助': 'Self-help', '书单分类': 'Book categories',
+          '回到顶部 ↑': 'Back to top ↑', 'oo的主页，返回主页': "oo's home, back to home", '主导航': 'Main navigation',
+          '书单正在加载……': 'Loading the list…'
+        },
+        'ko': {
+          'oo的主页': 'oo의 홈', '作品': '작품', '10 问': '10가지 질문', '书单': '추천 도서',
+          '跳到主要内容': '본문으로 건너뛰기', '03 / 书单': '03 / 추천 도서', '推荐书单': '추천 도서 목록',
+          '一些反复想推荐给别人、也值得自己反复读的书。按主题分成两类，点开封面即可到豆瓣看详情。': '자꾸 추천하고 싶고, 저도 다시 읽는 책들입니다. 주제에 따라 두 갈래로 나눴고, 표지를 누르면 더우반에서 자세히 볼 수 있습니다.',
+          '按主题挑选': '주제별로 고르기',
+          '社会科学帮你看懂世界，心理自助帮你看清自己——正好对应我一直带着的两条线索。': '사회과학은 세상을 읽게 하고, 자기계발은 나를 읽게 합니다. 제가 계속 붙들고 있는 두 갈래입니다.',
+          '社会科学': '사회과학', '心理自助': '자기계발', '书单分类': '도서 분류',
+          '回到顶部 ↑': '맨 위로 ↑', 'oo的主页，返回主页': 'oo의 홈, 홈으로 돌아가기', '主导航': '주 메뉴',
+          '书单正在加载……': '목록을 불러오는 중…'
+        },
+        'ja': {
+          'oo的主页': 'oo のホーム', '作品': '作品', '10 问': '10 の問い', '书单': '推薦図書',
+          '跳到主要内容': 'メインコンテンツへスキップ', '03 / 书单': '03 / 推薦図書', '推荐书单': '推薦図書リスト',
+          '一些反复想推荐给别人、也值得自己反复读的书。按主题分成两类，点开封面即可到豆瓣看详情。': '何度も人に薦めたくなる、自分でも繰り返し読みたい本。テーマで二つに分けました。表紙を開くと豆瓣で詳細が見られます。',
+          '按主题挑选': 'テーマから選ぶ',
+          '社会科学帮你看懂世界，心理自助帮你看清自己——正好对应我一直带着的两条线索。': '社会科学は世界を読み解くため、自己啓発は自分を見つめるため。ずっと抱えている二本の線です。',
+          '社会科学': '社会科学', '心理自助': '自己啓発', '书单分类': '図書の分類',
+          '回到顶部 ↑': 'トップへ戻る ↑', 'oo的主页，返回主页': 'oo のホーム、ホームへ戻る', '主导航': 'メインナビ',
+          '书单正在加载……': 'リストを読み込み中…'
+        }
+      };
+
+      var currentLang = 'zh-Hans';
+
+      function norm(s) { return s.replace(/\s+/g, ' ').trim(); }
+
+      var textNodes = [];
+      (function () {
+        var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+          acceptNode: function (n) {
+            if (!n.nodeValue || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+            var p = n.parentElement;
+            if (!p || p.closest('.tab-count')) return NodeFilter.FILTER_REJECT;
+            if (p.tagName === 'SCRIPT' || p.tagName === 'STYLE') return NodeFilter.FILTER_REJECT;
+            return NodeFilter.FILTER_ACCEPT;
+          }
+        });
+        var n;
+        while ((n = walker.nextNode())) textNodes.push({ node: n, orig: n.nodeValue, key: norm(n.nodeValue) });
+      })();
+
+      var attrTargets = [];
+      document.querySelectorAll('[aria-label],[alt],[title]').forEach(function (el) {
+        if (el.id === 'themeToggle' || el.id === 'langBtn') return;
+        ['aria-label', 'alt', 'title'].forEach(function (a) {
+          if (el.hasAttribute(a)) attrTargets.push({ el: el, attr: a, orig: el.getAttribute(a) });
+        });
+      });
+
       var stored = null;
       try { stored = localStorage.getItem('oo-design-theme'); } catch (e) {}
       var theme = stored === 'dark' || stored === 'light' ? stored : 'light';
 
       function applyTheme(next) {
+        var ui = UI[currentLang] || UI['zh-Hans'];
         root.setAttribute('data-theme', next);
         var isDark = next === 'dark';
         toggle.setAttribute('aria-pressed', String(isDark));
-        toggle.setAttribute('aria-label', isDark ? '切换到浅色模式' : '切换到深色模式');
+        toggle.setAttribute('aria-label', isDark ? ui.themeLight : ui.themeDark);
+        toggle.setAttribute('title', isDark ? ui.themeLight : ui.themeDark);
         icon.innerHTML = isDark
           ? '<circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/>'
           : '<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/>';
         try { localStorage.setItem('oo-design-theme', next); } catch (e) {}
       }
-      applyTheme(theme);
-      toggle.addEventListener('click', function () {
-        theme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        applyTheme(theme);
-      });
 
-      // ===== 渲染书单 =====
+      // ===== 书单渲染 =====
       var grid = document.getElementById('bookGrid');
+      var panel = document.getElementById('bookPanel');
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
       var books = window.RECOMMEND_BOOKS || [];
-      var CAT_LABEL = { '社科': '社会科学', '心理': '心理自助' };
+      var activeCat = '社科';
 
       function el(tag, cls, text) {
         var n = document.createElement(tag);
@@ -324,31 +470,31 @@
       }
 
       function makeBook(b) {
+        var L = BOOK_UI[currentLang] || BOOK_UI['zh-Hans'];
         var a = el('a', 'book reveal');
         a.href = b.url;
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
-        a.setAttribute('aria-label', '查看《' + b.title + '》在豆瓣的页面（在新窗口打开）');
+        a.setAttribute('aria-label', L.aria.replace('{t}', b.title));
 
         var cover = el('div', 'book-cover');
         if (b.cover) {
           var img = el('img');
           img.src = b.cover;
-          img.alt = '《' + b.title + '》封面';
+          img.alt = b.title;
+          img.loading = 'lazy';
           cover.appendChild(img);
         }
-        if (b.rating) {
-          var r = el('span', 'book-rating', '★ ' + b.rating);
-          cover.appendChild(r);
-        }
+        if (b.rating) cover.appendChild(el('span', 'book-rating', '★ ' + b.rating));
         a.appendChild(cover);
 
         var body = el('div', 'book-body');
         body.appendChild(el('h3', 'book-title', b.title));
         body.appendChild(el('p', 'book-author', b.author));
         if (b.desc) body.appendChild(el('p', 'book-desc', b.desc));
+
         var link = el('span', 'book-link');
-        link.appendChild(el('span', '', '去豆瓣查看'));
+        link.appendChild(el('span', '', L.view));
         link.insertAdjacentHTML('beforeend', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>');
         body.appendChild(link);
         a.appendChild(body);
@@ -356,30 +502,28 @@
       }
 
       function render(cat) {
+        var L = BOOK_UI[currentLang] || BOOK_UI['zh-Hans'];
         grid.innerHTML = '';
         var list = books.filter(function (b) { return b.cat === cat; });
         if (!list.length) {
-          grid.appendChild(el('p', 'book-empty', '这一类还没有书，去 books.js 里加几本吧。'));
+          grid.appendChild(el('p', 'book-empty', L.empty));
           return;
         }
         list.forEach(function (b) { grid.appendChild(makeBook(b)); });
         revealCards();
       }
 
-      // 分类计数
       function count(cat) { return books.filter(function (b) { return b.cat === cat; }).length; }
       document.getElementById('count-she').textContent = count('社科');
       document.getElementById('count-xin').textContent = count('心理');
 
-      // Tab 切换
-      var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
-      var panel = document.getElementById('bookPanel');
       tabs.forEach(function (tab) {
         tab.addEventListener('click', function () {
           tabs.forEach(function (t) { t.setAttribute('aria-selected', 'false'); });
           tab.setAttribute('aria-selected', 'true');
+          activeCat = tab.getAttribute('data-cat');
           panel.setAttribute('aria-labelledby', tab.id);
-          render(tab.getAttribute('data-cat'));
+          render(activeCat);
         });
         tab.addEventListener('keydown', function (e) {
           if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
@@ -390,7 +534,6 @@
         });
       });
 
-      // Reveal
       function revealCards() {
         var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         var items = grid.querySelectorAll('.reveal');
@@ -404,7 +547,88 @@
         }
       }
 
-      render('社科');
+      // ===== 语言 =====
+      function applyLang(code) {
+        currentLang = code;
+        var dict = TEXT[code] || null;
+        var lang = LANGS.filter(function (l) { return l.code === code; })[0] || LANGS[0];
+        var ui = UI[code] || UI['zh-Hans'];
+        root.setAttribute('lang', lang.tag);
+
+        textNodes.forEach(function (t) {
+          if (!dict) { t.node.nodeValue = t.orig; return; }
+          var tr = dict[t.key];
+          t.node.nodeValue = (tr != null) ? tr : t.orig;
+        });
+
+        attrTargets.forEach(function (a) {
+          if (!dict) { a.el.setAttribute(a.attr, a.orig); return; }
+          var tr = dict[a.orig];
+          a.el.setAttribute(a.attr, (tr != null) ? tr : a.orig);
+        });
+
+        document.title = ui.title;
+        var md = document.querySelector('meta[name="description"]');
+        if (md) md.setAttribute('content', ui.desc);
+
+        langCurrent.textContent = lang.short;
+        langBtn.setAttribute('aria-label', ui.langAria);
+        langMenu.setAttribute('aria-label', ui.langMenuLabel);
+
+        langMenu.querySelectorAll('button[data-lang]').forEach(function (b) {
+          b.setAttribute('aria-checked', String(b.getAttribute('data-lang') === code));
+        });
+
+        applyTheme(theme);
+        try { localStorage.setItem('oo-design-lang', code); } catch (e) {}
+        render(activeCat);
+      }
+
+      function openMenu(open) {
+        langMenu.hidden = !open;
+        langBtn.setAttribute('aria-expanded', String(open));
+      }
+      langBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        openMenu(langMenu.hidden);
+      });
+      document.addEventListener('click', function (e) {
+        if (!e.target.closest('.lang-wrap')) openMenu(false);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') openMenu(false);
+      });
+      langMenu.querySelectorAll('button[data-lang]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          applyLang(b.getAttribute('data-lang'));
+          openMenu(false);
+          langBtn.focus();
+        });
+      });
+
+      toggle.addEventListener('click', function () {
+        theme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(theme);
+      });
+
+      var storedLang = null;
+      try { storedLang = localStorage.getItem('oo-design-lang'); } catch (e) {}
+      var initLang = LANGS.some(function (l) { return l.code === storedLang; }) ? storedLang : 'zh-Hans';
+      applyLang(initLang);
+
+      // 页面级 reveal
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var items = document.querySelectorAll('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        items.forEach(function (el) { el.classList.add('in'); });
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+          });
+        }, { threshold: 0.12 });
+        items.forEach(function (el) { io.observe(el); });
+      }
     })();
   </script>
 </body>
