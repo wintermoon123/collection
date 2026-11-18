@@ -158,21 +158,9 @@
       content: ""; position: absolute; left: 0; right: 0; bottom: 4px; height: 10px;
       background: var(--tag-peach-bg); z-index: -1; border-radius: 4px;
     }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
-      min-height: 52px; padding: 12px 24px; border-radius: 10px;
-      font-weight: 700; font-size: 1rem; text-decoration: none; cursor: pointer;
-      border: 2px solid transparent; transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
-    }
-    .btn svg { width: 19px; height: 19px; }
-    .btn-primary { background: var(--primary); color: var(--on-primary); }
-    .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: var(--shadow); }
-    .btn-secondary { background: var(--surface); color: var(--text); border-color: var(--border); }
-    .btn-secondary:hover { background: var(--surface-2); transform: translateY(-2px); }
     .hero-email { display: inline-flex; align-items: center; gap: 8px; margin: 16px 0 0; font-size: .98rem; font-weight: 700; color: var(--text-muted); }
     .hero-email svg { width: 17px; height: 17px; color: var(--primary); }
-    .hero-email a { color: var(--text); text-decoration: none; }
-    .hero-email a:hover { color: var(--primary); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+    .hero-email-text { color: var(--text); font-variant-numeric: tabular-nums; }
 
     .hero-art { position: relative; display: grid; justify-items: center; }
     .avatar-frame {
@@ -289,18 +277,6 @@
     }
     .q-title { flex: 1; font-weight: 700; line-height: 1.45; padding-top: 3px; font-size: .97rem; }
 
-    /* ============ Contact ============ */
-    .contact-inner {
-      display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;
-      background: var(--surface); border: 3px solid var(--text); border-radius: 18px;
-      padding: 40px; box-shadow: 8px 8px 0 var(--primary);
-    }
-    .contact-inner p { color: var(--text-muted); margin-bottom: 0; }
-    .contact-email { font-size: clamp(1.2rem, 3vw, 1.7rem); font-weight: 800; word-break: break-all; }
-    .copy-btn { min-height: 48px; padding: 10px 18px; border: 2px solid var(--text); border-radius: 9px; background: var(--bg); color: var(--text); font-weight: 800; cursor: pointer; }
-    .copy-btn:hover { background: var(--surface-2); }
-    .copy-status { min-height: 1.5em; font-size: .9rem; font-weight: 700; color: var(--ok); margin-top: 8px; }
-
     /* ============ Footer ============ */
     .site-footer { border-top: 1px solid var(--border-soft); padding: 30px 0; color: var(--text-muted); font-size: .9rem; }
     .footer-inner { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; }
@@ -329,7 +305,6 @@
       .q-list { grid-template-columns: 1fr; }
       section { padding: 64px 0; }
       #questions { padding: 48px 0 56px; }
-      .contact-inner { grid-template-columns: 1fr; padding: 28px; box-shadow: 5px 5px 0 var(--primary); }
     }
   </style>
 </head>
@@ -348,7 +323,6 @@
         <a href="#works">作品</a>
         <a href="#questions">10 问</a>
         <a href="./推荐书单/index.html" title="推荐书单">书单</a>
-        <a href="#contact">联系</a>
       </nav>
       <div class="header-tools">
         <div class="lang-wrap">
@@ -380,7 +354,7 @@
           <h1 id="hero-title">你好，我是 <span class="hl">oo</span>。</h1>
           <p class="hero-lead">这里放我一直在做的三件事：AI 作品、费曼问题，还有一份推荐书单。</p>
           <p class="hero-sub">AI 作品从社区活动平台、环保卡牌游戏到英语与韩语情境闯关，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。</p>
-          <p class="hero-email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><a href="mailto:671066720@qq.com">671066720@qq.com</a></p>
+          <p class="hero-email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span class="hero-email-text">671066720@qq.com</span></p>
         </div>
         <div class="hero-art">
           <div class="avatar-frame">
@@ -550,27 +524,6 @@
         </div>
       </div>
     </section>
-
-    <!-- CONTACT -->
-    <section id="contact" aria-labelledby="contact-title">
-      <div class="wrap">
-        <div class="contact-inner reveal">
-          <div>
-            <p class="eyebrow">03 / 联系</p>
-            <h2 id="contact-title">有想法？一起做点什么。</h2>
-            <p class="contact-email">671066720@qq.com</p>
-            <p class="copy-status" id="copyStatus" role="status" aria-live="polite"></p>
-          </div>
-          <div>
-            <a class="btn btn-primary" href="mailto:671066720@qq.com?subject=关于你的%20AI%20作品">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-              发邮件给我
-            </a>
-            <button class="copy-btn" id="copyBtn" type="button" style="margin-top:12px;width:100%">复制邮箱地址</button>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
@@ -598,16 +551,16 @@
       ];
 
       var UI = {
-        'zh-Hans': { themeDark: '切换到深色模式', themeLight: '切换到浅色模式', copyDone: '✓ 已复制邮箱地址', copyBtn: '复制邮箱地址', copyBtnDone: '已复制', copyFail: '复制失败，请手动选择邮箱地址', langAria: '切换语言', langMenuLabel: '语言', title: 'oo的主页', desc: 'oo 的 AI 作品集与费曼 10 问：社区运营平台、百变玉米、英语与韩语情境闯关，还有一份推荐书单。' },
-        'zh-Hant': { themeDark: '切換到深色模式', themeLight: '切換到淺色模式', copyDone: '✓ 已複製電子郵件', copyBtn: '複製電子郵件', copyBtnDone: '已複製', copyFail: '複製失敗，請手動選取電子郵件', langAria: '切換語言', langMenuLabel: '語言', title: 'oo 的首頁', desc: 'oo 的 AI 作品集與費曼 10 問：社區營運平台、百變玉米、英語與韓語情境闖關，還有一份推薦書單。' },
-        'en': { themeDark: 'Switch to dark mode', themeLight: 'Switch to light mode', copyDone: '✓ Email copied', copyBtn: 'Copy email', copyBtnDone: 'Copied', copyFail: 'Copy failed, please select the email manually', langAria: 'Change language', langMenuLabel: 'Language', title: "oo's home", desc: 'oo AI portfolio and Feynman 10 questions: a community platform, Magic Corn, English & Korean scenario challenges, plus a recommended reading list.' },
-        'ko': { themeDark: '어두운 모드로 전환', themeLight: '밝은 모드로 전환', copyDone: '✓ 이메일을 복사했습니다', copyBtn: '이메일 복사', copyBtnDone: '복사됨', copyFail: '복사하지 못했습니다. 이메일을 직접 선택해 주세요', langAria: '언어 변경', langMenuLabel: '언어', title: 'oo의 홈', desc: 'oo의 AI 작품집과 파인만 10 질문: 커뮤니티 플랫폼, 변신 옥수수, 영어·한국어 상황 챌린지, 그리고 추천 도서 목록.' },
-        'ja': { themeDark: 'ダークモードに切り替え', themeLight: 'ライトモードに切り替え', copyDone: '✓ メールをコピーしました', copyBtn: 'メールをコピー', copyBtnDone: 'コピー済み', copyFail: 'コピーできませんでした。メールを手動で選択してください', langAria: '言語を変更', langMenuLabel: '言語', title: 'oo のホーム', desc: 'oo の AI 作品集とファインマン 10 問：コミュニティプラットフォーム、マジックコーン、英語・韓国語のシチュエーション攻略、そして推薦図書リスト。' }
+        'zh-Hans': { themeDark: '切换到深色模式', themeLight: '切换到浅色模式', langAria: '切换语言', langMenuLabel: '语言', title: 'oo的主页', desc: 'oo 的 AI 作品集与费曼 10 问：社区运营平台、百变玉米、英语与韩语情境闯关，还有一份推荐书单。' },
+        'zh-Hant': { themeDark: '切換到深色模式', themeLight: '切換到淺色模式', langAria: '切換語言', langMenuLabel: '語言', title: 'oo 的首頁', desc: 'oo 的 AI 作品集與費曼 10 問：社區營運平台、百變玉米、英語與韓語情境闖關，還有一份推薦書單。' },
+        'en': { themeDark: 'Switch to dark mode', themeLight: 'Switch to light mode', langAria: 'Change language', langMenuLabel: 'Language', title: "oo's home", desc: 'oo AI portfolio and Feynman 10 questions: a community platform, Magic Corn, English & Korean scenario challenges, plus a recommended reading list.' },
+        'ko': { themeDark: '어두운 모드로 전환', themeLight: '밝은 모드로 전환', langAria: '언어 변경', langMenuLabel: '언어', title: 'oo의 홈', desc: 'oo의 AI 작품집과 파인만 10 질문: 커뮤니티 플랫폼, 변신 옥수수, 영어·한국어 상황 챌린지, 그리고 추천 도서 목록.' },
+        'ja': { themeDark: 'ダークモードに切り替え', themeLight: 'ライトモードに切り替え', langAria: '言語を変更', langMenuLabel: '言語', title: 'oo のホーム', desc: 'oo の AI 作品集とファインマン 10 問：コミュニティプラットフォーム、マジックコーン、英語・韓国語のシチュエーション攻略、そして推薦図書リスト。' }
       };
 
       var TEXT = {
         'zh-Hant': {
-          'oo的主页': 'oo 的首頁', '作品': '作品', '联系': '聯絡', '跳到主要内容': '跳到主要內容',
+          'oo的主页': 'oo 的首頁', '作品': '作品', '跳到主要内容': '跳到主要內容',
           '你好，我是': '你好，我是 ', '。': '。',
           '这里放我一直在做的三件事：AI 作品、费曼问题，还有一份推荐书单。': '這裡放我一直在做的三件事：AI 作品、費曼問題，還有一份推薦書單。',
           'AI 作品从社区活动平台、环保卡牌游戏到英语与韩语情境闯关，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。': 'AI 作品從社區活動平台、環保卡牌遊戲到英語與韓語情境闖關，都是能直接上手的小產品；費曼問題用提問把概念講清楚；推薦書單收著我讀過、也願意反覆推薦的書。',
@@ -623,7 +576,7 @@
           '十个真实情境，用英语把一件事办成。进度条反映任务完成度，决策点用符号区分对错，AI 点评即时反馈。': '十個真實情境，用英語把一件事辦成。進度條反映任務完成度，決策點用符號區分對錯，AI 點評即時回饋。',
           '情境闯关': '情境闖關', 'AI 点评': 'AI 點評', '生词本': '生詞本', '韩语情境闯关': '韓語情境闖關',
           '十个真实情境，用韩语把一件事办成。不只说对，还要说得体——进度条反映任务完成度，AI 点评即时反馈。': '十個真實情境，用韓語把一件事辦成。不只說對，還要說得體——進度條反映任務完成度，AI 點評即時回饋。',
-          '03 / 联系': '02 / 聯絡', '有想法？一起做点什么。': '有想法？一起做點什麼。', '发邮件给我': '寄信給我', '复制邮箱地址': '複製電子郵件', '回到顶部 ↑': '回到頂端 ↑',
+          '回到顶部 ↑': '回到頂端 ↑',
           'oo的主页，返回顶部': 'oo 的首頁，返回頂端', '主导航': '主要導覽', '作品分类': '作品分類', '作品特点': '作品特點',
           '查看 LIA 社区运营平台（在新窗口打开）': '查看 LIA 社區營運平台（在新視窗開啟）',
           '查看百变玉米（在新窗口打开）': '查看百變玉米（在新視窗開啟）',
@@ -644,7 +597,7 @@
           '如何看待神秘学的影响？': '如何看待神秘學的影響？'
         },
         'en': {
-          'oo的主页': "oo's home", '作品': 'Works', '联系': 'Contact', '跳到主要内容': 'Skip to main content', '你好，我是': "Hi, I'm ", '。': '.',
+          'oo的主页': "oo's home", '作品': 'Works', '跳到主要内容': 'Skip to main content', '你好，我是': "Hi, I'm ", '。': '.',
           '这里放我一直在做的三件事：AI 作品、费曼问题，还有一份推荐书单。': 'Three things I keep working on: AI projects, Feynman questions, and a recommended reading list.',
           'AI 作品从社区活动平台、环保卡牌游戏到英语与韩语情境闯关，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。': 'The AI projects range from a community activity platform and an eco card game to English and Korean scenario challenges — all small products you can use right away. Feynman questions explain ideas through questions, and the reading list collects books I have read and keep recommending.',
           '01 / 作品': '01 / Works', '我的 AI 作品': 'My AI Works',
@@ -659,7 +612,7 @@
           '十个真实情境，用英语把一件事办成。进度条反映任务完成度，决策点用符号区分对错，AI 点评即时反馈。': 'Ten real-life scenarios to get things done in English. A progress bar shows completion, symbols mark right and wrong choices, and AI feedback is instant.',
           '情境闯关': 'Scenario levels', 'AI 点评': 'AI feedback', '生词本': 'Word list', '韩语情境闯关': 'Korean Scenario Challenge',
           '十个真实情境，用韩语把一件事办成。不只说对，还要说得体——进度条反映任务完成度，AI 点评即时反馈。': 'Ten real-life scenarios to get things done in Korean. Not just correct, but appropriate — a progress bar shows completion and AI feedback is instant.',
-          '03 / 联系': '02 / Contact', '有想法？一起做点什么。': "Got an idea? Let's build something.", '发邮件给我': 'Email me', '复制邮箱地址': 'Copy email', '回到顶部 ↑': 'Back to top ↑',
+          '回到顶部 ↑': 'Back to top ↑',
           'oo的主页，返回顶部': "oo's home, back to top", '主导航': 'Main navigation', '作品分类': 'Categories', '作品特点': 'Highlights',
           '查看 LIA 社区运营平台（在新窗口打开）': 'View LIA Community Platform (opens in a new window)',
           '查看百变玉米（在新窗口打开）': 'View Magic Corn (opens in a new window)',
@@ -680,7 +633,7 @@
           '如何看待神秘学的影响？': 'How should I think about the influence of mysticism?'
         },
         'ko': {
-          'oo的主页': 'oo의 홈', '作品': '작품', '联系': '연락', '跳到主要内容': '본문으로 건너뛰기', '你好，我是': '안녕하세요, ', '。': '입니다.',
+          'oo的主页': 'oo의 홈', '作品': '작품', '跳到主要内容': '본문으로 건너뛰기', '你好，我是': '안녕하세요, ', '。': '입니다.',
           '这里放我一直在做的三件事：AI 作品、费曼问题，还有一份推荐书单。': '제가 꾸준히 해 온 세 가지입니다. AI 작품, 파인만 질문, 그리고 추천 도서 목록.',
           'AI 作品从社区活动平台、环保卡牌游戏到英语与韩语情境闯关，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。': 'AI 작품은 커뮤니티 활동 플랫폼과 환경 카드 게임에서 영어·한국어 상황 체험까지, 바로 써 볼 수 있는 작은 제품들입니다. 파인만 질문은 질문으로 개념을 설명하고, 추천 도서 목록은 제가 읽고 다시 추천하고 싶은 책을 모았습니다.',
           '01 / 作品': '01 / 작품', '我的 AI 作品': '나의 AI 작품',
@@ -695,7 +648,7 @@
           '十个真实情境，用英语把一件事办成。进度条反映任务完成度，决策点用符号区分对错，AI 点评即时反馈。': '열 가지 실제 상황에서 영어로 일을 해냅니다. 진행 표시줄이 완료도를 보여 주고, 선택 지점은 기호로 정답을 구분하며, AI 피드백이 즉시 제공됩니다.',
           '情境闯关': '상황 챌린지', 'AI 点评': 'AI 피드백', '生词本': '단어장', '韩语情境闯关': '한국어 상황 챌린지',
           '十个真实情境，用韩语把一件事办成。不只说对，还要说得体——进度条反映任务完成度，AI 点评即时反馈。': '열 가지 실제 상황에서 한국어로 일을 해냅니다. 맞는 말뿐 아니라 적절한 말까지 — 진행 표시줄이 완료도를 보여 주고 AI 피드백이 즉시 제공됩니다.',
-          '03 / 联系': '02 / 연락', '有想法？一起做点什么。': '아이디어가 있나요? 함께 만들어 봐요.', '发邮件给我': '메일 보내기', '复制邮箱地址': '이메일 복사', '回到顶部 ↑': '맨 위로 ↑',
+          '回到顶部 ↑': '맨 위로 ↑',
           'oo的主页，返回顶部': 'oo의 홈, 맨 위로', '主导航': '주요 내비게이션', '作品分类': '분류', '作品特点': '특징',
           '查看 LIA 社区运营平台（在新窗口打开）': 'LIA 커뮤니티 플랫폼 보기(새 창에서 열림)',
           '查看百变玉米（在新窗口打开）': '변신 옥수수 보기(새 창에서 열림)',
@@ -716,7 +669,7 @@
           '如何看待神秘学的影响？': '신비학의 영향력을 어떻게 볼 것인가?'
         },
         'ja': {
-          'oo的主页': 'ooのホーム', '作品': '作品', '联系': '連絡', '跳到主要内容': 'メインコンテンツへスキップ', '你好，我是': 'こんにちは、', '。': 'です。',
+          'oo的主页': 'ooのホーム', '作品': '作品', '跳到主要内容': 'メインコンテンツへスキップ', '你好，我是': 'こんにちは、', '。': 'です。',
           '这里放我一直在做的三件事：AI 作品、费曼问题，还有一份推荐书单。': 'ずっと取り組んでいる三つのこと。AI 作品、ファインマン質問、そして推薦書リストです。',
           'AI 作品从社区活动平台、环保卡牌游戏到英语与韩语情境闯关，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。': 'AI 作品は、コミュニティ活動プラットフォームや環境カードゲームから、英語・韓国語のシチュエーション体験まで、すぐに使える小さなプロダクトです。ファインマン質問は問いで概念を説明し、推薦書リストは何度でも薦めたい本を集めました。',
           '01 / 作品': '01 / 作品', '我的 AI 作品': '私の AI 作品',
@@ -731,7 +684,7 @@
           '十个真实情境，用英语把一件事办成。进度条反映任务完成度，决策点用符号区分对错，AI 点评即时反馈。': '10 のリアルなシチュエーションで、英語で用事を済ませます。進捗バーが達成度を示し、選択の正誤は記号で区別、AI の講評はその場で返ります。',
           '情境闯关': 'シチュエーション攻略', 'AI 点评': 'AI 講評', '生词本': '単語帳', '韩语情境闯关': '韓国語シチュエーション攻略',
           '十个真实情境，用韩语把一件事办成。不只说对，还要说得体——进度条反映任务完成度，AI 点评即时反馈。': '10 のリアルなシチュエーションで、韓国語で用事を済ませます。正しいだけでなく、ふさわしい言い方まで。進捗バーが達成度を示し、AI の講評はその場で返ります。',
-          '03 / 联系': '02 / 連絡', '有想法？一起做点什么。': 'アイデアがありますか？一緒に何か作りましょう。', '发邮件给我': 'メールを送る', '复制邮箱地址': 'メールをコピー', '回到顶部 ↑': 'トップへ戻る ↑',
+          '回到顶部 ↑': 'トップへ戻る ↑',
           'oo的主页，返回顶部': 'ooのホーム、トップへ戻る', '主导航': 'メインナビゲーション', '作品分类': 'カテゴリ', '作品特点': '特徴',
           '查看 LIA 社区运营平台（在新窗口打开）': 'LIA コミュニティプラットフォームを見る（新しいウィンドウで開く）',
           '查看百变玉米（在新窗口打开）': 'マジックコーンを見る（新しいウィンドウで開く）',
@@ -825,10 +778,6 @@
         langBtn.setAttribute('aria-label', ui.langAria);
         langMenu.setAttribute('aria-label', ui.langMenuLabel);
 
-        var cb = document.getElementById('copyBtn');
-        if (cb) cb.textContent = ui.copyBtn;
-        var st = document.getElementById('copyStatus');
-        if (st) st.textContent = '';
         langMenu.querySelectorAll('button[data-lang]').forEach(function (b) {
           b.setAttribute('aria-checked', String(b.getAttribute('data-lang') === code));
         });
@@ -883,31 +832,6 @@
         }, { threshold: 0.12 });
         items.forEach(function (el) { io.observe(el); });
       }
-
-      // Copy email with live-region feedback
-      var copyBtn = document.getElementById('copyBtn');
-      var status = document.getElementById('copyStatus');
-      var email = '671066720@qq.com';
-      copyBtn.addEventListener('click', function () {
-        var ui = UI[currentLang] || UI['zh-Hans'];
-        function done() {
-          status.textContent = ui.copyDone;
-          copyBtn.textContent = ui.copyBtnDone;
-          setTimeout(function () { copyBtn.textContent = (UI[currentLang] || UI['zh-Hans']).copyBtn; }, 2000);
-        }
-        if (navigator.clipboard && window.isSecureContext) {
-          navigator.clipboard.writeText(email).then(done).catch(fallback);
-        } else { fallback(); }
-        function fallback() {
-          var ta = document.createElement('textarea');
-          ta.value = email; ta.setAttribute('readonly', '');
-          ta.style.position = 'fixed'; ta.style.opacity = '0';
-          document.body.appendChild(ta); ta.select();
-          try { document.execCommand('copy'); done(); }
-          catch (e) { status.textContent = (UI[currentLang] || UI['zh-Hans']).copyFail; }
-          document.body.removeChild(ta);
-        }
-      });
     })();
   </script>
 </body>
