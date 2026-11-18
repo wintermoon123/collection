@@ -19,7 +19,6 @@
       --primary-hover: #172E7E;
       --on-primary: #FFFFFF;
       --focus: #B91C1C;
-      --stripe: rgba(17, 24, 39, 0.055);
       --shadow: 0 1px 2px rgba(17,24,39,.06), 0 8px 24px rgba(17,24,39,.05);
       --tag-blue-bg: #DBEAFE; --tag-blue-text: #1E3A8A;
       --tag-mint-bg: #D1FAE5; --tag-mint-text: #14532D;
@@ -41,7 +40,6 @@
       --primary-hover: #BFDBFE;
       --on-primary: #0C1424;
       --focus: #FCA5A5;
-      --stripe: rgba(248, 250, 252, 0.06);
       --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.25);
       --tag-blue-bg: #1E3A8A; --tag-blue-text: #DBEAFE;
       --tag-mint-bg: #14532D; --tag-mint-text: #D1FAE5;
@@ -66,6 +64,7 @@
     a { color: var(--primary); }
     h1, h2, h3 { line-height: 1.25; letter-spacing: -0.02em; }
     h1 { font-size: clamp(2.4rem, 6vw, 4rem); margin: 0 0 18px; }
+    html[lang="ja"] h1 { font-size: clamp(1.9rem, 4.2vw, 2.8rem); }
     h2 { font-size: clamp(1.9rem, 4.5vw, 2.6rem); margin: 0 0 12px; }
     h3 { font-size: 1.35rem; margin: 0 0 10px; }
     p { margin: 0 0 16px; }
@@ -98,7 +97,8 @@
     }
     .header-inner { display: flex; align-items: center; gap: 24px; min-height: 72px; }
     .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.03em; }
-    .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 9px; background: var(--primary); color: var(--on-primary); }
+    .brand-mark { width: 30px; height: 30px; display: grid; place-items: center; background: none; color: var(--text); }
+    .brand-mark svg { width: 26px; height: 26px; }
     .site-nav { margin-left: auto; display: flex; gap: 4px; align-items: center; }
     .site-nav a {
       color: var(--text-muted); text-decoration: none; font-weight: 600;
@@ -113,15 +113,38 @@
     .icon-btn:hover { background: var(--surface-2); }
     .icon-btn svg { width: 20px; height: 20px; }
 
-    /* ============ Hero ============ */
-    .hero { position: relative; overflow: hidden; padding: 72px 0 84px; border-bottom: 1px solid var(--border-soft); }
-    .hero::before {
-      content: ""; position: absolute; inset: 0; pointer-events: none;
-      background-image: repeating-linear-gradient(135deg, var(--stripe) 0 2px, transparent 2px 14px);
-      mask-image: linear-gradient(90deg, transparent 40%, #000 100%);
-      -webkit-mask-image: linear-gradient(90deg, transparent 40%, #000 100%);
+    /* ============ Language switcher ============ */
+    .header-tools { display: flex; align-items: center; gap: 10px; }
+    .lang-wrap { position: relative; }
+    .lang-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      height: 44px; padding: 0 11px; border: 2px solid var(--border); border-radius: 10px;
+      background: var(--surface); color: var(--text); font-weight: 700; font-size: .92rem;
+      cursor: pointer; font-family: inherit;
     }
-    .hero-grid { position: relative; display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center; }
+    .lang-btn:hover { background: var(--surface-2); }
+    .lang-btn .globe { width: 18px; height: 18px; flex: none; }
+    .lang-btn .chev { width: 12px; height: 12px; flex: none; opacity: .65; transition: transform .18s ease; }
+    .lang-btn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+    .lang-menu {
+      position: absolute; right: 0; top: calc(100% + 8px); z-index: 60;
+      min-width: 168px; margin: 0; padding: 6px; list-style: none;
+      background: var(--surface); border: 2px solid var(--border); border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+    .lang-menu[hidden] { display: none; }
+    .lang-menu button {
+      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 10px 12px; border: 0; border-radius: 8px; background: none; color: var(--text);
+      font-family: inherit; font-size: .92rem; font-weight: 600; text-align: left; cursor: pointer;
+    }
+    .lang-menu button:hover, .lang-menu button:focus-visible { background: var(--surface-2); }
+    .lang-menu button[aria-checked="true"] { font-weight: 800; }
+    .lang-menu button[aria-checked="true"]::after { content: "✓"; font-weight: 800; color: var(--primary); }
+
+    /* ============ Hero ============ */
+    .hero { padding: 72px 0 84px; border-bottom: 1px solid var(--border-soft); }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center; }
     .eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
       font-size: .85rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
@@ -135,7 +158,6 @@
       content: ""; position: absolute; left: 0; right: 0; bottom: 4px; height: 10px;
       background: var(--tag-peach-bg); z-index: -1; border-radius: 4px;
     }
-    .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 9px;
       min-height: 52px; padding: 12px 24px; border-radius: 10px;
@@ -147,9 +169,10 @@
     .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: var(--shadow); }
     .btn-secondary { background: var(--surface); color: var(--text); border-color: var(--border); }
     .btn-secondary:hover { background: var(--surface-2); transform: translateY(-2px); }
-    .hero-meta { list-style: none; padding: 0; margin: 30px 0 0; display: flex; flex-wrap: wrap; gap: 10px 22px; color: var(--text-muted); font-size: .92rem; font-weight: 600; }
-    .hero-meta li { display: inline-flex; align-items: center; gap: 7px; }
-    .hero-meta svg { width: 16px; height: 16px; color: var(--primary); }
+    .hero-email { display: inline-flex; align-items: center; gap: 8px; margin: 16px 0 0; font-size: .98rem; font-weight: 700; color: var(--text-muted); }
+    .hero-email svg { width: 17px; height: 17px; color: var(--primary); }
+    .hero-email a { color: var(--text); text-decoration: none; }
+    .hero-email a:hover { color: var(--primary); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
 
     .hero-art { position: relative; display: grid; justify-items: center; }
     .avatar-frame {
@@ -164,42 +187,32 @@
       background-size: 18px 18px; opacity: .7;
     }
     .avatar-frame img { position: relative; width: 88%; height: 88%; object-fit: contain; }
-    .avatar-badge {
-      position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%);
-      background: var(--surface); border: 2px solid var(--text); border-radius: 999px;
-      padding: 8px 18px; font-size: .85rem; font-weight: 800; white-space: nowrap;
-      display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--shadow);
-    }
-    .avatar-badge svg { width: 17px; height: 17px; color: var(--primary); }
 
     /* ============ Sections ============ */
     section { padding: 88px 0; }
-    .section-head { margin-bottom: 40px; max-width: 60ch; }
-    .section-desc { color: var(--text-muted); font-size: 1.05rem; }
+    #works { padding: 60px 0 68px; }
+    .section-head { margin-bottom: 28px; max-width: 60ch; }
+    .section-desc { color: var(--text-muted); font-size: 1rem; margin-bottom: 0; }
 
     /* ============ Work cards ============ */
-    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
     .card {
       background: var(--surface); border: 2px solid var(--border-soft);
       border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column;
       transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
     }
-    .card:hover { transform: translateY(-6px); border-color: var(--text); box-shadow: var(--shadow); }
+    .card:hover { transform: translateY(-4px); border-color: var(--text); box-shadow: var(--shadow); }
     .card-preview {
-      height: 210px; position: relative; overflow: hidden;
+      height: 168px; position: relative; overflow: hidden;
       border-bottom: 2px solid var(--border-soft);
-      display: grid; place-items: center; padding: 20px;
+      display: grid; place-items: center; padding: 12px;
     }
     .preview-lia { background: var(--tag-blue-bg); }
     .preview-corn { background: var(--tag-peach-bg); }
     .preview-en { background: var(--tag-mint-bg); }
     .preview-ko { background: var(--tag-purple-bg); }
-    .card-preview::after {
-      content: ""; position: absolute; inset: 0; pointer-events: none;
-      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,.28) 0 8px, transparent 8px 18px);
-    }
-    .card-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
-    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; list-style: none; padding: 0; }
+    .card-body { padding: 18px 20px; display: flex; flex-direction: column; flex: 1; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 11px; list-style: none; padding: 0; }
     .tag {
       display: inline-flex; align-items: center; gap: 6px;
       font-size: .8rem; font-weight: 800; padding: 4px 11px; border-radius: 999px;
@@ -209,68 +222,84 @@
     .tag-mint { background: var(--tag-mint-bg); color: var(--tag-mint-text); }
     .tag-peach { background: var(--tag-peach-bg); color: var(--tag-peach-text); }
     .tag-purple { background: var(--tag-purple-bg); color: var(--tag-purple-text); }
-    .card p { color: var(--text-muted); font-size: .96rem; margin-bottom: 20px; }
-    .features { list-style: none; padding: 0; margin: 0 0 22px; display: flex; flex-wrap: wrap; gap: 8px; }
-    .features li { font-size: .82rem; font-weight: 600; color: var(--text-muted); background: var(--surface-2); padding: 4px 10px; border-radius: 6px; }
+    .card h3 { font-size: 1.18rem; margin: 0 0 7px; }
+    .card p { color: var(--text-muted); font-size: .9rem; margin-bottom: 14px; line-height: 1.55; }
+    .features { list-style: none; padding: 0; margin: 0 0 15px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .features li { font-size: .78rem; font-weight: 600; color: var(--text-muted); background: var(--surface-2); padding: 3px 9px; border-radius: 6px; }
     .card-link {
       margin-top: auto; display: inline-flex; align-items: center; justify-content: space-between; gap: 10px;
-      min-height: 48px; padding: 10px 16px; border: 2px solid var(--primary); border-radius: 9px;
-      color: var(--primary); font-weight: 800; text-decoration: none;
+      min-height: 42px; padding: 8px 14px; border: 2px solid var(--primary); border-radius: 9px;
+      color: var(--primary); font-weight: 800; text-decoration: none; font-size: .92rem;
     }
     .card-link:hover { background: var(--primary); color: var(--on-primary); }
     .card-link svg { width: 18px; height: 18px; }
 
     /* ============ Mini previews (decorative) ============ */
-    .mock { width: 100%; max-width: 320px; background: #fff; border: 2px solid #1F2937; border-radius: 10px; overflow: hidden; box-shadow: 0 6px 0 rgba(0,0,0,.18); color: #1F2937; }
-    .mock-bar { display: flex; align-items: center; gap: 5px; padding: 7px 10px; background: #1F2937; }
-    .mock-dot { width: 7px; height: 7px; border-radius: 50%; background: #9CA3AF; }
-    .mock-url { margin-left: 8px; font-size: 9px; color: #D1D5DB; font-family: ui-monospace, monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .mock-pad { padding: 12px; }
-    .mock-line { display: block; height: 6px; border-radius: 3px; background: #D1D5DB; margin-bottom: 6px; }
-    .mock-line.w20 { width: 20%; } .mock-line.w25 { width: 25%; } .mock-line.w35 { width: 35%; }
-    .mock-line.w40 { width: 40%; } .mock-line.w45 { width: 45%; } .mock-line.w50 { width: 50%; }
-    .mock-line.w60 { width: 60%; } .mock-line.w70 { width: 70%; }
-    .mock-line.dark { background: #4B5563; } .mock-line.blue { background: #1E40AF; } .mock-line.green { background: #166534; }
-    .mock-lia-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .mock-lia-item { display: flex; align-items: center; gap: 8px; padding: 8px; border: 1px solid #E5E7EB; border-radius: 6px; margin-bottom: 6px; }
-    .mock-av { width: 22px; height: 22px; border-radius: 50%; background: #BFDBFE; flex: none; }
-    .mock-lia-item > div { flex: 1; }
-    .mock-chip { font-size: 8px; font-weight: 700; color: #fff; background: #1E40AF; padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
-    .mock-corn-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .mock-pill { font-size: 8px; font-weight: 700; background: #FDE68A; color: #78350F; padding: 2px 8px; border-radius: 999px; }
-    .mock-corn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
-    .mock-card { border: 1px solid #E5E7EB; border-radius: 6px; padding: 7px; }
-    .mock-card-art { height: 40px; border-radius: 4px; background: #FEF3C7; display: grid; place-items: center; margin-bottom: 7px; }
-    .mock-card-art svg { width: 24px; height: 24px; color: #92400E; }
-    .mock-en-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px; }
-    .mock-progress { display: flex; gap: 3px; margin-bottom: 10px; }
-    .mock-progress span { height: 7px; border-radius: 4px; flex: 1; }
-    .mock-progress .s1 { background: #166534; } .mock-progress .s2 { background: #166534; }
-    .mock-progress .s3 { background: #92400E; } .mock-progress .s4 { background: #E5E7EB; } .mock-progress .s5 { background: #E5E7EB; }
-    .mock-bubble { font-size: 9px; font-weight: 600; padding: 6px 9px; border-radius: 8px; margin-bottom: 6px; max-width: 85%; line-height: 1.4; }
-    .mock-bubble.left { background: #F3F4F6; margin-right: auto; }
-    .mock-bubble.right { background: #DCFCE7; margin-left: auto; }
-    .mock-feedback { font-size: 9px; font-weight: 800; color: var(--ok); display: flex; align-items: center; gap: 5px; margin-top: 8px; }
+    .mock {
+      width: 100%; max-width: 300px; background: #fff;
+      border: 1.5px solid #D7DBE1; border-radius: 12px; padding: 12px 14px;
+      box-shadow: 0 8px 20px rgba(15,23,42,.12); color: #1F2937;
+    }
+    .mock-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .mock-pill { font-size: 9px; font-weight: 800; padding: 3px 9px; border-radius: 999px; background: #DBEAFE; color: #1D4ED8; }
+    .mock-pill.green { background: #DCFCE7; color: #15803D; }
+    .mock-pill.amber { background: #FEF3C7; color: #B45309; }
+    .mock-pill.violet { background: #EDE9FE; color: #6D28D9; }
+    .mock-title { font-size: 11px; font-weight: 800; color: #1F2937; }
+    .mock-name { font-size: 10px; font-weight: 700; color: #1F2937; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .mock-sub { font-size: 8.5px; font-weight: 500; color: #9CA3AF; }
+    .mock-lia-item { display: flex; align-items: center; gap: 9px; margin-bottom: 9px; }
+    .mock-lia-item:last-child { margin-bottom: 0; }
+    .mock-av { width: 24px; height: 24px; border-radius: 8px; background: #DBEAFE; flex: none; display: grid; place-items: center; }
+    .mock-av svg { width: 14px; height: 14px; color: #1D4ED8; }
+    .mock-av.green { background: #DCFCE7; } .mock-av.green svg { color: #15803D; }
+    .mock-av.amber { background: #FEF3C7; } .mock-av.amber svg { color: #B45309; }
+    .mock-lia-item > div { flex: 1; min-width: 0; line-height: 1.3; }
+    .mock-chip { font-size: 9px; font-weight: 800; padding: 3px 8px; border-radius: 6px; white-space: nowrap; background: #EFF6FF; color: #1D4ED8; }
+    .mock-chip.amber { background: #FFFBEB; color: #B45309; }
+    .mock-corn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .mock-card { border: 1px solid #EEF0F3; border-radius: 9px; padding: 8px 6px; text-align: center; }
+    .mock-card-art { height: 34px; display: grid; place-items: center; margin-bottom: 6px; }
+    .mock-card-art svg { width: 26px; height: 26px; }
+    .mock-card .mock-name { font-size: 9px; line-height: 1.3; }
+    .mock-card .mock-sub { font-size: 8px; }
+    .mock-progress { display: flex; gap: 4px; margin-bottom: 10px; }
+    .mock-progress span { height: 6px; border-radius: 4px; flex: 1; background: #E9ECF1; }
+    .mock-progress .on { background: #16A34A; } .mock-progress .now { background: #F59E0B; }
+    .mock-bubble { font-size: 10px; font-weight: 600; padding: 6px 10px; border-radius: 9px; margin-bottom: 7px; max-width: 86%; line-height: 1.35; }
+    .mock-bubble.left { background: #F1F3F6; margin-right: auto; border-bottom-left-radius: 3px; }
+    .mock-bubble.right { background: #DCFCE7; margin-left: auto; border-bottom-right-radius: 3px; }
+    .mock-feedback { font-size: 9.5px; font-weight: 800; color: #15803D; display: flex; align-items: center; gap: 5px; margin-top: 2px; }
     .mock-feedback svg { width: 12px; height: 12px; }
 
-    /* ============ Questions ============ */
-    .q-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    /* ============ Feynman questions ============ */
+    #questions { padding: 64px 0 72px; border-top: 1px solid var(--border-soft); }
+    .q-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
     .q-item {
       background: var(--surface); border: 2px solid var(--border-soft);
       border-radius: 12px; transition: border-color .18s ease, box-shadow .18s ease;
     }
     .q-item:hover { border-color: var(--text); box-shadow: var(--shadow); }
-    .q-head {
-      display: flex; align-items: flex-start; gap: 14px;
-      padding: 18px 20px; min-height: 78px;
-    }
+    .q-head { display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px; min-height: 74px; }
     .q-num {
       flex: none; display: grid; place-items: center;
       min-width: 34px; height: 34px; padding: 0 6px;
-      border-radius: 8px; font-weight: 800; font-size: .9rem;
+      border-radius: 8px; font-weight: 800; font-size: .88rem;
       font-variant-numeric: tabular-nums;
     }
-    .q-title { flex: 1; font-weight: 700; line-height: 1.45; padding-top: 3px; }
+    .q-title { flex: 1; font-weight: 700; line-height: 1.45; padding-top: 3px; font-size: .97rem; }
+
+    /* ============ Contact ============ */
+    .contact-inner {
+      display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;
+      background: var(--surface); border: 3px solid var(--text); border-radius: 18px;
+      padding: 40px; box-shadow: 8px 8px 0 var(--primary);
+    }
+    .contact-inner p { color: var(--text-muted); margin-bottom: 0; }
+    .contact-email { font-size: clamp(1.2rem, 3vw, 1.7rem); font-weight: 800; word-break: break-all; }
+    .copy-btn { min-height: 48px; padding: 10px 18px; border: 2px solid var(--text); border-radius: 9px; background: var(--bg); color: var(--text); font-weight: 800; cursor: pointer; }
+    .copy-btn:hover { background: var(--surface-2); }
+    .copy-status { min-height: 1.5em; font-size: .9rem; font-weight: 700; color: var(--ok); margin-top: 8px; }
 
     /* ============ Footer ============ */
     .site-footer { border-top: 1px solid var(--border-soft); padding: 30px 0; color: var(--text-muted); font-size: .9rem; }
@@ -288,14 +317,19 @@
     @media (max-width: 680px) {
       body { font-size: 16px; }
       .wrap { width: min(var(--wrap), calc(100% - 32px)); }
-      .site-nav { display: none; }
-      .hero { padding: 52px 0 72px; }
+      .header-inner { flex-wrap: wrap; gap: 8px 12px; padding: 10px 0; min-height: 0; }
+      .header-tools { margin-left: auto; }
+      .site-nav { order: 3; width: 100%; margin-left: 0; gap: 2px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .site-nav a { padding: 8px 10px; font-size: .9rem; white-space: nowrap; }
+      .hero { padding: 40px 0 56px; }
       .hero-grid { grid-template-columns: 1fr; }
       .hero-art { order: -1; }
       .avatar-frame { width: min(78%, 320px); box-shadow: 7px 7px 0 var(--primary); }
       .cards { grid-template-columns: 1fr; }
       .q-list { grid-template-columns: 1fr; }
       section { padding: 64px 0; }
+      #questions { padding: 48px 0 56px; }
+      .contact-inner { grid-template-columns: 1fr; padding: 28px; box-shadow: 5px 5px 0 var(--primary); }
     }
   </style>
 </head>
@@ -304,23 +338,37 @@
 
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="#top" aria-label="oo design，返回顶部">
+      <a class="brand" href="#top" aria-label="oo的主页，返回顶部">
         <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1 1.2 2.2 1.8 3.5 1.8s2.5-.6 3.5-1.8"/><path d="M9 9.5h.01M15 9.5h.01"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
         </span>
-        <span>oo design</span>
+        <span>oo的主页</span>
       </a>
       <nav class="site-nav" aria-label="主导航">
         <a href="#works">作品</a>
         <a href="#questions">10 问</a>
-        <a href="./推荐书单/index.html" title="推荐书单">
-          <svg viewBox="0 0 24 24" width="16" height="16" style="margin-right:6px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          书单
-        </a>
+        <a href="./推荐书单/index.html" title="推荐书单">书单</a>
+        <a href="#contact">联系</a>
       </nav>
-      <button id="themeToggle" class="icon-btn" type="button" aria-pressed="false" aria-label="切换到深色模式" title="切换深浅色模式">
-        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
-      </button>
+      <div class="header-tools">
+        <div class="lang-wrap">
+          <button id="langBtn" class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="切换语言">
+            <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M12 2.8a13.5 13.5 0 0 0 0 18.4 13.5 13.5 0 0 0 0-18.4M2.8 12h18.4"/></svg>
+            <span id="langCurrent">简</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <ul id="langMenu" class="lang-menu" role="menu" aria-label="语言" hidden>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="zh-Hans" aria-checked="true">简体中文</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="zh-Hant" aria-checked="false">繁體中文</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="en" aria-checked="false">English</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="ko" aria-checked="false">한국어</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="ja" aria-checked="false">日本語</button></li>
+          </ul>
+        </div>
+        <button id="themeToggle" class="icon-btn" type="button" aria-pressed="false" aria-label="切换到深色模式" title="切换深浅色模式">
+          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -329,36 +377,15 @@
     <section id="top" class="hero" aria-labelledby="hero-title">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 2l2.4 5 5.6.8-4 4 .9 5.5L12 14.8 7.1 17.3 8 11.8 4 7.8 9.6 7z"/></svg>
-            AI 作品集 · 2026
-          </p>
           <h1 id="hero-title">你好，我是 <span class="hl">oo</span>。</h1>
-          <p class="hero-lead">我用 AI 把想法做成能用、好玩、也照顾到每个人的产品。</p>
-          <p class="hero-sub">这里收录了我的四个 AI 作品——从社区运营工具，到环保教育小游戏，再到英语与韩语情境学习应用。</p>
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="#works">
-              查看作品
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a class="btn btn-secondary" href="mailto:671066720@qq.com?subject=关于你的%20AI%20作品">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-              联系我
-            </a>
-          </div>
-          <ul class="hero-meta">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>4 个上线作品</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>教育 · 社区 · 语言 · 环保</li>
-          </ul>
+          <p class="hero-lead">这里放我一直在做的三件事：AI 作品、费曼问题，还有一份推荐书单。</p>
+          <p class="hero-sub">AI 作品从社区活动平台、环保卡牌游戏到英语与韩语情境闯关，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。</p>
+          <p class="hero-email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><a href="mailto:671066720@qq.com">671066720@qq.com</a></p>
         </div>
         <div class="hero-art">
           <div class="avatar-frame">
             <img src="./assets/avatar.jpeg" alt="oo 的头像：一只穿绿色和服、手捧花束的白色小狐狸插画" width="1080" height="1080">
           </div>
-          <span class="avatar-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 5 5.6.8-4 4 .9 5.5L12 14.8 7.1 17.3 8 11.8 4 7.8 9.6 7z"/></svg>
-            用好奇心做设计
-          </span>
         </div>
       </div>
     </section>
@@ -377,13 +404,10 @@
           <article class="card reveal">
             <div class="card-preview preview-lia" aria-hidden="true">
               <div class="mock">
-                <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-url">lia community / activities</span></div>
-                <div class="mock-pad">
-                  <div class="mock-lia-head"><span class="mock-line dark w40"></span><span class="mock-line blue w20"></span></div>
-                  <div class="mock-lia-item"><span class="mock-av"></span><div><span class="mock-line dark w60"></span><span class="mock-line w35"></span></div><span class="mock-chip">报名</span></div>
-                  <div class="mock-lia-item"><span class="mock-av"></span><div><span class="mock-line dark w50"></span><span class="mock-line w35"></span></div><span class="mock-chip">进行中</span></div>
-                  <div class="mock-lia-item"><span class="mock-av"></span><div><span class="mock-line dark w60"></span><span class="mock-line w25"></span></div><span class="mock-chip">回顾</span></div>
-                </div>
+                <div class="mock-top"><span class="mock-title">近期活动</span><span class="mock-pill">查看全部 →</span></div>
+                <div class="mock-lia-item"><span class="mock-av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v13H4zM4 10h16M8 3v4M16 3v4"/></svg></span><div><div class="mock-name">春日邻里市集</div><div class="mock-sub">周六 14:00 · 中庭</div></div><span class="mock-chip">报名</span></div>
+                <div class="mock-lia-item"><span class="mock-av green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5 5.5.8-4 4 1 5.5L12 15.8 7 18.3l1-5.5-4-4 5.5-.8z"/></svg></span><div><div class="mock-name">手作体验课</div><div class="mock-sub">周日 10:00 · 活动室</div></div><span class="mock-chip">进行中</span></div>
+                <div class="mock-lia-item"><span class="mock-av amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2-5.3M4 4v4h4"/></svg></span><div><div class="mock-name">旧物交换角</div><div class="mock-sub">上周 · 已结束</div></div><span class="mock-chip amber">回顾</span></div>
               </div>
             </div>
             <div class="card-body">
@@ -405,15 +429,11 @@
           <article class="card reveal">
             <div class="card-preview preview-corn" aria-hidden="true">
               <div class="mock">
-                <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-url">baibianyumi / demo</span></div>
-                <div class="mock-pad">
-                  <div class="mock-corn-top"><span class="mock-line dark w50"></span><span class="mock-pill">DEMO</span></div>
-                  <div class="mock-corn-grid">
-                    <div class="mock-card"><div class="mock-card-art"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3c2 3 3 6 3 9a3 3 0 0 1-6 0c0-3 1-6 3-9z"/><path d="M12 21v-5M9 7l-3-2M15 7l3-2"/></svg></div><span class="mock-line w70"></span><span class="mock-line w45"></span></div>
-                    <div class="mock-card"><div class="mock-card-art"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3c2 3 3 6 3 9a3 3 0 0 1-6 0c0-3 1-6 3-9z"/><path d="M12 21v-5M9 7l-3-2M15 7l3-2"/></svg></div><span class="mock-line w70"></span><span class="mock-line w45"></span></div>
-                    <div class="mock-card"><div class="mock-card-art"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3c2 3 3 6 3 9a3 3 0 0 1-6 0c0-3 1-6 3-9z"/><path d="M12 21v-5M9 7l-3-2M15 7l3-2"/></svg></div><span class="mock-line w70"></span><span class="mock-line w45"></span></div>
-                  </div>
-                  <span class="mock-line w60" style="margin-top:10px"></span>
+                <div class="mock-top"><span class="mock-title">我的卡牌册</span><span class="mock-pill amber">12 / 30</span></div>
+                <div class="mock-corn-grid">
+                  <div class="mock-card"><div class="mock-card-art" style="background:#FEF3C7"><svg viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c2 3 3 6 3 9a3 3 0 0 1-6 0c0-3 1-6 3-9z"/><path d="M12 21v-5M9 7l-3-2M15 7l3-2"/></svg></div><div class="mock-name">甜玉米</div><div class="mock-sub">已收集 ×4</div></div>
+                  <div class="mock-card"><div class="mock-card-art" style="background:#DCFCE7"><svg viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c0-6 4-11 12-12"/><path d="M16 8c2-2 4-2 5-2 0 4-2 7-6 8"/><path d="M4 20c3-1 6-3 8-6"/></svg></div><div class="mock-name">绿叶菜</div><div class="mock-sub">已收集 ×2</div></div>
+                  <div class="mock-card"><div class="mock-card-art" style="background:#DBEAFE"><svg viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><div class="mock-name">每日一题</div><div class="mock-sub">+10 积分</div></div>
                 </div>
               </div>
             </div>
@@ -436,14 +456,11 @@
           <article class="card reveal">
             <div class="card-preview preview-en" aria-hidden="true">
               <div class="mock">
-                <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-url">english roleplay / level</span></div>
-                <div class="mock-pad">
-                  <div class="mock-en-head"><span class="mock-line dark w45"></span><span class="mock-line green w25"></span></div>
-                  <div class="mock-progress"><span class="s1"></span><span class="s2"></span><span class="s3"></span><span class="s4"></span><span class="s5"></span></div>
-                  <div class="mock-bubble left">Can I have a coffee, please?</div>
-                  <div class="mock-bubble right">Sure, what size would you like?</div>
-                  <div class="mock-feedback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>答对 · 进度 60%</div>
-                </div>
+                <div class="mock-top"><span class="mock-title">咖啡店点单</span><span class="mock-pill green">情境 3/10</span></div>
+                <div class="mock-progress"><span class="on"></span><span class="on"></span><span class="now"></span><span></span><span></span></div>
+                <div class="mock-bubble left">Can I have a coffee, please?</div>
+                <div class="mock-bubble right">Sure, what size would you like?</div>
+                <div class="mock-feedback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>答对 · 进度 60%</div>
               </div>
             </div>
             <div class="card-body">
@@ -465,14 +482,11 @@
           <article class="card reveal">
             <div class="card-preview preview-ko" aria-hidden="true">
               <div class="mock">
-                <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-url">korean roleplay / level</span></div>
-                <div class="mock-pad">
-                  <div class="mock-en-head"><span class="mock-line dark w45"></span><span class="mock-line green w25"></span></div>
-                  <div class="mock-progress"><span class="s1"></span><span class="s2"></span><span class="s3"></span><span class="s4"></span><span class="s5"></span></div>
-                  <div class="mock-bubble left">커피 한 잔 주세요.</div>
-                  <div class="mock-bubble right">사이즈는 어떻게 하시겠어요?</div>
-                  <div class="mock-feedback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>정답 · 진행 60%</div>
-                </div>
+                <div class="mock-top"><span class="mock-title">카페 주문하기</span><span class="mock-pill violet">상황 3/10</span></div>
+                <div class="mock-progress"><span class="on"></span><span class="on"></span><span class="now"></span><span></span><span></span></div>
+                <div class="mock-bubble left">커피 한 잔 주세요.</div>
+                <div class="mock-bubble right">사이즈는 어떻게 하시겠어요?</div>
+                <div class="mock-feedback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>정답 · 진행 60%</div>
               </div>
             </div>
             <div class="card-body">
@@ -499,6 +513,7 @@
         <header class="section-head reveal">
           <p class="eyebrow">02 / 10 问</p>
           <h2 id="questions-title">我的费曼 10 问</h2>
+          <p class="section-desc">一组长期带着的问题。把一个概念讲到别人听懂，才算真的懂了。</p>
         </header>
 
         <div class="q-list reveal">
@@ -536,11 +551,30 @@
       </div>
     </section>
 
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <div class="contact-inner reveal">
+          <div>
+            <p class="eyebrow">03 / 联系</p>
+            <h2 id="contact-title">有想法？一起做点什么。</h2>
+            <p class="contact-email">671066720@qq.com</p>
+            <p class="copy-status" id="copyStatus" role="status" aria-live="polite"></p>
+          </div>
+          <div>
+            <a class="btn btn-primary" href="mailto:671066720@qq.com?subject=关于你的%20AI%20作品">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+              发邮件给我
+            </a>
+            <button class="copy-btn" id="copyBtn" type="button" style="margin-top:12px;width:100%">复制邮箱地址</button>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
-      <span>© 2026 oo design · 用 AI 与耐心制作</span>
       <span><a href="#top">回到顶部 ↑</a></span>
     </div>
   </footer>
@@ -551,25 +585,290 @@
       var root = document.documentElement;
       var toggle = document.getElementById('themeToggle');
       var icon = document.getElementById('themeIcon');
+      var langBtn = document.getElementById('langBtn');
+      var langMenu = document.getElementById('langMenu');
+      var langCurrent = document.getElementById('langCurrent');
+
+      var LANGS = [
+        { code: 'zh-Hans', tag: 'zh-CN', short: '简', label: '简体中文' },
+        { code: 'zh-Hant', tag: 'zh-Hant', short: '繁', label: '繁體中文' },
+        { code: 'en', tag: 'en', short: 'EN', label: 'English' },
+        { code: 'ko', tag: 'ko', short: '한', label: '한국어' },
+        { code: 'ja', tag: 'ja', short: '日', label: '日本語' }
+      ];
+
+      var UI = {
+        'zh-Hans': { themeDark: '切换到深色模式', themeLight: '切换到浅色模式', copyDone: '✓ 已复制邮箱地址', copyBtn: '复制邮箱地址', copyBtnDone: '已复制', copyFail: '复制失败，请手动选择邮箱地址', langAria: '切换语言', langMenuLabel: '语言', title: 'oo的主页', desc: 'oo 的 AI 作品集与费曼 10 问：社区运营平台、百变玉米、英语与韩语情境闯关，还有一份推荐书单。' },
+        'zh-Hant': { themeDark: '切換到深色模式', themeLight: '切換到淺色模式', copyDone: '✓ 已複製電子郵件', copyBtn: '複製電子郵件', copyBtnDone: '已複製', copyFail: '複製失敗，請手動選取電子郵件', langAria: '切換語言', langMenuLabel: '語言', title: 'oo 的首頁', desc: 'oo 的 AI 作品集與費曼 10 問：社區營運平台、百變玉米、英語與韓語情境闖關，還有一份推薦書單。' },
+        'en': { themeDark: 'Switch to dark mode', themeLight: 'Switch to light mode', copyDone: '✓ Email copied', copyBtn: 'Copy email', copyBtnDone: 'Copied', copyFail: 'Copy failed, please select the email manually', langAria: 'Change language', langMenuLabel: 'Language', title: "oo's home", desc: 'oo AI portfolio and Feynman 10 questions: a community platform, Magic Corn, English & Korean scenario challenges, plus a recommended reading list.' },
+        'ko': { themeDark: '어두운 모드로 전환', themeLight: '밝은 모드로 전환', copyDone: '✓ 이메일을 복사했습니다', copyBtn: '이메일 복사', copyBtnDone: '복사됨', copyFail: '복사하지 못했습니다. 이메일을 직접 선택해 주세요', langAria: '언어 변경', langMenuLabel: '언어', title: 'oo의 홈', desc: 'oo의 AI 작품집과 파인만 10 질문: 커뮤니티 플랫폼, 변신 옥수수, 영어·한국어 상황 챌린지, 그리고 추천 도서 목록.' },
+        'ja': { themeDark: 'ダークモードに切り替え', themeLight: 'ライトモードに切り替え', copyDone: '✓ メールをコピーしました', copyBtn: 'メールをコピー', copyBtnDone: 'コピー済み', copyFail: 'コピーできませんでした。メールを手動で選択してください', langAria: '言語を変更', langMenuLabel: '言語', title: 'oo のホーム', desc: 'oo の AI 作品集とファインマン 10 問：コミュニティプラットフォーム、マジックコーン、英語・韓国語のシチュエーション攻略、そして推薦図書リスト。' }
+      };
+
+      var TEXT = {
+        'zh-Hant': {
+          'oo的主页': 'oo 的首頁', '作品': '作品', '联系': '聯絡', '跳到主要内容': '跳到主要內容',
+          '你好，我是': '你好，我是 ', '。': '。',
+          '这里放我一直在做的三件事：AI 作品、费曼问题，还有一份推荐书单。': '這裡放我一直在做的三件事：AI 作品、費曼問題，還有一份推薦書單。',
+          'AI 作品从社区活动平台、环保卡牌游戏到英语与韩语情境闯关，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。': 'AI 作品從社區活動平台、環保卡牌遊戲到英語與韓語情境闖關，都是能直接上手的小產品；費曼問題用提問把概念講清楚；推薦書單收著我讀過、也願意反覆推薦的書。',
+          '01 / 作品': '01 / 作品', '我的 AI 作品': '我的 AI 作品',
+          '每一个都从真实需求出发：把复杂的事变简单，把有用的事变好玩。点击卡片即可打开在线作品。': '每一個都從真實需求出發：把複雜的事變簡單，把有用的事變好玩。點擊卡片即可打開線上作品。',
+          '社区运营': '社區營運', 'LIA 社区运营平台': 'LIA 社區營運平台',
+          '面向住客的社区活动平台：活动浏览、报名与回顾一站式呈现，让社区运营更有序、居民参与更方便。': '面向住客的社區活動平台：活動瀏覽、報名與回顧一站式呈現，讓社區營運更有秩序、居民參與更方便。',
+          '活动管理': '活動管理', '在线报名': '線上報名', '云端部署': '雲端部署', '查看作品': '查看作品',
+          '环保教育': '環保教育', '互动游戏': '互動遊戲', '百变玉米': '百變玉米',
+          '把农产品与环保理念装进卡牌收集游戏：卡牌、商店、农户故事、每日一题，让公益变得可玩、可分享。': '把農產品與環保理念裝進卡牌收集遊戲：卡牌、商店、農夫故事、每日一題，讓公益變得可玩、可分享。',
+          '卡牌收集': '卡牌收集', '每日答题': '每日答題', '积分体系': '積分系統',
+          '语言学习': '語言學習', 'AI 应用': 'AI 應用', '英语情境闯关': '英語情境闖關',
+          '十个真实情境，用英语把一件事办成。进度条反映任务完成度，决策点用符号区分对错，AI 点评即时反馈。': '十個真實情境，用英語把一件事辦成。進度條反映任務完成度，決策點用符號區分對錯，AI 點評即時回饋。',
+          '情境闯关': '情境闖關', 'AI 点评': 'AI 點評', '生词本': '生詞本', '韩语情境闯关': '韓語情境闖關',
+          '十个真实情境，用韩语把一件事办成。不只说对，还要说得体——进度条反映任务完成度，AI 点评即时反馈。': '十個真實情境，用韓語把一件事辦成。不只說對，還要說得體——進度條反映任務完成度，AI 點評即時回饋。',
+          '03 / 联系': '02 / 聯絡', '有想法？一起做点什么。': '有想法？一起做點什麼。', '发邮件给我': '寄信給我', '复制邮箱地址': '複製電子郵件', '回到顶部 ↑': '回到頂端 ↑',
+          'oo的主页，返回顶部': 'oo 的首頁，返回頂端', '主导航': '主要導覽', '作品分类': '作品分類', '作品特点': '作品特點',
+          '查看 LIA 社区运营平台（在新窗口打开）': '查看 LIA 社區營運平台（在新視窗開啟）',
+          '查看百变玉米（在新窗口打开）': '查看百變玉米（在新視窗開啟）',
+          '查看英语情境闯关（在新窗口打开）': '查看英語情境闖關（在新視窗開啟）',
+          '查看韩语情境闯关（在新窗口打开）': '查看韓語情境闖關（在新視窗開啟）',
+          'oo 的头像：一只穿绿色和服、手捧花束的白色小狐狸插画': 'oo 的頭像：一隻穿綠色和服、手捧花束的白色小狐狸插畫',
+          '10 问': '10 問', '书单': '書單', '推荐书单': '推薦書單', '02 / 10 问': '02 / 10 問', '我的费曼 10 问': '我的費曼 10 問',
+          '一组长期带着的问题。把一个概念讲到别人听懂，才算真的懂了。': '一組長期帶著的問題。把一個概念講到別人聽懂，才算真的懂了。',
+          '如何搭建可长期使用的 Life OS？': '如何搭建可長期使用的 Life OS？',
+          '如何更好地进行复盘？': '如何更好地進行復盤？',
+          '如何搭建可长期运营的第三空间？': '如何搭建可長期營運的第三空間？',
+          '如何搭建可长期运营的人生学校？': '如何搭建可長期營運的人生學校？',
+          '如何建立有弹性和自由度的个人事业？': '如何建立有彈性和自由度的個人事業？',
+          '如何更好地把看过的书进行知识变现？': '如何更好地把看過的書進行知識變現？',
+          '如何处理好社会时钟和个人节奏的关系？': '如何處理好社會時鐘和個人節奏的關係？',
+          '如何定义更好的生活？': '如何定義更好的生活？',
+          '如何看待 AI 的影响？': '如何看待 AI 的影響？',
+          '如何看待神秘学的影响？': '如何看待神秘學的影響？'
+        },
+        'en': {
+          'oo的主页': "oo's home", '作品': 'Works', '联系': 'Contact', '跳到主要内容': 'Skip to main content', '你好，我是': "Hi, I'm ", '。': '.',
+          '这里放我一直在做的三件事：AI 作品、费曼问题，还有一份推荐书单。': 'Three things I keep working on: AI projects, Feynman questions, and a recommended reading list.',
+          'AI 作品从社区活动平台、环保卡牌游戏到英语与韩语情境闯关，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。': 'The AI projects range from a community activity platform and an eco card game to English and Korean scenario challenges — all small products you can use right away. Feynman questions explain ideas through questions, and the reading list collects books I have read and keep recommending.',
+          '01 / 作品': '01 / Works', '我的 AI 作品': 'My AI Works',
+          '每一个都从真实需求出发：把复杂的事变简单，把有用的事变好玩。点击卡片即可打开在线作品。': 'Each one starts from a real need: make complex things simple, make useful things fun. Click a card to open the live project.',
+          '社区运营': 'Community Ops', 'LIA 社区运营平台': 'LIA Community Platform',
+          '面向住客的社区活动平台：活动浏览、报名与回顾一站式呈现，让社区运营更有序、居民参与更方便。': 'A community activity platform for residents: browse, sign up for and review events in one place, so operations stay organized and participation stays easy.',
+          '活动管理': 'Event management', '在线报名': 'Online sign-up', '云端部署': 'Cloud deploy', '查看作品': 'View project',
+          '环保教育': 'Eco education', '互动游戏': 'Interactive game', '百变玉米': 'Magic Corn',
+          '把农产品与环保理念装进卡牌收集游戏：卡牌、商店、农户故事、每日一题，让公益变得可玩、可分享。': "Turns produce and eco ideas into a card-collecting game: cards, a shop, farmers' stories and a daily quiz make public good playable and shareable.",
+          '卡牌收集': 'Card collecting', '每日答题': 'Daily quiz', '积分体系': 'Points system',
+          '语言学习': 'Language learning', 'AI 应用': 'AI app', '英语情境闯关': 'English Scenario Challenge',
+          '十个真实情境，用英语把一件事办成。进度条反映任务完成度，决策点用符号区分对错，AI 点评即时反馈。': 'Ten real-life scenarios to get things done in English. A progress bar shows completion, symbols mark right and wrong choices, and AI feedback is instant.',
+          '情境闯关': 'Scenario levels', 'AI 点评': 'AI feedback', '生词本': 'Word list', '韩语情境闯关': 'Korean Scenario Challenge',
+          '十个真实情境，用韩语把一件事办成。不只说对，还要说得体——进度条反映任务完成度，AI 点评即时反馈。': 'Ten real-life scenarios to get things done in Korean. Not just correct, but appropriate — a progress bar shows completion and AI feedback is instant.',
+          '03 / 联系': '02 / Contact', '有想法？一起做点什么。': "Got an idea? Let's build something.", '发邮件给我': 'Email me', '复制邮箱地址': 'Copy email', '回到顶部 ↑': 'Back to top ↑',
+          'oo的主页，返回顶部': "oo's home, back to top", '主导航': 'Main navigation', '作品分类': 'Categories', '作品特点': 'Highlights',
+          '查看 LIA 社区运营平台（在新窗口打开）': 'View LIA Community Platform (opens in a new window)',
+          '查看百变玉米（在新窗口打开）': 'View Magic Corn (opens in a new window)',
+          '查看英语情境闯关（在新窗口打开）': 'View English Scenario Challenge (opens in a new window)',
+          '查看韩语情境闯关（在新窗口打开）': 'View Korean Scenario Challenge (opens in a new window)',
+          'oo 的头像：一只穿绿色和服、手捧花束的白色小狐狸插画': 'Avatar of oo: an illustration of a white fox in a green kimono holding a bouquet',
+          '10 问': '10 Questions', '书单': 'Booklist', '推荐书单': 'Recommended reading list', '02 / 10 问': '02 / 10 Questions', '我的费曼 10 问': 'My Feynman 10 Questions',
+          '一组长期带着的问题。把一个概念讲到别人听懂，才算真的懂了。': 'A set of questions I keep carrying. A concept is only truly understood once you can explain it to someone else.',
+          '如何搭建可长期使用的 Life OS？': 'How to build a Life OS that lasts?',
+          '如何更好地进行复盘？': 'How to review and reflect better?',
+          '如何搭建可长期运营的第三空间？': 'How to build a third space that runs for the long term?',
+          '如何搭建可长期运营的人生学校？': 'How to build a life school that runs for the long term?',
+          '如何建立有弹性和自由度的个人事业？': 'How to build a personal business with flexibility and freedom?',
+          '如何更好地把看过的书进行知识变现？': 'How to turn the books I have read into value?',
+          '如何处理好社会时钟和个人节奏的关系？': 'How to reconcile the social clock with my own pace?',
+          '如何定义更好的生活？': 'How to define a better life?',
+          '如何看待 AI 的影响？': 'How should I think about the impact of AI?',
+          '如何看待神秘学的影响？': 'How should I think about the influence of mysticism?'
+        },
+        'ko': {
+          'oo的主页': 'oo의 홈', '作品': '작품', '联系': '연락', '跳到主要内容': '본문으로 건너뛰기', '你好，我是': '안녕하세요, ', '。': '입니다.',
+          '这里放我一直在做的三件事：AI 作品、费曼问题，还有一份推荐书单。': '제가 꾸준히 해 온 세 가지입니다. AI 작품, 파인만 질문, 그리고 추천 도서 목록.',
+          'AI 作品从社区活动平台、环保卡牌游戏到英语与韩语情境闯关，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。': 'AI 작품은 커뮤니티 활동 플랫폼과 환경 카드 게임에서 영어·한국어 상황 체험까지, 바로 써 볼 수 있는 작은 제품들입니다. 파인만 질문은 질문으로 개념을 설명하고, 추천 도서 목록은 제가 읽고 다시 추천하고 싶은 책을 모았습니다.',
+          '01 / 作品': '01 / 작품', '我的 AI 作品': '나의 AI 작품',
+          '每一个都从真实需求出发：把复杂的事变简单，把有用的事变好玩。点击卡片即可打开在线作品。': '모두 실제 필요에서 출발했습니다. 복잡한 것은 단순하게, 유용한 것은 재미있게. 카드를 클릭하면 온라인 작품이 열립니다.',
+          '社区运营': '커뮤니티 운영', 'LIA 社区运营平台': 'LIA 커뮤니티 플랫폼',
+          '面向住客的社区活动平台：活动浏览、报名与回顾一站式呈现，让社区运营更有序、居民参与更方便。': '입주민을 위한 커뮤니티 활동 플랫폼입니다. 활동 조회·신청·후기를 한곳에서 제공해 운영은 더 질서 있게, 참여는 더 쉽게 만듭니다.',
+          '活动管理': '활동 관리', '在线报名': '온라인 신청', '云端部署': '클라우드 배포', '查看作品': '작품 보기',
+          '环保教育': '환경 교육', '互动游戏': '인터랙티브 게임', '百变玉米': '변신 옥수수',
+          '把农产品与环保理念装进卡牌收集游戏：卡牌、商店、农户故事、每日一题，让公益变得可玩、可分享。': '농산물과 환경 보호를 카드 수집 게임에 담았습니다. 카드, 상점, 농부 이야기, 매일 한 문제로 공익을 놀이처럼 즐기고 나눌 수 있습니다.',
+          '卡牌收集': '카드 수집', '每日答题': '매일 퀴즈', '积分体系': '포인트 제도',
+          '语言学习': '언어 학습', 'AI 应用': 'AI 앱', '英语情境闯关': '영어 상황 챌린지',
+          '十个真实情境，用英语把一件事办成。进度条反映任务完成度，决策点用符号区分对错，AI 点评即时反馈。': '열 가지 실제 상황에서 영어로 일을 해냅니다. 진행 표시줄이 완료도를 보여 주고, 선택 지점은 기호로 정답을 구분하며, AI 피드백이 즉시 제공됩니다.',
+          '情境闯关': '상황 챌린지', 'AI 点评': 'AI 피드백', '生词本': '단어장', '韩语情境闯关': '한국어 상황 챌린지',
+          '十个真实情境，用韩语把一件事办成。不只说对，还要说得体——进度条反映任务完成度，AI 点评即时反馈。': '열 가지 실제 상황에서 한국어로 일을 해냅니다. 맞는 말뿐 아니라 적절한 말까지 — 진행 표시줄이 완료도를 보여 주고 AI 피드백이 즉시 제공됩니다.',
+          '03 / 联系': '02 / 연락', '有想法？一起做点什么。': '아이디어가 있나요? 함께 만들어 봐요.', '发邮件给我': '메일 보내기', '复制邮箱地址': '이메일 복사', '回到顶部 ↑': '맨 위로 ↑',
+          'oo的主页，返回顶部': 'oo의 홈, 맨 위로', '主导航': '주요 내비게이션', '作品分类': '분류', '作品特点': '특징',
+          '查看 LIA 社区运营平台（在新窗口打开）': 'LIA 커뮤니티 플랫폼 보기(새 창에서 열림)',
+          '查看百变玉米（在新窗口打开）': '변신 옥수수 보기(새 창에서 열림)',
+          '查看英语情境闯关（在新窗口打开）': '영어 상황 챌린지 보기(새 창에서 열림)',
+          '查看韩语情境闯关（在新窗口打开）': '한국어 상황 챌린지 보기(새 창에서 열림)',
+          'oo 的头像：一只穿绿色和服、手捧花束的白色小狐狸插画': 'oo의 아바타: 초록 기모노를 입고 꽃다발을 든 흰 여우 일러스트',
+          '10 问': '10 질문', '书单': '책 목록', '推荐书单': '추천 도서 목록', '02 / 10 问': '02 / 10 질문', '我的费曼 10 问': '나의 파인만 10 질문',
+          '一组长期带着的问题。把一个概念讲到别人听懂，才算真的懂了。': '오래 품고 있는 질문들입니다. 개념은 다른 사람이 이해할 수 있게 설명해야 진짜로 아는 것입니다.',
+          '如何搭建可长期使用的 Life OS？': '오래 쓸 수 있는 Life OS는 어떻게 만드는가?',
+          '如何更好地进行复盘？': '회고를 더 잘하는 방법은?',
+          '如何搭建可长期运营的第三空间？': '오래 운영할 수 있는 제3의 공간은 어떻게 만드는가?',
+          '如何搭建可长期运营的人生学校？': '오래 운영할 수 있는 인생 학교는 어떻게 만드는가?',
+          '如何建立有弹性和自由度的个人事业？': '유연성과 자유도가 있는 개인 사업은 어떻게 만드는가?',
+          '如何更好地把看过的书进行知识变现？': '읽은 책을 지식으로 수익화하려면?',
+          '如何处理好社会时钟和个人节奏的关系？': '사회적 시계와 나만의 속도를 어떻게 조율할까?',
+          '如何定义更好的生活？': '더 나은 삶을 어떻게 정의할까?',
+          '如何看待 AI 的影响？': 'AI의 영향력을 어떻게 볼 것인가?',
+          '如何看待神秘学的影响？': '신비학의 영향력을 어떻게 볼 것인가?'
+        },
+        'ja': {
+          'oo的主页': 'ooのホーム', '作品': '作品', '联系': '連絡', '跳到主要内容': 'メインコンテンツへスキップ', '你好，我是': 'こんにちは、', '。': 'です。',
+          '这里放我一直在做的三件事：AI 作品、费曼问题，还有一份推荐书单。': 'ずっと取り組んでいる三つのこと。AI 作品、ファインマン質問、そして推薦書リストです。',
+          'AI 作品从社区活动平台、环保卡牌游戏到英语与韩语情境闯关，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。': 'AI 作品は、コミュニティ活動プラットフォームや環境カードゲームから、英語・韓国語のシチュエーション体験まで、すぐに使える小さなプロダクトです。ファインマン質問は問いで概念を説明し、推薦書リストは何度でも薦めたい本を集めました。',
+          '01 / 作品': '01 / 作品', '我的 AI 作品': '私の AI 作品',
+          '每一个都从真实需求出发：把复杂的事变简单，把有用的事变好玩。点击卡片即可打开在线作品。': 'どれも実際のニーズから生まれました。複雑なことをシンプルに、役立つことを楽しく。カードをクリックすると作品が開きます。',
+          '社区运营': 'コミュニティ運営', 'LIA 社区运营平台': 'LIA コミュニティプラットフォーム',
+          '面向住客的社区活动平台：活动浏览、报名与回顾一站式呈现，让社区运营更有序、居民参与更方便。': '住民向けのコミュニティ活動プラットフォームです。活動の閲覧・申し込み・振り返りを一か所にまとめ、運営を整え、参加をもっと手軽にします。',
+          '活动管理': '活動管理', '在线报名': 'オンライン申込', '云端部署': 'クラウド公開', '查看作品': '作品を見る',
+          '环保教育': '環境教育', '互动游戏': 'インタラクティブゲーム', '百变玉米': 'マジックコーン',
+          '把农产品与环保理念装进卡牌收集游戏：卡牌、商店、农户故事、每日一题，让公益变得可玩、可分享。': '農産物と環境への思いをカード収集ゲームにしました。カード、ショップ、農家の物語、毎日の一問で、公益性を遊べて共有できるものにしています。',
+          '卡牌收集': 'カード収集', '每日答题': '毎日のクイズ', '积分体系': 'ポイント制度',
+          '语言学习': '語学学習', 'AI 应用': 'AI アプリ', '英语情境闯关': '英語シチュエーション攻略',
+          '十个真实情境，用英语把一件事办成。进度条反映任务完成度，决策点用符号区分对错，AI 点评即时反馈。': '10 のリアルなシチュエーションで、英語で用事を済ませます。進捗バーが達成度を示し、選択の正誤は記号で区別、AI の講評はその場で返ります。',
+          '情境闯关': 'シチュエーション攻略', 'AI 点评': 'AI 講評', '生词本': '単語帳', '韩语情境闯关': '韓国語シチュエーション攻略',
+          '十个真实情境，用韩语把一件事办成。不只说对，还要说得体——进度条反映任务完成度，AI 点评即时反馈。': '10 のリアルなシチュエーションで、韓国語で用事を済ませます。正しいだけでなく、ふさわしい言い方まで。進捗バーが達成度を示し、AI の講評はその場で返ります。',
+          '03 / 联系': '02 / 連絡', '有想法？一起做点什么。': 'アイデアがありますか？一緒に何か作りましょう。', '发邮件给我': 'メールを送る', '复制邮箱地址': 'メールをコピー', '回到顶部 ↑': 'トップへ戻る ↑',
+          'oo的主页，返回顶部': 'ooのホーム、トップへ戻る', '主导航': 'メインナビゲーション', '作品分类': 'カテゴリ', '作品特点': '特徴',
+          '查看 LIA 社区运营平台（在新窗口打开）': 'LIA コミュニティプラットフォームを見る（新しいウィンドウで開く）',
+          '查看百变玉米（在新窗口打开）': 'マジックコーンを見る（新しいウィンドウで開く）',
+          '查看英语情境闯关（在新窗口打开）': '英語シチュエーション攻略を見る（新しいウィンドウで開く）',
+          '查看韩语情境闯关（在新窗口打开）': '韓国語シチュエーション攻略を見る（新しいウィンドウで開く）',
+          'oo 的头像：一只穿绿色和服、手捧花束的白色小狐狸插画': 'oo のアバター：緑の着物を着て花束を持つ白いキツネのイラスト',
+          '10 问': '10 の問い', '书单': 'ブックリスト', '推荐书单': '推薦図書リスト', '02 / 10 问': '02 / 10 の問い', '我的费曼 10 问': '私のファインマン 10 問',
+          '一组长期带着的问题。把一个概念讲到别人听懂，才算真的懂了。': 'ずっと持ち続けている問いです。概念は人に説明できて初めて理解したことになります。',
+          '如何搭建可长期使用的 Life OS？': '長く使える Life OS はどう作るか？',
+          '如何更好地进行复盘？': '振り返りをうまく行うには？',
+          '如何搭建可长期运营的第三空间？': '長く運営できる第三の場所はどう作るか？',
+          '如何搭建可长期运营的人生学校？': '長く運営できる人生学校はどう作るか？',
+          '如何建立有弹性和自由度的个人事业？': '柔軟性と自由度のある個人事業はどう作るか？',
+          '如何更好地把看过的书进行知识变现？': '読んだ本を知識として収益化するには？',
+          '如何处理好社会时钟和个人节奏的关系？': '社会の時計と自分のペースをどう両立させるか？',
+          '如何定义更好的生活？': 'より良い生活をどう定義するか？',
+          '如何看待 AI 的影响？': 'AI の影響をどう捉えるか？',
+          '如何看待神秘学的影响？': '神秘学の影響をどう捉えるか？'
+        }
+      };
+
+      var currentLang = 'zh-Hans';
+
+      function norm(s) { return s.replace(/\s+/g, ' ').trim(); }
+
+      /* Cache original text nodes and attributes so switching back restores exactly. */
+      var textNodes = [];
+      (function () {
+        var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+          acceptNode: function (n) {
+            if (!n.nodeValue || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+            var p = n.parentElement;
+            if (!p || p.closest('.card-preview')) return NodeFilter.FILTER_REJECT;
+            if (p.tagName === 'SCRIPT' || p.tagName === 'STYLE') return NodeFilter.FILTER_REJECT;
+            return NodeFilter.FILTER_ACCEPT;
+          }
+        });
+        var n;
+        while ((n = walker.nextNode())) textNodes.push({ node: n, orig: n.nodeValue, key: norm(n.nodeValue) });
+      })();
+
+      var attrTargets = [];
+      document.querySelectorAll('[aria-label],[alt],[title]').forEach(function (el) {
+        if (el.id === 'themeToggle' || el.id === 'langBtn') return;
+        ['aria-label', 'alt', 'title'].forEach(function (a) {
+          if (el.hasAttribute(a)) attrTargets.push({ el: el, attr: a, orig: el.getAttribute(a) });
+        });
+      });
+
       var stored = null;
       try { stored = localStorage.getItem('oo-design-theme'); } catch (e) {}
       var theme = stored === 'dark' || stored === 'light' ? stored : 'light';
 
       function applyTheme(next) {
+        var ui = UI[currentLang] || UI['zh-Hans'];
         root.setAttribute('data-theme', next);
         var isDark = next === 'dark';
         toggle.setAttribute('aria-pressed', String(isDark));
-        toggle.setAttribute('aria-label', isDark ? '切换到浅色模式' : '切换到深色模式');
+        toggle.setAttribute('aria-label', isDark ? ui.themeLight : ui.themeDark);
+        toggle.setAttribute('title', isDark ? ui.themeLight : ui.themeDark);
         icon.innerHTML = isDark
           ? '<circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/>'
           : '<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/>';
         try { localStorage.setItem('oo-design-theme', next); } catch (e) {}
       }
-      applyTheme(theme);
+
+      function applyLang(code) {
+        currentLang = code;
+        var dict = TEXT[code] || null;
+        var lang = LANGS.filter(function (l) { return l.code === code; })[0] || LANGS[0];
+        var ui = UI[code] || UI['zh-Hans'];
+        root.setAttribute('lang', lang.tag);
+
+        textNodes.forEach(function (t) {
+          if (!dict) { t.node.nodeValue = t.orig; return; }
+          var tr = dict[t.key];
+          t.node.nodeValue = (tr != null) ? tr : t.orig;
+        });
+
+        attrTargets.forEach(function (a) {
+          if (!dict) { a.el.setAttribute(a.attr, a.orig); return; }
+          var tr = dict[a.orig];
+          a.el.setAttribute(a.attr, (tr != null) ? tr : a.orig);
+        });
+
+        document.title = ui.title;
+        var md = document.querySelector('meta[name="description"]');
+        if (md) md.setAttribute('content', ui.desc);
+
+        langCurrent.textContent = lang.short;
+        langBtn.setAttribute('aria-label', ui.langAria);
+        langMenu.setAttribute('aria-label', ui.langMenuLabel);
+
+        var cb = document.getElementById('copyBtn');
+        if (cb) cb.textContent = ui.copyBtn;
+        var st = document.getElementById('copyStatus');
+        if (st) st.textContent = '';
+        langMenu.querySelectorAll('button[data-lang]').forEach(function (b) {
+          b.setAttribute('aria-checked', String(b.getAttribute('data-lang') === code));
+        });
+
+        applyTheme(theme);
+        try { localStorage.setItem('oo-design-lang', code); } catch (e) {}
+      }
+
+      /* --- Language menu behaviour --- */
+      function openMenu(open) {
+        langMenu.hidden = !open;
+        langBtn.setAttribute('aria-expanded', String(open));
+      }
+      langBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        openMenu(langMenu.hidden);
+      });
+      document.addEventListener('click', function (e) {
+        if (!e.target.closest('.lang-wrap')) openMenu(false);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { openMenu(false); }
+      });
+      langMenu.querySelectorAll('button[data-lang]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          applyLang(b.getAttribute('data-lang'));
+          openMenu(false);
+          langBtn.focus();
+        });
+      });
+
       toggle.addEventListener('click', function () {
         theme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         applyTheme(theme);
       });
+
+      var storedLang = null;
+      try { storedLang = localStorage.getItem('oo-design-lang'); } catch (e) {}
+      var initLang = LANGS.some(function (l) { return l.code === storedLang; }) ? storedLang : 'zh-Hans';
+      applyLang(initLang);
 
       // Scroll reveal — skipped entirely under reduced motion
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -584,6 +883,31 @@
         }, { threshold: 0.12 });
         items.forEach(function (el) { io.observe(el); });
       }
+
+      // Copy email with live-region feedback
+      var copyBtn = document.getElementById('copyBtn');
+      var status = document.getElementById('copyStatus');
+      var email = '671066720@qq.com';
+      copyBtn.addEventListener('click', function () {
+        var ui = UI[currentLang] || UI['zh-Hans'];
+        function done() {
+          status.textContent = ui.copyDone;
+          copyBtn.textContent = ui.copyBtnDone;
+          setTimeout(function () { copyBtn.textContent = (UI[currentLang] || UI['zh-Hans']).copyBtn; }, 2000);
+        }
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(email).then(done).catch(fallback);
+        } else { fallback(); }
+        function fallback() {
+          var ta = document.createElement('textarea');
+          ta.value = email; ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); done(); }
+          catch (e) { status.textContent = (UI[currentLang] || UI['zh-Hans']).copyFail; }
+          document.body.removeChild(ta);
+        }
+      });
     })();
   </script>
 </body>
