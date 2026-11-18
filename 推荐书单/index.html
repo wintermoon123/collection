@@ -143,20 +143,19 @@
     .lang-menu button[aria-checked="true"]::after { content: "✓"; font-weight: 800; color: var(--primary); }
 
     /* ============ Hero ============ */
-    .hero { padding: 72px 0 64px; border-bottom: 1px solid var(--border-soft); }
+    .hero { padding: 64px 0 56px; border-bottom: 1px solid var(--border-soft); }
+    .hero h1 { margin-bottom: 0; }
     .eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
       font-size: .85rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
       color: var(--primary); margin-bottom: 18px;
     }
     .eyebrow svg { width: 18px; height: 18px; }
-    .hero-lead { font-size: clamp(1.1rem, 2.4vw, 1.3rem); color: var(--text-muted); max-width: 54ch; margin-bottom: 0; }
 
     /* ============ Sections ============ */
     section { padding: 88px 0; }
     #list { padding: 56px 0 80px; }
     .section-head { margin-bottom: 26px; max-width: 60ch; }
-    .section-desc { color: var(--text-muted); font-size: 1rem; margin-bottom: 0; }
 
     /* ============ Tabs ============ */
     .tabs {
@@ -302,7 +301,6 @@
           03 / 书单
         </p>
         <h1 id="page-title">推荐书单</h1>
-        <p class="hero-lead">一些反复想推荐给别人、也值得自己反复读的书。按主题分成两类，点开封面即可到豆瓣看详情。</p>
       </div>
     </section>
 
@@ -311,7 +309,6 @@
       <div class="wrap">
         <header class="section-head reveal">
           <h2 id="list-title">按主题挑选</h2>
-          <p class="section-desc">社会科学帮你看懂世界，心理自助帮你看清自己——正好对应我一直带着的两条线索。</p>
         </header>
 
         <div class="tabs reveal" role="tablist" aria-label="书单分类">
@@ -380,9 +377,7 @@
         'zh-Hant': {
           'oo的主页': 'oo 的首頁', '作品': '作品', '10 问': '10 問', '书单': '書單',
           '跳到主要内容': '跳到主要內容', '03 / 书单': '03 / 書單', '推荐书单': '推薦書單',
-          '一些反复想推荐给别人、也值得自己反复读的书。按主题分成两类，点开封面即可到豆瓣看详情。': '一些反覆想推薦給別人、也值得自己反覆讀的書。按主題分成兩類，點開封面即可到豆瓣看詳情。',
           '按主题挑选': '按主題挑選',
-          '社会科学帮你看懂世界，心理自助帮你看清自己——正好对应我一直带着的两条线索。': '社會科學幫你看懂世界，心理自助幫你看清自己——正好對應我一直帶著的兩條線索。',
           '社会科学': '社會科學', '心理自助': '心理自助', '书单分类': '書單分類',
           '回到顶部 ↑': '回到頂端 ↑', 'oo的主页，返回主页': 'oo 的首頁，返回首頁', '主导航': '主要導覽',
           '书单正在加载……': '書單正在載入……'
@@ -390,9 +385,7 @@
         'en': {
           'oo的主页': "oo's home", '作品': 'Works', '10 问': '10 questions', '书单': 'Reading list',
           '跳到主要内容': 'Skip to main content', '03 / 书单': '03 / READING LIST', '推荐书单': 'Reading list',
-          '一些反复想推荐给别人、也值得自己反复读的书。按主题分成两类，点开封面即可到豆瓣看详情。': 'Books I keep recommending to others, and keep re-reading myself. Split into two themes — open a cover to see details on Douban.',
           '按主题挑选': 'Browse by theme',
-          '社会科学帮你看懂世界，心理自助帮你看清自己——正好对应我一直带着的两条线索。': 'Social science helps you read the world; self-help helps you read yourself — two threads I keep coming back to.',
           '社会科学': 'Social science', '心理自助': 'Self-help', '书单分类': 'Book categories',
           '回到顶部 ↑': 'Back to top ↑', 'oo的主页，返回主页': "oo's home, back to home", '主导航': 'Main navigation',
           '书单正在加载……': 'Loading the list…'
@@ -400,9 +393,7 @@
         'ko': {
           'oo的主页': 'oo의 홈', '作品': '작품', '10 问': '10가지 질문', '书单': '추천 도서',
           '跳到主要内容': '본문으로 건너뛰기', '03 / 书单': '03 / 추천 도서', '推荐书单': '추천 도서 목록',
-          '一些反复想推荐给别人、也值得自己反复读的书。按主题分成两类，点开封面即可到豆瓣看详情。': '자꾸 추천하고 싶고, 저도 다시 읽는 책들입니다. 주제에 따라 두 갈래로 나눴고, 표지를 누르면 더우반에서 자세히 볼 수 있습니다.',
           '按主题挑选': '주제별로 고르기',
-          '社会科学帮你看懂世界，心理自助帮你看清自己——正好对应我一直带着的两条线索。': '사회과학은 세상을 읽게 하고, 자기계발은 나를 읽게 합니다. 제가 계속 붙들고 있는 두 갈래입니다.',
           '社会科学': '사회과학', '心理自助': '자기계발', '书单分类': '도서 분류',
           '回到顶部 ↑': '맨 위로 ↑', 'oo的主页，返回主页': 'oo의 홈, 홈으로 돌아가기', '主导航': '주 메뉴',
           '书单正在加载……': '목록을 불러오는 중…'
@@ -410,9 +401,7 @@
         'ja': {
           'oo的主页': 'oo のホーム', '作品': '作品', '10 问': '10 の問い', '书单': '推薦図書',
           '跳到主要内容': 'メインコンテンツへスキップ', '03 / 书单': '03 / 推薦図書', '推荐书单': '推薦図書リスト',
-          '一些反复想推荐给别人、也值得自己反复读的书。按主题分成两类，点开封面即可到豆瓣看详情。': '何度も人に薦めたくなる、自分でも繰り返し読みたい本。テーマで二つに分けました。表紙を開くと豆瓣で詳細が見られます。',
           '按主题挑选': 'テーマから選ぶ',
-          '社会科学帮你看懂世界，心理自助帮你看清自己——正好对应我一直带着的两条线索。': '社会科学は世界を読み解くため、自己啓発は自分を見つめるため。ずっと抱えている二本の線です。',
           '社会科学': '社会科学', '心理自助': '自己啓発', '书单分类': '図書の分類',
           '回到顶部 ↑': 'トップへ戻る ↑', 'oo的主页，返回主页': 'oo のホーム、ホームへ戻る', '主导航': 'メインナビ',
           '书单正在加载……': 'リストを読み込み中…'
