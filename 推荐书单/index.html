@@ -307,16 +307,9 @@
           <h2 id="list-title">按主题挑选</h2>
         </header>
 
-        <div class="tabs reveal" role="tablist" aria-label="书单分类">
-          <button class="tab" type="button" role="tab" id="tab-she" aria-controls="bookPanel" aria-selected="true" data-cat="社科">
-            社会科学 <span class="tab-count" id="count-she">0</span>
-          </button>
-          <button class="tab" type="button" role="tab" id="tab-xin" aria-controls="bookPanel" aria-selected="false" data-cat="心理">
-            心理自助 <span class="tab-count" id="count-xin">0</span>
-          </button>
-        </div>
+        <div class="tabs reveal" id="bookTabs" role="tablist" aria-label="书单分类"></div>
 
-        <div id="bookPanel" role="tabpanel" aria-labelledby="tab-she">
+        <div id="bookPanel" role="tabpanel" aria-labelledby="tab-0">
           <div class="books" id="bookGrid">
             <p class="book-empty">书单正在加载……</p>
           </div>
@@ -451,9 +444,27 @@
       // ===== 书单渲染 =====
       var grid = document.getElementById('bookGrid');
       var panel = document.getElementById('bookPanel');
-      var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+      var tabsEl = document.getElementById('bookTabs');
       var books = window.RECOMMEND_BOOKS || [];
-      var activeCat = '社科';
+      var CATS = (window.RECOMMEND_CATS && window.RECOMMEND_CATS.length)
+        ? window.RECOMMEND_CATS.slice()
+        : books.map(function (b) { return b.cat; }).filter(function (c, i, a) { return a.indexOf(c) === i; });
+      var activeCat = CATS[0];
+
+      /* 分类名的多语言（分类键本身用中文，展示时按语言取词） */
+      var CAT_LABEL = {
+        '社会科学': { 'zh-Hant': '社會科學', en: 'Social science', ko: '사회과학', ja: '社会科学' },
+        '心理自助': { 'zh-Hant': '心理自助', en: 'Self-help', ko: '자기계발', ja: '自己啓発' },
+        '历史':     { 'zh-Hant': '歷史', en: 'History', ko: '역사', ja: '歴史' },
+        '商业':     { 'zh-Hant': '商業', en: 'Business', ko: '비즈니스', ja: 'ビジネス' },
+        '纪实':     { 'zh-Hant': '紀實', en: 'Reportage', ko: '르포', ja: 'ルポ' },
+        '思考工具': { 'zh-Hant': '思考工具', en: 'Thinking tools', ko: '사고 도구', ja: '思考の道具' }
+      };
+
+      function catLabel(cat) {
+        var m = CAT_LABEL[cat];
+        return (m && m[currentLang]) || cat;
+      }
 
       function el(tag, cls, text) {
         var n = document.createElement(tag);
@@ -483,7 +494,7 @@
 
         var body = el('div', 'book-body');
         body.appendChild(el('h3', 'book-title', b.title));
-        body.appendChild(el('p', 'book-author', b.author));
+        body.appendChild(el('p', 'book-author', b.author + (b.year ? ' · ' + b.year : '')));
         if (b.desc) body.appendChild(el('p', 'book-desc', b.desc));
 
         var link = el('span', 'book-link');
@@ -507,25 +518,55 @@
       }
 
       function count(cat) { return books.filter(function (b) { return b.cat === cat; }).length; }
-      document.getElementById('count-she').textContent = count('社科');
-      document.getElementById('count-xin').textContent = count('心理');
 
-      tabs.forEach(function (tab) {
-        tab.addEventListener('click', function () {
-          tabs.forEach(function (t) { t.setAttribute('aria-selected', 'false'); });
-          tab.setAttribute('aria-selected', 'true');
-          activeCat = tab.getAttribute('data-cat');
-          panel.setAttribute('aria-labelledby', tab.id);
-          render(activeCat);
+      /* 分类标签由数据驱动，加书后自动出现；空分类也保留标签 */
+      function buildTabs() {
+        tabsEl.innerHTML = '';
+        CATS.forEach(function (cat, i) {
+          var b = el('button', 'tab');
+          b.type = 'button';
+          b.setAttribute('role', 'tab');
+          b.id = 'tab-' + i;
+          b.setAttribute('aria-controls', 'bookPanel');
+          b.setAttribute('aria-selected', String(cat === activeCat));
+          b.setAttribute('data-cat', cat);
+          b.appendChild(document.createTextNode(catLabel(cat)));
+          var n = count(cat);
+          if (n > 0) {
+            b.appendChild(document.createTextNode(' '));
+            b.appendChild(el('span', 'tab-count', String(n)));
+          }
+          b.addEventListener('click', function () { selectTab(cat); });
+          b.addEventListener('keydown', onTabKey);
+          tabsEl.appendChild(b);
         });
-        tab.addEventListener('keydown', function (e) {
-          if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-          e.preventDefault();
-          var i = tabs.indexOf(tab);
-          var next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
-          next.focus(); next.click();
+        syncPanel();
+      }
+
+      function selectTab(cat) {
+        activeCat = cat;
+        Array.prototype.forEach.call(tabsEl.children, function (t) {
+          t.setAttribute('aria-selected', String(t.getAttribute('data-cat') === cat));
         });
-      });
+        syncPanel();
+        render(cat);
+      }
+
+      function syncPanel() {
+        var cur = tabsEl.querySelector('.tab[aria-selected="true"]');
+        var i = CATS.indexOf(activeCat);
+        if (cur) panel.setAttribute('aria-labelledby', cur.id);
+        else if (i >= 0) panel.setAttribute('aria-labelledby', 'tab-' + i);
+      }
+
+      function onTabKey(e) {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        e.preventDefault();
+        var list = Array.prototype.slice.call(tabsEl.children);
+        var i = list.indexOf(e.currentTarget);
+        var next = list[(i + (e.key === 'ArrowRight' ? 1 : list.length - 1)) % list.length];
+        if (next) { next.focus(); next.click(); }
+      }
 
       function revealCards() {
         var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -574,6 +615,7 @@
 
         applyTheme(theme);
         try { localStorage.setItem('oo-design-lang', code); } catch (e) {}
+        buildTabs();
         render(activeCat);
       }
 
