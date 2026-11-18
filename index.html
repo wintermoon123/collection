@@ -254,27 +254,16 @@
     .mock-feedback svg { width: 12px; height: 12px; }
 
     /* ============ Questions ============ */
-    .q-intro {
-      background: var(--surface); border: 2px solid var(--border-soft);
-      border-left: 6px solid var(--primary); border-radius: var(--radius);
-      padding: 22px 26px; margin-bottom: 44px; max-width: 76ch;
-    }
-    .q-intro p { margin: 0 0 12px; }
-    .q-intro p:last-child { margin-bottom: 0; color: var(--text-muted); font-size: .96rem; }
     .q-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .q-item {
       background: var(--surface); border: 2px solid var(--border-soft);
-      border-radius: 12px; transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+      border-radius: 12px; transition: border-color .18s ease, box-shadow .18s ease;
     }
     .q-item:hover { border-color: var(--text); box-shadow: var(--shadow); }
-    .q-item[open] { border-color: var(--text); box-shadow: var(--shadow); }
-    .q-item summary {
-      list-style: none; cursor: pointer; user-select: none;
+    .q-head {
       display: flex; align-items: flex-start; gap: 14px;
       padding: 18px 20px; min-height: 78px;
     }
-    .q-item summary::-webkit-details-marker { display: none; }
-    .q-item summary:focus-visible { outline: 4px solid var(--focus); outline-offset: -2px; border-radius: 10px; }
     .q-num {
       flex: none; display: grid; place-items: center;
       min-width: 34px; height: 34px; padding: 0 6px;
@@ -282,29 +271,6 @@
       font-variant-numeric: tabular-nums;
     }
     .q-title { flex: 1; font-weight: 700; line-height: 1.45; padding-top: 3px; }
-    .q-chevron {
-      flex: none; width: 26px; height: 26px; display: grid; place-items: center;
-      border: 2px solid var(--border); border-radius: 7px; margin-top: 4px;
-      transition: transform .2s ease, background .2s ease, color .2s ease;
-    }
-    .q-chevron svg { width: 15px; height: 15px; }
-    .q-item[open] .q-chevron { transform: rotate(180deg); background: var(--text); color: var(--bg); border-color: var(--text); }
-    .q-body { padding: 0 20px 22px; border-top: 1px solid var(--border-soft); }
-    .q-field { padding-top: 16px; }
-    .q-label {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: .78rem; font-weight: 800; letter-spacing: .04em;
-      color: var(--text-muted); margin-bottom: 6px;
-    }
-    .q-label::before { content: ""; width: 14px; height: 2px; background: var(--primary); border-radius: 2px; }
-    .q-text { color: var(--text); font-size: 1rem; line-height: 1.6; margin: 0; }
-    .q-field + .q-field { margin-top: 4px; }
-    .q-note {
-      margin-top: 44px; padding: 20px 24px; text-align: center;
-      border: 2px dashed var(--border); border-radius: var(--radius);
-      color: var(--text-muted); font-size: .95rem;
-    }
-    .q-note strong { color: var(--text); }
 
     /* ============ Footer ============ */
     .site-footer { border-top: 1px solid var(--border-soft); padding: 30px 0; color: var(--text-muted); font-size: .9rem; }
@@ -329,7 +295,6 @@
       .avatar-frame { width: min(78%, 320px); box-shadow: 7px 7px 0 var(--primary); }
       .cards { grid-template-columns: 1fr; }
       .q-list { grid-template-columns: 1fr; }
-      .q-intro { padding: 18px 20px; }
       section { padding: 64px 0; }
     }
   </style>
@@ -534,88 +499,40 @@
         <header class="section-head reveal">
           <p class="eyebrow">02 / 10 问</p>
           <h2 id="questions-title">我的费曼 10 问</h2>
-          <p class="section-desc">不急着回答的问题，才是能陪很久的问题。这 10 个问题来自「纵横四海」EP89：把它们长期挂在脑子里，在生活里慢慢攒线索，让答案自己长出来。</p>
         </header>
 
-        <div class="q-intro reveal">
-          <p>它们是我给自己搭的一套人生操作系统：不靠意志力，靠一组始终没关掉的问题。</p>
-          <p>用法很简单——先别急着回答，点开看它「真正在问」什么；往后遇到的书、事、人，只要往里掉了一条线索，就顺手记一句。每三个月回看一次，被自然忽略的划掉，新揪住的补进来。10 不是定额。</p>
-        </div>
-
         <div class="q-list reveal">
-          <details class="q-item">
-            <summary><span class="q-num tag-blue">01</span><span class="q-title">如何搭建可长期使用的 Life OS？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
-            <div class="q-body">
-              <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">一个在我状态最差、注意力最散时还能转得动的 Life OS，现在缺的到底是哪一层——环境、机制，还是入口？</p></div>
-              <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">那些没靠意志力也完成了的时刻，当时靠的是什么。</p></div>
-            </div>
-          </details>
-          <details class="q-item">
-            <summary><span class="q-num tag-blue">02</span><span class="q-title">如何更好地进行复盘？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
-            <div class="q-body">
-              <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">为什么我的复盘总停在"记下发生了什么"，却很少真的改掉下一次的做法？缺的是记录、诚实，还是承认的勇气？</p></div>
-              <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">回看三个月前的复盘，哪些字句是空的，哪些真的改变了行为。</p></div>
-            </div>
-          </details>
-          <details class="q-item">
-            <summary><span class="q-num tag-blue">03</span><span class="q-title">如何搭建可长期运营的第三空间？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
-            <div class="q-body">
-              <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">我想要的第三空间，是一个地方、一群固定的人，还是一种"不用扮演任何角色"的状态？如果只能留住一样，留哪个？</p></div>
-              <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">那些你一进门就松一口气的场所或场合，它们共同提供了什么。</p></div>
-            </div>
-          </details>
-          <details class="q-item">
-            <summary><span class="q-num tag-blue">04</span><span class="q-title">如何搭建可长期运营的人生学校？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
-            <div class="q-body">
-              <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">我办的是"教人知道"的学校，还是"陪人做到"的学校？如果毕业生只有一个标准——把知识用进生活，我该砍掉什么？</p></div>
-              <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">学员说"我后来真的去做了"的瞬间；以及你自己想砍却一直没砍的环节。</p></div>
-            </div>
-          </details>
-          <details class="q-item">
-            <summary><span class="q-num tag-blue">05</span><span class="q-title">如何建立有弹性和自由度的个人事业？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
-            <div class="q-body">
-              <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">如果我的事业不能靠"我一直在场"来运转，它靠什么转？为了自由，我愿意先放弃什么——收入、规模，还是控制感？</p></div>
-              <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">那些"你不在也能跑"的环节；以及每次想放手时，你真正怕的是什么。</p></div>
-            </div>
-          </details>
-          <details class="q-item">
-            <summary><span class="q-num tag-blue">06</span><span class="q-title">如何更好地把看过的书进行知识变现？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
-            <div class="q-body">
-              <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">我读过的书，哪些真的变成了能交付出去的东西（一场读书会、一篇文案、一个观点）？"变现"对我是钱、是影响，还是把理解变成作品？</p></div>
-              <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">反复被人问起的书和主题；以及讲完觉得"这次真的讲出来了"的时刻。</p></div>
-            </div>
-          </details>
-          <details class="q-item">
-            <summary><span class="q-num tag-blue">07</span><span class="q-title">如何处理好社会时钟和个人节奏的关系？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
-            <div class="q-body">
-              <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">当身边人的进度（学位、房子、职位、婚姻）和我自己想做的事对不上时，我凭什么判断该追赶，还是该守住自己的节奏？</p></div>
-              <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">那些让你突然焦虑的比较——它们到底戳中了什么。</p></div>
-            </div>
-          </details>
-          <details class="q-item">
-            <summary><span class="q-num tag-blue">08</span><span class="q-title">如何定义更好的生活？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
-            <div class="q-body">
-              <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">抛开所有"应该"，我说过"这就是我想要的日子"的时刻有哪些？它们有什么共同点？其中哪些是真想要的，哪些是怕被落下才想要的？</p></div>
-              <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">那些不想发朋友圈、但自己知道很好的时刻。</p></div>
-            </div>
-          </details>
-          <details class="q-item">
-            <summary><span class="q-num tag-blue">09</span><span class="q-title">如何看待 AI 的影响？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
-            <div class="q-body">
-              <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">AI 已经能替我做掉哪些事？其中哪些是我其实不想失去的？当"做得快"不再是优势，我还剩什么？</p></div>
-              <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">交出去之后反而想念的环节；以及 AI 做得很好、但你觉得"这不是我"的部分。</p></div>
-            </div>
-          </details>
-          <details class="q-item">
-            <summary><span class="q-num tag-blue">10</span><span class="q-title">如何看待神秘学的影响？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
-            <div class="q-body">
-              <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">当我说"信"或"不信"时，我到底在防御什么、渴望什么？它给的是确定感、意义感，还是对失控的安抚？我允许它在决策里占多大位置？</p></div>
-              <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">那些明知不理性却仍然照做的选择——回看时它们带来了什么。</p></div>
-            </div>
-          </details>
+          <div class="q-item">
+            <div class="q-head"><span class="q-num tag-blue">01</span><span class="q-title">如何搭建可长期使用的 Life OS？</span></div>
+          </div>
+          <div class="q-item">
+            <div class="q-head"><span class="q-num tag-blue">02</span><span class="q-title">如何更好地进行复盘？</span></div>
+          </div>
+          <div class="q-item">
+            <div class="q-head"><span class="q-num tag-blue">03</span><span class="q-title">如何搭建可长期运营的第三空间？</span></div>
+          </div>
+          <div class="q-item">
+            <div class="q-head"><span class="q-num tag-blue">04</span><span class="q-title">如何搭建可长期运营的人生学校？</span></div>
+          </div>
+          <div class="q-item">
+            <div class="q-head"><span class="q-num tag-blue">05</span><span class="q-title">如何建立有弹性和自由度的个人事业？</span></div>
+          </div>
+          <div class="q-item">
+            <div class="q-head"><span class="q-num tag-blue">06</span><span class="q-title">如何更好地把看过的书进行知识变现？</span></div>
+          </div>
+          <div class="q-item">
+            <div class="q-head"><span class="q-num tag-blue">07</span><span class="q-title">如何处理好社会时钟和个人节奏的关系？</span></div>
+          </div>
+          <div class="q-item">
+            <div class="q-head"><span class="q-num tag-blue">08</span><span class="q-title">如何定义更好的生活？</span></div>
+          </div>
+          <div class="q-item">
+            <div class="q-head"><span class="q-num tag-blue">09</span><span class="q-title">如何看待 AI 的影响？</span></div>
+          </div>
+          <div class="q-item">
+            <div class="q-head"><span class="q-num tag-blue">10</span><span class="q-title">如何看待神秘学的影响？</span></div>
+          </div>
         </div>
-
-        <p class="q-note reveal">这 10 个问题不是答案，是<strong>一组留着的灯</strong>。哪天它们不再揪你了，就换一批。</p>
       </div>
     </section>
 
