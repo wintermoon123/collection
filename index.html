@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>oo design — AI 作品集</title>
-  <meta name="description" content="oo 的 AI 作品集：社区运营平台、百变玉米、英语情境闯关。">
+  <meta name="description" content="oo 的 AI 作品集与费曼 10 问：社区运营平台、百变玉米、英语情境闯关，一组长期带着的问题与它们的成长时间轴。">
   <style>
     /* ============ Design tokens ============ */
     :root {
@@ -253,6 +253,117 @@
     .mock-feedback { font-size: 9px; font-weight: 800; color: var(--ok); display: flex; align-items: center; gap: 5px; margin-top: 8px; }
     .mock-feedback svg { width: 12px; height: 12px; }
 
+    /* ============ Questions ============ */
+    .q-intro {
+      background: var(--surface); border: 2px solid var(--border-soft);
+      border-left: 6px solid var(--primary); border-radius: var(--radius);
+      padding: 22px 26px; margin-bottom: 44px; max-width: 76ch;
+    }
+    .q-intro p { margin: 0 0 12px; }
+    .q-intro p:last-child { margin-bottom: 0; color: var(--text-muted); font-size: .96rem; }
+    .q-groups { display: grid; gap: 46px; }
+    .q-group-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .q-badge {
+      flex: none; width: 46px; height: 46px; display: grid; place-items: center;
+      border: 2px solid var(--text); border-radius: 12px;
+      font-weight: 800; font-size: 1.35rem; box-shadow: 3px 3px 0 var(--text);
+    }
+    .q-group-head h3 { margin: 0; font-size: 1.4rem; }
+    .q-group-head p { margin: 2px 0 0; color: var(--text-muted); font-size: .96rem; }
+    .q-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .q-item {
+      background: var(--surface); border: 2px solid var(--border-soft);
+      border-radius: 12px; transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+    }
+    .q-item:hover { border-color: var(--text); box-shadow: var(--shadow); }
+    .q-item[open] { border-color: var(--text); box-shadow: var(--shadow); }
+    .q-item summary {
+      list-style: none; cursor: pointer; user-select: none;
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 18px 20px; min-height: 78px;
+    }
+    .q-item summary::-webkit-details-marker { display: none; }
+    .q-item summary:focus-visible { outline: 4px solid var(--focus); outline-offset: -2px; border-radius: 10px; }
+    .q-num {
+      flex: none; display: grid; place-items: center;
+      min-width: 34px; height: 34px; padding: 0 6px;
+      border-radius: 8px; font-weight: 800; font-size: .9rem;
+      font-variant-numeric: tabular-nums;
+    }
+    .q-title { flex: 1; font-weight: 700; line-height: 1.45; padding-top: 3px; }
+    .q-chevron {
+      flex: none; width: 26px; height: 26px; display: grid; place-items: center;
+      border: 2px solid var(--border); border-radius: 7px; margin-top: 4px;
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+    }
+    .q-chevron svg { width: 15px; height: 15px; }
+    .q-item[open] .q-chevron { transform: rotate(180deg); background: var(--text); color: var(--bg); border-color: var(--text); }
+    .q-body { padding: 0 20px 22px; border-top: 1px solid var(--border-soft); }
+    .q-field { padding-top: 16px; }
+    .q-label {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .78rem; font-weight: 800; letter-spacing: .04em;
+      color: var(--text-muted); margin-bottom: 6px;
+    }
+    .q-label::before { content: ""; width: 14px; height: 2px; background: var(--primary); border-radius: 2px; }
+    .q-text { color: var(--text); font-size: 1rem; line-height: 1.6; margin: 0; }
+    .q-field + .q-field { margin-top: 4px; }
+    .q-note {
+      margin-top: 44px; padding: 20px 24px; text-align: center;
+      border: 2px dashed var(--border); border-radius: var(--radius);
+      color: var(--text-muted); font-size: .95rem;
+    }
+    .q-note strong { color: var(--text); }
+
+    /* ============ Timeline ============ */
+    .tl-wrap { position: relative; max-width: 900px; margin-inline: auto; padding-left: 46px; }
+    .tl-wrap::before {
+      content: ""; position: absolute; left: 15px; top: 6px; bottom: 6px;
+      width: 2px; background: var(--border-soft);
+    }
+    .tl-item { position: relative; padding-bottom: 30px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-dot {
+      position: absolute; left: -39px; top: 4px;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--surface); border: 3px solid var(--primary);
+      box-shadow: 0 0 0 4px var(--bg);
+    }
+    .tl-item[data-type="资料"] .tl-dot { border-color: var(--tag-mint-text); }
+    .tl-item[data-type="里程碑"] .tl-dot { border-color: var(--tag-peach-text); background: var(--tag-peach-bg); }
+    .tl-card {
+      background: var(--surface); border: 2px solid var(--border-soft);
+      border-radius: 12px; padding: 20px 22px;
+      transition: border-color .18s ease, box-shadow .18s ease;
+    }
+    .tl-card:hover { border-color: var(--text); box-shadow: var(--shadow); }
+    .tl-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .tl-date {
+      font-variant-numeric: tabular-nums; font-size: .86rem; font-weight: 800;
+      letter-spacing: .02em; color: var(--text-muted);
+    }
+    .tl-type {
+      font-size: .76rem; font-weight: 800; padding: 3px 10px; border-radius: 999px;
+    }
+    .tl-item[data-type="思考"] .tl-type { background: var(--tag-blue-bg); color: var(--tag-blue-text); }
+    .tl-item[data-type="资料"] .tl-type { background: var(--tag-mint-bg); color: var(--tag-mint-text); }
+    .tl-item[data-type="里程碑"] .tl-type { background: var(--tag-peach-bg); color: var(--tag-peach-text); }
+    .tl-title { margin: 0 0 8px; font-size: 1.18rem; }
+    .tl-text { color: var(--text-muted); margin: 0 0 12px; line-height: 1.65; }
+    .tl-text:last-child { margin-bottom: 0; }
+    .tl-links { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .tl-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .86rem; font-weight: 700; text-decoration: none;
+      color: var(--primary); border-bottom: 2px solid transparent;
+    }
+    .tl-link:hover { border-bottom-color: var(--primary); }
+    .tl-link svg { width: 14px; height: 14px; }
+    .tl-empty {
+      text-align: center; color: var(--text-muted); padding: 40px 20px;
+      border: 2px dashed var(--border); border-radius: var(--radius);
+    }
+
     /* ============ Contact ============ */
     .contact-inner {
       display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;
@@ -287,6 +398,8 @@
       .hero-art { order: -1; }
       .avatar-frame { width: min(78%, 320px); box-shadow: 7px 7px 0 var(--primary); }
       .cards { grid-template-columns: 1fr; }
+      .q-list { grid-template-columns: 1fr; }
+      .q-intro { padding: 18px 20px; }
       section { padding: 64px 0; }
       .contact-inner { grid-template-columns: 1fr; padding: 28px; box-shadow: 5px 5px 0 var(--primary); }
     }
@@ -305,6 +418,8 @@
       </a>
       <nav class="site-nav" aria-label="主导航">
         <a href="#works">作品</a>
+        <a href="#questions">10 问</a>
+        <a href="#timeline">时间轴</a>
         <a href="#contact">联系</a>
       </nav>
       <button id="themeToggle" class="icon-btn" type="button" aria-pressed="false" aria-label="切换到深色模式" title="切换深浅色模式">
@@ -482,12 +597,168 @@
       </div>
     </section>
 
+    <!-- QUESTIONS -->
+    <section id="questions" aria-labelledby="questions-title">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <p class="eyebrow">02 / 10 问</p>
+          <h2 id="questions-title">我的费曼 10 问</h2>
+          <p class="section-desc">不急着回答的问题，才是能陪很久的问题。这 10 个问题来自「纵横四海」EP89：把它们长期挂在脑子里，在生活里慢慢攒线索，让答案自己长出来。</p>
+        </header>
+
+        <div class="q-intro reveal">
+          <p>它们是我给自己搭的一套人生操作系统：不靠意志力，靠一组始终没关掉的问题。</p>
+          <p>用法很简单——先别急着回答，点开看它「真正在问」什么；往后遇到的书、事、人，只要往里掉了一条线索，就顺手记一句。每三个月回看一次，被自然忽略的划掉，新揪住的补进来。10 不是定额。</p>
+        </div>
+
+        <div class="q-groups">
+          <!-- 系统层 -->
+          <section class="q-group reveal" aria-labelledby="qg-system">
+            <div class="q-group-head">
+              <span class="q-badge tag-blue" aria-hidden="true">A</span>
+              <div>
+                <h3 id="qg-system">系统层</h3>
+                <p>怎么让生活自己转起来</p>
+              </div>
+            </div>
+            <div class="q-list">
+              <details class="q-item">
+                <summary><span class="q-num tag-blue">01</span><span class="q-title">如何搭建可长期使用的 Life OS？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+                <div class="q-body">
+                  <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">一个在我状态最差、注意力最散时还能转得动的 Life OS，现在缺的到底是哪一层——环境、机制，还是入口？</p></div>
+                  <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">那些没靠意志力也完成了的时刻，当时靠的是什么。</p></div>
+                </div>
+              </details>
+              <details class="q-item">
+                <summary><span class="q-num tag-blue">02</span><span class="q-title">如何更好地进行复盘？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+                <div class="q-body">
+                  <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">为什么我的复盘总停在"记下发生了什么"，却很少真的改掉下一次的做法？缺的是记录、诚实，还是承认的勇气？</p></div>
+                  <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">回看三个月前的复盘，哪些字句是空的，哪些真的改变了行为。</p></div>
+                </div>
+              </details>
+              <details class="q-item">
+                <summary><span class="q-num tag-blue">03</span><span class="q-title">如何搭建可长期运营的第三空间？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+                <div class="q-body">
+                  <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">我想要的第三空间，是一个地方、一群固定的人，还是一种"不用扮演任何角色"的状态？如果只能留住一样，留哪个？</p></div>
+                  <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">那些你一进门就松一口气的场所或场合，它们共同提供了什么。</p></div>
+                </div>
+              </details>
+              <details class="q-item">
+                <summary><span class="q-num tag-blue">04</span><span class="q-title">如何搭建可长期运营的人生学校？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+                <div class="q-body">
+                  <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">我办的是"教人知道"的学校，还是"陪人做到"的学校？如果毕业生只有一个标准——把知识用进生活，我该砍掉什么？</p></div>
+                  <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">学员说"我后来真的去做了"的瞬间；以及你自己想砍却一直没砍的环节。</p></div>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <!-- 事业层 -->
+          <section class="q-group reveal" aria-labelledby="qg-career">
+            <div class="q-group-head">
+              <span class="q-badge tag-mint" aria-hidden="true">B</span>
+              <div>
+                <h3 id="qg-career">事业层</h3>
+                <p>怎么让做的事养活自己和别人</p>
+              </div>
+            </div>
+            <div class="q-list">
+              <details class="q-item">
+                <summary><span class="q-num tag-mint">05</span><span class="q-title">如何建立有弹性和自由度的个人事业？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+                <div class="q-body">
+                  <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">如果我的事业不能靠"我一直在场"来运转，它靠什么转？为了自由，我愿意先放弃什么——收入、规模，还是控制感？</p></div>
+                  <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">那些"你不在也能跑"的环节；以及每次想放手时，你真正怕的是什么。</p></div>
+                </div>
+              </details>
+              <details class="q-item">
+                <summary><span class="q-num tag-mint">06</span><span class="q-title">如何更好地把看过的书进行知识变现？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+                <div class="q-body">
+                  <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">我读过的书，哪些真的变成了能交付出去的东西（一场读书会、一篇文案、一个观点）？"变现"对我是钱、是影响，还是把理解变成作品？</p></div>
+                  <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">反复被人问起的书和主题；以及讲完觉得"这次真的讲出来了"的时刻。</p></div>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <!-- 坐标层 -->
+          <section class="q-group reveal" aria-labelledby="qg-compass">
+            <div class="q-group-head">
+              <span class="q-badge tag-peach" aria-hidden="true">C</span>
+              <div>
+                <h3 id="qg-compass">坐标层</h3>
+                <p>用什么尺子量自己的人生</p>
+              </div>
+            </div>
+            <div class="q-list">
+              <details class="q-item">
+                <summary><span class="q-num tag-peach">07</span><span class="q-title">如何处理好社会时钟和个人节奏的关系？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+                <div class="q-body">
+                  <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">当身边人的进度（学位、房子、职位、婚姻）和我自己想做的事对不上时，我凭什么判断该追赶，还是该守住自己的节奏？</p></div>
+                  <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">那些让你突然焦虑的比较——它们到底戳中了什么。</p></div>
+                </div>
+              </details>
+              <details class="q-item">
+                <summary><span class="q-num tag-peach">08</span><span class="q-title">如何定义更好的生活？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+                <div class="q-body">
+                  <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">抛开所有"应该"，我说过"这就是我想要的日子"的时刻有哪些？它们有什么共同点？其中哪些是真想要的，哪些是怕被落下才想要的？</p></div>
+                  <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">那些不想发朋友圈、但自己知道很好的时刻。</p></div>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <!-- 变量层 -->
+          <section class="q-group reveal" aria-labelledby="qg-variable">
+            <div class="q-group-head">
+              <span class="q-badge tag-purple" aria-hidden="true">D</span>
+              <div>
+                <h3 id="qg-variable">变量层</h3>
+                <p>两个正在改写规则的力量</p>
+              </div>
+            </div>
+            <div class="q-list">
+              <details class="q-item">
+                <summary><span class="q-num tag-purple">09</span><span class="q-title">如何看待 AI 的影响？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+                <div class="q-body">
+                  <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">AI 已经能替我做掉哪些事？其中哪些是我其实不想失去的？当"做得快"不再是优势，我还剩什么？</p></div>
+                  <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">交出去之后反而想念的环节；以及 AI 做得很好、但你觉得"这不是我"的部分。</p></div>
+                </div>
+              </details>
+              <details class="q-item">
+                <summary><span class="q-num tag-purple">10</span><span class="q-title">如何看待神秘学的影响？</span><span class="q-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+                <div class="q-body">
+                  <div class="q-field"><span class="q-label">真正在问</span><p class="q-text">当我说"信"或"不信"时，我到底在防御什么、渴望什么？它给的是确定感、意义感，还是对失控的安抚？我允许它在决策里占多大位置？</p></div>
+                  <div class="q-field"><span class="q-label">往里攒</span><p class="q-text">那些明知不理性却仍然照做的选择——回看时它们带来了什么。</p></div>
+                </div>
+              </details>
+            </div>
+          </section>
+        </div>
+
+        <p class="q-note reveal">这 10 个问题不是答案，是<strong>一组留着的灯</strong>。哪天它们不再揪你了，就换一批。</p>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section id="timeline" aria-labelledby="timeline-title">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <p class="eyebrow">03 / 时间轴</p>
+          <h2 id="timeline-title">问题在生长</h2>
+          <p class="section-desc">这里记录每一次思考、每一份新资料。日期在左，线索在右——它们是我给这些问题留下的脚印。</p>
+        </header>
+        <div class="tl-wrap reveal" id="timelineList" aria-live="polite">
+          <p class="tl-empty">时间轴正在加载……</p>
+        </div>
+      </div>
+    </section>
+
     <!-- CONTACT -->
     <section id="contact" aria-labelledby="contact-title">
       <div class="wrap">
         <div class="contact-inner reveal">
           <div>
-            <p class="eyebrow">02 / 联系</p>
+            <p class="eyebrow">04 / 联系</p>
             <h2 id="contact-title">有想法？一起做点什么。</h2>
             <p class="contact-email">671066720@qq.com</p>
             <p class="copy-status" id="copyStatus" role="status" aria-live="polite"></p>
@@ -510,6 +781,9 @@
       <span><a href="#top">回到顶部 ↑</a></span>
     </div>
   </footer>
+
+  <!-- 时间轴数据：由「费曼问题/timeline.js」提供，更新数据文件即可更新本页 -->
+  <script src="./费曼问题/timeline.js"></script>
 
   <script>
     (function () {
@@ -574,6 +848,68 @@
           document.body.removeChild(ta);
         }
       });
+
+      // ===== Timeline: render from window.FEYNMAN_TIMELINE =====
+      var tlList = document.getElementById('timelineList');
+      var entries = window.FEYNMAN_TIMELINE;
+      function el(tag, cls, text) {
+        var n = document.createElement(tag);
+        if (cls) n.className = cls;
+        if (text != null) n.textContent = text;
+        return n;
+      }
+      function renderTimeline(data) {
+        tlList.innerHTML = '';
+        if (!Array.isArray(data) || !data.length) {
+          tlList.appendChild(el('p', 'tl-empty', '还没有记录。第一份思考，等你写下。'));
+          return;
+        }
+        data.forEach(function (item) {
+          var type = ['思考', '资料', '里程碑'].indexOf(item.type) >= 0 ? item.type : '思考';
+          var wrap = el('article', 'tl-item reveal');
+          wrap.setAttribute('data-type', type);
+          wrap.appendChild(el('span', 'tl-dot'));
+
+          var card = el('div', 'tl-card');
+          var meta = el('div', 'tl-meta');
+          meta.appendChild(el('time', 'tl-date', item.date || ''));
+          meta.appendChild(el('span', 'tl-type', type));
+          card.appendChild(meta);
+
+          card.appendChild(el('h3', 'tl-title', item.title || ''));
+          if (item.text) card.appendChild(el('p', 'tl-text', item.text));
+
+          var links = el('div', 'tl-links');
+          if (Array.isArray(item.q) && item.q.length) {
+            var q = el('span', 'q-label', '关联问题 #' + item.q.join(' · #'));
+            links.appendChild(q);
+          }
+          if (item.source && item.source.url) {
+            var a = el('a', 'tl-link');
+            a.href = item.source.url;
+            a.textContent = item.source.label || '查看资料';
+            a.setAttribute('target', '_blank');
+            a.setAttribute('rel', 'noopener noreferrer');
+            a.innerHTML += ' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>';
+            links.appendChild(a);
+          }
+          if (links.childNodes.length) card.appendChild(links);
+          wrap.appendChild(card);
+          tlList.appendChild(wrap);
+        });
+        // 让新插入的卡片也参与滚动显现
+        var reduce2 = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var items2 = tlList.querySelectorAll('.reveal');
+        if (reduce2 || !('IntersectionObserver' in window)) {
+          items2.forEach(function (n) { n.classList.add('in'); });
+        } else {
+          var io2 = new IntersectionObserver(function (es) {
+            es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io2.unobserve(e.target); } });
+          }, { threshold: 0.12 });
+          items2.forEach(function (n) { io2.observe(n); });
+        }
+      }
+      renderTimeline(entries);
     })();
   </script>
 </body>
