@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>oo的主页</title>
-  <meta name="description" content="oo 的 AI 作品集与费曼 10 问：社区运营平台、百变玉米、英语情境闯关，一组长期带着的问题。">
+  <meta name="description" content="oo 的 AI 作品集与费曼 10 问：社区运营平台、百变玉米，一组长期带着的问题，一份推荐书单。">
   <style>
     /* ============ Design tokens ============ */
     :root {
@@ -50,6 +50,7 @@
 
     /* ============ Base ============ */
     *, *::before, *::after { box-sizing: border-box; }
+    [hidden] { display: none !important; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
@@ -353,7 +354,7 @@
         <div class="hero-copy">
           <h1 id="hero-title">你好，我是 <span class="hl">oo</span>。</h1>
           <p class="hero-lead">这里放我一直在做的三件事：AI 作品、费曼问题，还有一份推荐书单。</p>
-          <p class="hero-sub">AI 作品从社区活动平台、环保卡牌游戏到英语与韩语情境闯关，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。</p>
+          <p class="hero-sub">AI 作品现在有社区活动平台和环保卡牌游戏两款，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。</p>
           <p class="hero-email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span class="hero-email-text">671066720@qq.com</span></p>
         </div>
         <div class="hero-art">
@@ -426,8 +427,8 @@
             </div>
           </article>
 
-          <!-- Card 3 -->
-          <article class="card reveal">
+          <!-- Card 3：暂时隐藏，去掉 hidden 即可恢复 -->
+          <article class="card reveal" hidden>
             <div class="card-preview preview-en" aria-hidden="true">
               <div class="mock">
                 <div class="mock-top"><span class="mock-title">咖啡店点单</span><span class="mock-pill green">情境 3/10</span></div>
@@ -452,8 +453,8 @@
             </div>
           </article>
 
-          <!-- Card 4 -->
-          <article class="card reveal">
+          <!-- Card 4：暂时隐藏，去掉 hidden 即可恢复 -->
+          <article class="card reveal" hidden>
             <div class="card-preview preview-ko" aria-hidden="true">
               <div class="mock">
                 <div class="mock-top"><span class="mock-title">카페 주문하기</span><span class="mock-pill violet">상황 3/10</span></div>
@@ -551,11 +552,11 @@
       ];
 
       var UI = {
-        'zh-Hans': { themeDark: '切换到深色模式', themeLight: '切换到浅色模式', langAria: '切换语言', langMenuLabel: '语言', title: 'oo的主页', desc: 'oo 的 AI 作品集与费曼 10 问：社区运营平台、百变玉米、英语与韩语情境闯关，还有一份推荐书单。' },
-        'zh-Hant': { themeDark: '切換到深色模式', themeLight: '切換到淺色模式', langAria: '切換語言', langMenuLabel: '語言', title: 'oo 的首頁', desc: 'oo 的 AI 作品集與費曼 10 問：社區營運平台、百變玉米、英語與韓語情境闖關，還有一份推薦書單。' },
-        'en': { themeDark: 'Switch to dark mode', themeLight: 'Switch to light mode', langAria: 'Change language', langMenuLabel: 'Language', title: "oo's home", desc: 'oo AI portfolio and Feynman 10 questions: a community platform, Magic Corn, English & Korean scenario challenges, plus a recommended reading list.' },
-        'ko': { themeDark: '어두운 모드로 전환', themeLight: '밝은 모드로 전환', langAria: '언어 변경', langMenuLabel: '언어', title: 'oo의 홈', desc: 'oo의 AI 작품집과 파인만 10 질문: 커뮤니티 플랫폼, 변신 옥수수, 영어·한국어 상황 챌린지, 그리고 추천 도서 목록.' },
-        'ja': { themeDark: 'ダークモードに切り替え', themeLight: 'ライトモードに切り替え', langAria: '言語を変更', langMenuLabel: '言語', title: 'oo のホーム', desc: 'oo の AI 作品集とファインマン 10 問：コミュニティプラットフォーム、マジックコーン、英語・韓国語のシチュエーション攻略、そして推薦図書リスト。' }
+        'zh-Hans': { themeDark: '切换到深色模式', themeLight: '切换到浅色模式', langAria: '切换语言', langMenuLabel: '语言', title: 'oo的主页', desc: 'oo 的 AI 作品集与费曼 10 问：社区运营平台、百变玉米，还有一份推荐书单。' },
+        'zh-Hant': { themeDark: '切換到深色模式', themeLight: '切換到淺色模式', langAria: '切換語言', langMenuLabel: '語言', title: 'oo 的首頁', desc: 'oo 的 AI 作品集與費曼 10 問：社區營運平台、百變玉米，還有一份推薦書單。' },
+        'en': { themeDark: 'Switch to dark mode', themeLight: 'Switch to light mode', langAria: 'Change language', langMenuLabel: 'Language', title: "oo's home", desc: 'oo AI portfolio and Feynman 10 questions: a community platform, Magic Corn, plus a recommended reading list.' },
+        'ko': { themeDark: '어두운 모드로 전환', themeLight: '밝은 모드로 전환', langAria: '언어 변경', langMenuLabel: '언어', title: 'oo의 홈', desc: 'oo의 AI 작품집과 파인만 10 질문: 커뮤니티 플랫폼, 변신 옥수수, 그리고 추천 도서 목록.' },
+        'ja': { themeDark: 'ダークモードに切り替え', themeLight: 'ライトモードに切り替え', langAria: '言語を変更', langMenuLabel: '言語', title: 'oo のホーム', desc: 'oo の AI 作品集とファインマン 10 問：コミュニティプラットフォーム、マジックコーン、そして推薦図書リスト。' }
       };
 
       var TEXT = {
@@ -563,7 +564,7 @@
           'oo的主页': 'oo 的首頁', '作品': '作品', '跳到主要内容': '跳到主要內容',
           '你好，我是': '你好，我是 ', '。': '。',
           '这里放我一直在做的三件事：AI 作品、费曼问题，还有一份推荐书单。': '這裡放我一直在做的三件事：AI 作品、費曼問題，還有一份推薦書單。',
-          'AI 作品从社区活动平台、环保卡牌游戏到英语与韩语情境闯关，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。': 'AI 作品從社區活動平台、環保卡牌遊戲到英語與韓語情境闖關，都是能直接上手的小產品；費曼問題用提問把概念講清楚；推薦書單收著我讀過、也願意反覆推薦的書。',
+          'AI 作品现在有社区活动平台和环保卡牌游戏两款，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。': 'AI 作品現在有社區活動平台和環保卡牌遊戲兩款，都是能直接上手的小產品；費曼問題用提問把概念講清楚；推薦書單收著我讀過、也願意反覆推薦的書。',
           '01 / 作品': '01 / 作品', '我的 AI 作品': '我的 AI 作品',
           '每一个都从真实需求出发：把复杂的事变简单，把有用的事变好玩。点击卡片即可打开在线作品。': '每一個都從真實需求出發：把複雜的事變簡單，把有用的事變好玩。點擊卡片即可打開線上作品。',
           '社区运营': '社區營運', 'LIA 社区运营平台': 'LIA 社區營運平台',
@@ -599,7 +600,7 @@
         'en': {
           'oo的主页': "oo's home", '作品': 'Works', '跳到主要内容': 'Skip to main content', '你好，我是': "Hi, I'm ", '。': '.',
           '这里放我一直在做的三件事：AI 作品、费曼问题，还有一份推荐书单。': 'Three things I keep working on: AI projects, Feynman questions, and a recommended reading list.',
-          'AI 作品从社区活动平台、环保卡牌游戏到英语与韩语情境闯关，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。': 'The AI projects range from a community activity platform and an eco card game to English and Korean scenario challenges — all small products you can use right away. Feynman questions explain ideas through questions, and the reading list collects books I have read and keep recommending.',
+          'AI 作品现在有社区活动平台和环保卡牌游戏两款，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。': 'The AI projects are a community activity platform and an eco card game — both small products you can use right away. Feynman questions explain ideas through questions, and the reading list collects books I have read and keep recommending.',
           '01 / 作品': '01 / Works', '我的 AI 作品': 'My AI Works',
           '每一个都从真实需求出发：把复杂的事变简单，把有用的事变好玩。点击卡片即可打开在线作品。': 'Each one starts from a real need: make complex things simple, make useful things fun. Click a card to open the live project.',
           '社区运营': 'Community Ops', 'LIA 社区运营平台': 'LIA Community Platform',
@@ -635,7 +636,7 @@
         'ko': {
           'oo的主页': 'oo의 홈', '作品': '작품', '跳到主要内容': '본문으로 건너뛰기', '你好，我是': '안녕하세요, ', '。': '입니다.',
           '这里放我一直在做的三件事：AI 作品、费曼问题，还有一份推荐书单。': '제가 꾸준히 해 온 세 가지입니다. AI 작품, 파인만 질문, 그리고 추천 도서 목록.',
-          'AI 作品从社区活动平台、环保卡牌游戏到英语与韩语情境闯关，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。': 'AI 작품은 커뮤니티 활동 플랫폼과 환경 카드 게임에서 영어·한국어 상황 체험까지, 바로 써 볼 수 있는 작은 제품들입니다. 파인만 질문은 질문으로 개념을 설명하고, 추천 도서 목록은 제가 읽고 다시 추천하고 싶은 책을 모았습니다.',
+          'AI 作品现在有社区活动平台和环保卡牌游戏两款，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。': 'AI 작품은 지금 커뮤니티 활동 플랫폼과 환경 카드 게임 두 가지로, 바로 써 볼 수 있는 작은 제품들입니다. 파인만 질문은 질문으로 개념을 설명하고, 추천 도서 목록은 제가 읽고 다시 추천하고 싶은 책을 모았습니다.',
           '01 / 作品': '01 / 작품', '我的 AI 作品': '나의 AI 작품',
           '每一个都从真实需求出发：把复杂的事变简单，把有用的事变好玩。点击卡片即可打开在线作品。': '모두 실제 필요에서 출발했습니다. 복잡한 것은 단순하게, 유용한 것은 재미있게. 카드를 클릭하면 온라인 작품이 열립니다.',
           '社区运营': '커뮤니티 운영', 'LIA 社区运营平台': 'LIA 커뮤니티 플랫폼',
@@ -671,7 +672,7 @@
         'ja': {
           'oo的主页': 'ooのホーム', '作品': '作品', '跳到主要内容': 'メインコンテンツへスキップ', '你好，我是': 'こんにちは、', '。': 'です。',
           '这里放我一直在做的三件事：AI 作品、费曼问题，还有一份推荐书单。': 'ずっと取り組んでいる三つのこと。AI 作品、ファインマン質問、そして推薦書リストです。',
-          'AI 作品从社区活动平台、环保卡牌游戏到英语与韩语情境闯关，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。': 'AI 作品は、コミュニティ活動プラットフォームや環境カードゲームから、英語・韓国語のシチュエーション体験まで、すぐに使える小さなプロダクトです。ファインマン質問は問いで概念を説明し、推薦書リストは何度でも薦めたい本を集めました。',
+          'AI 作品现在有社区活动平台和环保卡牌游戏两款，都是能直接上手的小产品；费曼问题用提问把概念讲清楚；推荐书单收着我读过、也愿意反复推荐的书。': 'AI 作品は、コミュニティ活動プラットフォームと環境カードゲームの 2 つで、どちらもすぐに使える小さなプロダクトです。ファインマン質問は問いで概念を説明し、推薦書リストは何度でも薦めたい本を集めました。',
           '01 / 作品': '01 / 作品', '我的 AI 作品': '私の AI 作品',
           '每一个都从真实需求出发：把复杂的事变简单，把有用的事变好玩。点击卡片即可打开在线作品。': 'どれも実際のニーズから生まれました。複雑なことをシンプルに、役立つことを楽しく。カードをクリックすると作品が開きます。',
           '社区运营': 'コミュニティ運営', 'LIA 社区运营平台': 'LIA コミュニティプラットフォーム',
