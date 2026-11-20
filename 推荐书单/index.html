@@ -27,6 +27,12 @@
       --rating: #B45309;
       --radius: 14px;
       --wrap: 1120px;
+      /* 便签（摘录）*/
+      --note-bg: #FFF9DB;
+      --note-bg-2: #FFF3B8;
+      --note-line: #E8D979;
+      --note-tape: rgba(233, 213, 110, .55);
+      --note-ink: #3B3413;
     }
     [data-theme="dark"] {
       --bg: #0C1424;
@@ -46,6 +52,12 @@
       --tag-peach-bg: #7C2D12; --tag-peach-text: #FCE7D3;
       --tag-purple-bg: #5B21B6; --tag-purple-text: #EDE9FE;
       --rating: #FCD34D;
+      /* 便签（摘录）——深色下用低饱和暗金，避免刺眼 */
+      --note-bg: #3A3420;
+      --note-bg-2: #454025;
+      --note-line: #6B6029;
+      --note-tape: rgba(252, 211, 77, .22);
+      --note-ink: #F6EFD2;
     }
 
     /* ============ Base ============ */
@@ -150,6 +162,47 @@
       font-size: .85rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
       color: var(--primary); margin-bottom: 18px;
     }
+
+    /* ============ Quote notes（标题下便签） ============ */
+    .notes {
+      display: flex; flex-wrap: wrap; gap: 20px;
+      margin-top: 30px;
+    }
+    .note {
+      position: relative;
+      flex: 1 1 340px; max-width: 640px;
+      margin: 6px 0 10px;
+      padding: 30px 26px 24px;
+      background: linear-gradient(160deg, var(--note-bg) 0%, var(--note-bg-2) 100%);
+      border: 1px solid var(--note-line);
+      border-radius: 3px 12px 4px 10px;
+      box-shadow: 0 8px 20px rgba(17,24,39,.10), 0 2px 4px rgba(17,24,39,.06);
+      color: var(--note-ink);
+      transform: rotate(-.7deg);
+    }
+    .note:nth-child(even) { transform: rotate(.6deg); }
+    /* 顶部胶带 */
+    .note::before {
+      content: ""; position: absolute; top: -11px; left: 50%;
+      width: 92px; height: 22px; transform: translateX(-50%) rotate(-2deg);
+      background: var(--note-tape);
+      border-radius: 2px;
+    }
+    .note:nth-child(even)::before { transform: translateX(-50%) rotate(2deg); }
+    /* 底部折角 */
+    .note::after {
+      content: ""; position: absolute; right: 0; bottom: 0;
+      width: 26px; height: 26px;
+      background: linear-gradient(135deg, transparent 50%, var(--note-line) 50%, var(--note-bg-2) 52%);
+      border-radius: 0 0 10px 0;
+    }
+    .note blockquote {
+      margin: 0 0 14px; font-size: 1.02rem; line-height: 1.85; letter-spacing: .01em;
+    }
+    .note figcaption {
+      text-align: right; font-size: .9rem; font-weight: 700; color: var(--note-ink); opacity: .8;
+    }
+    html[lang="ja"] .note blockquote { font-size: .95rem; }
 
     /* ============ Sections ============ */
     section { padding: 88px 0; }
@@ -297,6 +350,7 @@
       <div class="wrap">
         <p class="eyebrow">03 / 书单</p>
         <h1 id="page-title">推荐书单</h1>
+        <div class="notes" id="quoteBoard" aria-label="摘录"></div>
       </div>
     </section>
 
@@ -322,6 +376,8 @@
 
   <!-- 书单数据：由「推荐书单/books.js」提供，更新数据文件即可更新本页 -->
   <script src="./books.js"></script>
+  <!-- 摘录便签数据：由「推荐书单/quotes.js」提供，新增一条即加一张便签 -->
+  <script src="./quotes.js"></script>
 
   <script>
     (function () {
@@ -463,6 +519,27 @@
         if (cls) n.className = cls;
         if (text != null) n.textContent = text;
         return n;
+      }
+
+      // ===== 摘录便签渲染 =====
+      var quoteBoard = document.getElementById('quoteBoard');
+      var quotes = window.RECOMMEND_QUOTES || [];
+      /* 从按语言的对象里取词，缺该语言则回退简体 */
+      function localized(field, lang) {
+        if (!field) return '';
+        if (typeof field === 'string') return field;
+        return field[lang] || field['zh-Hans'] || '';
+      }
+      function renderQuotes(lang) {
+        if (!quoteBoard) return;
+        quoteBoard.innerHTML = '';
+        quotes.forEach(function (q) {
+          var fig = el('figure', 'note');
+          fig.appendChild(el('blockquote', '', localized(q.text, lang)));
+          var author = localized(q.author, lang);
+          if (author) fig.appendChild(el('figcaption', '', '\u2014\u2014 ' + author));
+          quoteBoard.appendChild(fig);
+        });
       }
 
       function makeBook(b) {
@@ -607,6 +684,7 @@
 
         applyTheme(theme);
         try { localStorage.setItem('oo-design-lang', code); } catch (e) {}
+        renderQuotes(code);
         buildTabs();
         render(activeCat);
       }
