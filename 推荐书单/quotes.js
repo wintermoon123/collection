@@ -28,5 +28,37 @@ window.RECOMMEND_QUOTES = [
       ko: '우에노 치즈코',
       ja: '上野千鶴子'
     }
+  },
+  {
+    text: {
+      'zh-Hans': '依照一种同时从属于历史无意识以及自我意识与意愿的社会逻辑，每个阶级或阶层都倾向于自我延续。对那些感受到恐惧的人来说，恐惧甚至成了他们存在于世的结构。',
+      'zh-Hant': '依照一種同時從屬於歷史無意識以及自我意識與意願的社會邏輯，每個階級或階層都傾向於自我延續。對那些感受到恐懼的人來說，恐懼甚至成了他們存在於世的結構。',
+      en: 'According to a social logic that belongs as much to the historical unconscious as to conscious awareness and will, every class or social stratum tends to reproduce itself. For those who feel fear, fear even becomes the very structure of their being in the world.',
+      ko: '역사적 무의식과 자각 및 의지에 동시에 속하는 사회적 논리에 따라, 모든 계급이나 계층은 스스로를 지속하려는 경향이 있다. 두려움을 느끼는 사람들에게 두려움은 오히려 그들이 세상에 존재하는 방식의 구조가 되기도 한다.',
+      ja: '歴史的無意識と、自意識や意志の両方に属する社会的論理に従って、あらゆる階級・階層は自らを再生産しようとする。恐れを感じる人々にとって、恐れはそのまま世界に存在する仕組みにさえなる。'
+    },
+    author: {
+      'zh-Hans': '迪迪埃·埃里蓬',
+      'zh-Hant': '迪迪埃·埃里蓬',
+      en: 'Didier Eribon',
+      ko: '디디에 에리봉',
+      ja: 'ディディエ・エリボン'
+    }
+  },
+  {
+    text: {
+      'zh-Hans': '一旦你走出第一步，就会发生有趣的事情。你的面前出现一个又一个始料未及的难题。你将邂逅激动人心的机会。你可能发现原先的计划早就落伍了，必须走上一条全新的道路。',
+      'zh-Hant': '一旦你走出第一步，就會發生有趣的事情。你的面前出現一個又一個始料未及的難題。你將邂逅激動人心的機會。你可能發現原先的計畫早就落伍了，必須走上一條全新的道路。',
+      en: 'Once you take the first step, interesting things begin to happen. One unexpected challenge after another appears before you. You will encounter thrilling opportunities. You may discover that your original plan is long out of date and that you must set off on an entirely new path.',
+      ko: '일단 첫걸음을 내디디면 재미있는 일이 벌어진다. 예상치 못한 난제가 하나 또 하나 눈앞에 나타난다. 흥분되는 기회를 만나게 된다. 그리고 원래의 계획이 이미 낡아 버렸다는 것을 발견하고, 전혀 새로운 길을 걸어가야 할지도 모른다.',
+      ja: '一歩を踏み出せば、面白いことが起きる。想定外の難題が次々と目の前に現れる。心が躍るような機会に出会うだろう。最初の計画がもう時代遅れだと気づき、まったく新しい道を歩むことになるかもしれない。'
+    },
+    author: {
+      'zh-Hans': '《街头生意经》',
+      'zh-Hant': '《街頭生意經》',
+      en: 'The Knack',
+      ko: 'The Knack',
+      ja: 'The Knack'
+    }
   }
 ];

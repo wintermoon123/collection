@@ -494,10 +494,19 @@
       var panel = document.getElementById('bookPanel');
       var tabsEl = document.getElementById('bookTabs');
       var books = window.RECOMMEND_BOOKS || [];
-      var CATS = (window.RECOMMEND_CATS && window.RECOMMEND_CATS.length)
-        ? window.RECOMMEND_CATS.slice()
-        : books.map(function (b) { return b.cat; }).filter(function (c, i, a) { return a.indexOf(c) === i; });
-      var activeCat = CATS[0];
+      var ALL = '__all__';  /* 「全部」筛选项的标识 */
+      var CATS = [ALL].concat(
+        (window.RECOMMEND_CATS && window.RECOMMEND_CATS.length)
+          ? window.RECOMMEND_CATS.slice()
+          : books.map(function (b) { return b.cat; }).filter(function (c, i, a) { return a.indexOf(c) === i; })
+      );
+      var activeCat = ALL;  /* 默认显示全部书籍 */
+
+      /* 按中文书名拼音升序；支持 Intl.Collator 时用之，否则回退 localeCompare */
+      var collator = (typeof Intl !== 'undefined' && Intl.Collator) ? new Intl.Collator('zh-CN') : null;
+      function byTitle(a, b) {
+        return collator ? collator.compare(a.title, b.title) : a.title.localeCompare(b.title, 'zh-CN');
+      }
 
       /* 分类名的多语言（分类键本身用中文，展示时按语言取词） */
       var CAT_LABEL = {
@@ -509,7 +518,11 @@
         '思考工具': { 'zh-Hant': '思考工具', en: 'Thinking tools', ko: '사고 도구', ja: '思考の道具' }
       };
 
+      var ALL_LABEL = {
+        'zh-Hans': '全部', 'zh-Hant': '全部', en: 'All', ko: '전체', ja: 'すべて'
+      };
       function catLabel(cat) {
+        if (cat === ALL) return ALL_LABEL[currentLang] || ALL_LABEL['zh-Hans'];
         var m = CAT_LABEL[cat];
         return (m && m[currentLang]) || cat;
       }
@@ -577,7 +590,9 @@
       function render(cat) {
         var L = BOOK_UI[currentLang] || BOOK_UI['zh-Hans'];
         grid.innerHTML = '';
-        var list = books.filter(function (b) { return b.cat === cat; });
+        /* ALL 显示全部，其余按领域筛选；两种情况都按书名拼音排序 */
+        var list = (cat === ALL) ? books.slice() : books.filter(function (b) { return b.cat === cat; });
+        list.sort(byTitle);
         if (!list.length) {
           grid.appendChild(el('p', 'book-empty', L.empty));
           return;
@@ -586,7 +601,9 @@
         revealCards();
       }
 
-      function count(cat) { return books.filter(function (b) { return b.cat === cat; }).length; }
+      function count(cat) {
+        return (cat === ALL) ? books.length : books.filter(function (b) { return b.cat === cat; }).length;
+      }
 
       /* 分类标签由数据驱动，加书后自动出现；空分类也保留标签 */
       function buildTabs() {
