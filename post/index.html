@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>post · oo的主页</title>
+  <meta name="description" content="oo 的文章与笔记：wiki、blog 与 Q&A。">
+  <link rel="stylesheet" href="./assets/post.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html" aria-label="oo的主页，返回主页">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        </span>
+        <span>oo的主页</span>
+      </a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="../index.html#works">作品</a>
+        <a href="../index.html#questions">10 问</a>
+        <a href="./index.html" aria-current="page">post</a>
+        <a href="../推荐书单/index.html">书单</a>
+      </nav>
+      <div class="header-tools">
+        <div class="lang-wrap">
+          <button id="langBtn" class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="切换语言">
+            <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M12 2.8a13.5 13.5 0 0 0 0 18.4 13.5 13.5 0 0 0 0-18.4M2.8 12h18.4"/></svg>
+            <span id="langCurrent">简</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <ul id="langMenu" class="lang-menu" role="menu" aria-label="语言" hidden>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="zh-Hans" aria-checked="true">简体中文</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="zh-Hant" aria-checked="false">繁體中文</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="en" aria-checked="false">English</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="ko" aria-checked="false">한국어</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="ja" aria-checked="false">日本語</button></li>
+          </ul>
+        </div>
+        <button id="themeToggle" class="icon-btn" type="button" aria-pressed="false" aria-label="切换到深色模式" title="切换深浅色模式">
+          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section id="top" class="hero" aria-labelledby="page-title">
+      <div class="wrap">
+        <p class="eyebrow">03 / post / 发布</p>
+        <h1 id="page-title">post</h1>
+        <p class="hero-sub">把读过、想过、写过的东西放在这里——知识笔记、长文与问答，持续更新。</p>
+        <ul class="section-cards" aria-label="栏目导航">
+          <li>
+            <a href="#wiki">
+              <span class="card-top"><span class="dot dot-wiki" aria-hidden="true"></span><span class="card-name">wiki</span></span>
+              <p class="card-desc">可复用的方法与知识笔记。</p>
+              <span class="card-count">2 篇文章</span>
+            </a>
+          </li>
+          <li>
+            <a href="#blog">
+              <span class="card-top"><span class="dot dot-blog" aria-hidden="true"></span><span class="card-name">blog</span></span>
+              <p class="card-desc">成篇的长文与观察。</p>
+              <span class="card-count">1 篇文章</span>
+            </a>
+          </li>
+          <li>
+            <a href="#qa">
+              <span class="card-top"><span class="dot dot-qa" aria-hidden="true"></span><span class="card-name">Q&amp;A</span></span>
+              <p class="card-desc">常见问题的整理与回答。</p>
+              <span class="card-count">持续更新</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- WIKI -->
+    <section id="wiki" class="block" aria-labelledby="wiki-title">
+      <div class="wrap">
+        <div class="block-head reveal">
+          <span class="label label-wiki">wiki</span>
+          <h2 id="wiki-title">wiki</h2>
+          <p class="lead">可复用的方法与知识笔记。</p>
+        </div>
+
+        <div class="overviews">
+          <a class="overview reveal" href="./wiki/survey-guide.html">
+            <div class="overview-meta">
+              <span class="updated">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                最后更新：2026-11-21
+              </span>
+            </div>
+            <h3>如何做一个达标的调研</h3>
+            <p class="summary">一份达标调研报告该怎么写：从框架、题目与文献综述，到研究问题、研究设计、研究伦理与引用规范。</p>
+            <span class="read-more">阅读全文 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+
+          <a class="overview reveal" href="./wiki/productivity.html">
+            <div class="overview-meta">
+              <span class="updated">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                最后更新：2026-11-21
+              </span>
+            </div>
+            <h3>如何提高生产力</h3>
+            <p class="summary">不必追求复杂的系统——把睡眠、饮食、时间记录、公开承诺、深度学习与图书馆资源这七件小事稳定做到。</p>
+            <span class="read-more">阅读全文 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG -->
+    <section id="blog" class="block" aria-labelledby="blog-title">
+      <div class="wrap">
+        <div class="block-head reveal">
+          <span class="label label-blog">blog</span>
+          <h2 id="blog-title">blog</h2>
+          <p class="lead">成篇的长文与观察。</p>
+        </div>
+
+        <div class="overviews">
+          <a class="overview reveal" href="./blog/yongzhou-wenlv.html">
+            <div class="overview-meta">
+              <span class="date-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+                2026.3
+              </span>
+            </div>
+            <h3>文化资本与社会资本协同发展：赋能湖南永州文旅产业的新路径</h3>
+            <p class="summary">以布迪厄的文化资本与社会资本理论为基础，梳理永州两类资本的现状与困境，提出从支持体系、产品化到商业模式创新的协同发展路径。</p>
+            <span class="read-more">阅读全文 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Q&A -->
+    <section id="qa" class="block" aria-labelledby="qa-title">
+      <div class="wrap">
+        <div class="block-head reveal">
+          <span class="label label-qa">Q&amp;A</span>
+          <h2 id="qa-title">Q&amp;A</h2>
+          <p class="lead">常见问题的整理与回答。</p>
+        </div>
+        <div class="qa-empty reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9a2.5 2.5 0 1 1 3.4 2.3c-.9.4-1 1-1 1.7M12 17h.01"/></svg>
+          <p>内容整理中，敬请期待。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span><a href="#top">回到顶部 ↑</a></span>
+    </div>
+  </footer>
+
+  <script src="./assets/post.js"></script>
+</body>
+</html>

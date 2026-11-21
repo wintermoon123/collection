@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>如何做一个达标的调研 · post · oo的主页</title>
+  <meta name="description" content="一份达标调研报告的完整框架与设计要点：从题目、文献综述到研究设计、伦理与引用规范。">
+  <link rel="stylesheet" href="../assets/post.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../../index.html" aria-label="oo的主页，返回主页">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        </span>
+        <span>oo的主页</span>
+      </a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="../../index.html#works">作品</a>
+        <a href="../../index.html#questions">10 问</a>
+        <a href="../index.html" aria-current="page">post</a>
+        <a href="../../推荐书单/index.html">书单</a>
+      </nav>
+      <div class="header-tools">
+        <div class="lang-wrap">
+          <button id="langBtn" class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="切换语言">
+            <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M12 2.8a13.5 13.5 0 0 0 0 18.4 13.5 13.5 0 0 0 0-18.4M2.8 12h18.4"/></svg>
+            <span id="langCurrent">简</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <ul id="langMenu" class="lang-menu" role="menu" aria-label="语言" hidden>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="zh-Hans" aria-checked="true">简体中文</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="zh-Hant" aria-checked="false">繁體中文</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="en" aria-checked="false">English</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="ko" aria-checked="false">한국어</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="ja" aria-checked="false">日本語</button></li>
+          </ul>
+        </div>
+        <button id="themeToggle" class="icon-btn" type="button" aria-pressed="false" aria-label="切换到深色模式" title="切换深浅色模式">
+          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap" style="padding-top:40px;">
+      <nav class="crumb" aria-label="面包屑">
+        <a href="../index.html">post</a><span class="sep">/</span>
+        <a href="../index.html#wiki">wiki</a><span class="sep">/</span>
+        <span>如何做一个达标的调研</span>
+      </nav>
+      <header class="article-header">
+        <div class="meta">
+          <span class="label label-wiki">wiki</span>
+          <span class="updated">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            最后更新：2026-11-21
+          </span>
+        </div>
+        <h1>如何做一个达标的调研</h1>
+      </header>
+    </div>
+
+    <div class="wrap">
+      <div class="detail-layout">
+        <article class="article-body reveal">
+
+          <h3>一、调研报告的框架</h3>
+          <ul>
+            <li><strong>引言：</strong>研究背景、研究意义 / 目的、研究问题。</li>
+            <li><strong>研究设计：</strong>参考理论、研究方法和工具（问卷、量表、访谈提纲、测量仪器）、研究伦理。</li>
+            <li><strong>研究发现：</strong>客观数据（访谈内容、问卷数据、测量数据）+ 主观论述。</li>
+            <li><strong>结论与讨论：</strong>发现、创新、不足。</li>
+            <li><strong>参考资料。</strong></li>
+            <li><strong>附件：</strong>问卷、访谈提纲、访谈记录、测量数据、项目管理记录（小组分工、在哪些时间点做了哪些事）。</li>
+          </ul>
+          <p class="note-inline">题目需体现和调研地点的关系。</p>
+
+          <h3>二、研究背景与文献综述</h3>
+          <p>根据感兴趣的话题寻找相关文献。一般在中国知网上查找中文文献，尽量选择被引高、专业期刊的；也可以查找政策法规、专业数据库、研究报告。如果使用 AI 辅助查找文献，需核实真实性。用 300 字左右，总结现有文献有哪些发现。</p>
+
+          <h3>三、研究问题</h3>
+          <p>基于现有文献和调研地的情况，明确准备研究哪些问题、使用哪些研究方法和工具、参考哪些理论。</p>
+          <p>遵循"是什么、为什么、怎么办"的逻辑——在研究"怎么办"之前，先研究清楚"是什么"和"为什么"。</p>
+
+          <h3>四、研究设计</h3>
+          <p>优秀的研究设计有三个原则：</p>
+          <ul>
+            <li><strong>目的性：</strong>以研究问题为出发点，以最符合研究目的和总体方案的方式设计。</li>
+            <li><strong>可行性：</strong>必须在实践中切实可行。</li>
+            <li><strong>经济性：</strong>与可用资源相适应，受制于经费、时间、人力等。</li>
+          </ul>
+          <p>有小组在开题报告中写准备制作视频，需要考虑难度和工作量；对于不确定因素（如不确定能否联系到符合要求的受访者），建议选择把握更大的方案。</p>
+
+          <h4>研究工具</h4>
+          <p>问卷、访谈提纲。如果时间充裕，先设计一版并试填，过程中发现问题可及时调整，避免正式发放时再补救。涉及专业术语时，要使用受访者能理解的表达。</p>
+
+          <h4>参考理论</h4>
+          <p>论文要求 5000 字以内，参考理论不宜过于宏观（如新质生产力）或过多（多个学科），一般 1–2 个。</p>
+
+          <h4>研究伦理</h4>
+          <p>自愿参与、知情同意、不造成伤害、保护敏感信息。如果用访谈法一般要录音，录音前需取得受访者知情同意（较完备的做法是让受访者签知情同意书）；论文中用编号代替姓名以保护敏感信息。</p>
+
+          <h4>对受访者的价值</h4>
+          <p>可给予小额报酬，金额不宜过高；若受访者对研究内容感兴趣，可在未来告知研究发现。</p>
+
+          <h4>引用规范</h4>
+          <p>GB/T 7714—2025。参见：<a href="https://mp.weixin.qq.com/s/IxELmp9aePbIp7IhcKNSBg" target="_blank" rel="noopener noreferrer">引用规范说明</a></p>
+
+        </article>
+
+        <div class="article-end">
+          <a class="back-link" href="../index.html#wiki">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            返回 post
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span><a href="#top">回到顶部 ↑</a></span>
+    </div>
+  </footer>
+
+  <script src="../assets/post.js"></script>
+</body>
+</html>
