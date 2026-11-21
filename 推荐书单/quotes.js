@@ -60,5 +60,21 @@ window.RECOMMEND_QUOTES = [
       ko: 'The Knack',
       ja: 'The Knack'
     }
+  },
+  {
+    text: {
+      'zh-Hans': '企业本身不是目的，而是用来创造的工具，一种法律意义上的组织，仅此而已。',
+      'zh-Hant': '企業本身不是目的，而是用來創造的工具，一種法律意義上的組織，僅此而已。',
+      en: 'A business is not an end in itself, but a tool for creating — a legal entity, and nothing more.',
+      ko: '기업 자체는 목적이 아니라 창조를 위한 도구이자, 법률적 의미의 조직일 뿐이다.',
+      ja: '企業そのものは目的ではなく、創造のための道具であり、法的な意味での組織にすぎない。'
+    },
+    author: {
+      'zh-Hans': '《小而美：持续盈利的经营法则》',
+      'zh-Hant': '《小而美：持續獲利的經營法則》',
+      en: 'Company of One',
+      ko: 'Company of One',
+      ja: 'Company of One'
+    }
   }
 ];
