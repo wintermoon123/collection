@@ -221,12 +221,11 @@ section.block { padding: 56px 0; }
 }
 .updated svg { width: 13px; height: 13px; }
 
-.qa-empty {
-  max-width: var(--reading); text-align: center; padding: 54px 24px;
-  border: 2px dashed var(--border); border-radius: var(--radius); color: var(--text-muted);
-}
-.qa-empty svg { width: 34px; height: 34px; color: var(--primary); margin: 0 auto 12px; }
-.qa-empty p { margin: 0; }
+/* Q&A 占位卡片：复用 .overview 规格，仅内容居中且无跳转交互 */
+.overview-placeholder { align-items: center; justify-content: center; text-align: center; }
+.overview-placeholder:hover { transform: none; border-color: var(--border-soft); box-shadow: none; }
+.overview-placeholder svg { width: 34px; height: 34px; color: var(--primary); margin-bottom: 12px; }
+.overview-placeholder p { margin: 0; color: var(--text-muted); }
 
 /* ============ Detail page ============ */
 .article-top { padding-top: 40px; }
