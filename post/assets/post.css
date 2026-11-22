@@ -171,6 +171,7 @@ p { margin: 0 0 16px; }
 .section-cards .dot { width: 12px; height: 12px; border-radius: 999px; flex: none; }
 .dot-wiki { background: var(--tag-blue-text); }
 .dot-blog { background: var(--tag-peach-text); }
+.dot-digest { background: var(--tag-purple-text); }
 .dot-qa { background: var(--tag-mint-text); }
 .section-cards .card-name { font-size: 1.3rem; font-weight: 800; letter-spacing: -.02em; }
 .section-cards .card-desc { color: var(--text-muted); font-size: .9rem; line-height: 1.55; margin: 0; }
@@ -191,6 +192,7 @@ section.block { padding: 56px 0; }
 }
 .label-wiki { background: var(--tag-blue-bg); color: var(--tag-blue-text); }
 .label-blog { background: var(--tag-peach-bg); color: var(--tag-peach-text); }
+.label-digest { background: var(--tag-purple-bg); color: var(--tag-purple-text); }
 .label-qa { background: var(--tag-mint-bg); color: var(--tag-mint-text); }
 
 /* ============ Overview cards（主页每篇概览） ============ */

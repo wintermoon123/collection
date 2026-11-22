@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>数字排毒：从信息肥胖到数字节食 · post · oo的主页</title>
+  <meta name="description" content="Tara Brabazon《Time for a Digital Detox?》核心观点提炼：从信息肥胖到数字节食，再到数字正义。附可点击思维导图。">
+  <link rel="stylesheet" href="../assets/post.css">
+  <style>
+    .mindmap-block { margin: 0 auto 40px; max-width: var(--reading); }
+    .mindmap-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+    .mindmap-head h2 { font-size: 1.5rem; margin: 0; }
+    .mindmap-hint { color: var(--text-muted); font-size: .88rem; margin: 0 0 18px; }
+    .mindmap-frame {
+      background: var(--surface); border: 2px solid var(--border-soft);
+      border-radius: var(--radius); padding: 14px; overflow-x: auto;
+    }
+    .mg-svg { display: block; width: 100%; height: auto; min-width: 660px; }
+    .mg-node { cursor: pointer; }
+    .mg-node rect { transition: stroke-width .15s ease, filter .15s ease; }
+    .mg-node:hover rect { stroke-width: 2.6; filter: brightness(1.06); }
+    .mg-node:focus { outline: none; }
+    .mg-node:focus-visible rect { stroke-width: 3; }
+    [id^="n-"]:target {
+      background: var(--tag-purple-bg); color: var(--tag-purple-text);
+      border-radius: 4px; scroll-margin-top: 96px;
+    }
+    .cite-list { padding-left: 1.5em; }
+    .cite-list li { margin-bottom: 7px; }
+    @media (max-width: 680px) {
+      .mindmap-head h2 { font-size: 1.25rem; }
+      .mindmap-frame { padding: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../../index.html" aria-label="oo的主页，返回主页">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        </span>
+        <span>oo的主页</span>
+      </a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="../../index.html#works">作品</a>
+        <a href="../../index.html#questions">10 问</a>
+        <a href="../index.html" aria-current="page">post</a>
+        <a href="../../推荐书单/index.html">书单</a>
+      </nav>
+      <div class="header-tools">
+        <div class="lang-wrap">
+          <button id="langBtn" class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="切换语言">
+            <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M12 2.8a13.5 13.5 0 0 0 0 18.4 13.5 13.5 0 0 0 0-18.4M2.8 12h18.4"/></svg>
+            <span id="langCurrent">简</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <ul id="langMenu" class="lang-menu" role="menu" aria-label="语言" hidden>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="zh-Hans" aria-checked="true">简体中文</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="zh-Hant" aria-checked="false">繁體中文</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="en" aria-checked="false">English</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="ko" aria-checked="false">한국어</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="ja" aria-checked="false">日本語</button></li>
+          </ul>
+        </div>
+        <button id="themeToggle" class="icon-btn" type="button" aria-pressed="false" aria-label="切换到深色模式" title="切换深浅色模式">
+          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap article-top">
+      <nav class="crumb" aria-label="面包屑">
+        <a href="../index.html">post</a><span class="sep">/</span>
+        <a href="../index.html#digest">digest</a><span class="sep">/</span>
+        <span>数字排毒</span>
+      </nav>
+      <header class="article-header">
+        <div class="meta">
+          <span class="label label-digest">digest</span>
+          <span class="updated">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            最后更新：2026.11.22
+          </span>
+        </div>
+        <h1 id="n-root">数字排毒：从信息肥胖到数字节食</h1>
+      </header>
+    </div>
+
+    <!-- 思维导图：放在正文前，节点点击跳转到正文对应锚点 -->
+    <div class="wrap">
+      <section class="mindmap-block" aria-labelledby="mm-title">
+        <div class="mindmap-head">
+          <h2 id="mm-title">思维导图</h2>
+        </div>
+        <p class="mindmap-hint">点击任意节点，跳到正文对应处。</p>
+        <div class="mindmap-frame">
+<svg class="mg-svg" viewBox="0 0 920 2562" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="文章思维导图，点击任意节点跳转到正文对应处">
+<path d="M 214,1280.6 C 222.0,1280.6 222.0,70.0 230,70.0" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 214,1280.6 C 222.0,1280.6 222.0,499.2 230,499.2" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 214,1280.6 C 222.0,1280.6 222.0,1345.4 230,1345.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 214,1280.6 C 222.0,1280.6 222.0,2118.6 230,2118.6" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 214,1280.6 C 222.0,1280.6 222.0,2483.0 230,2483.0" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<a href="#n-root" class="mg-node"><title>数字排毒 · 从信息肥胖到数字节食</title><rect x="14" y="1253.6" width="200" height="54.0" rx="8" fill="var(--text)" stroke="var(--text)"/><text fill="var(--bg)" font-size="15" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="23" y="1275.3">数字排毒 · 从信息肥胖到</tspan><tspan x="23" y="1296.3">数字节食</tspan></text></a>
+<path d="M 390,70.0 C 397.5,70.0 397.5,28.0 405,28.0" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,70.0 C 397.5,70.0 397.5,70.0 405,70.0" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,70.0 C 397.5,70.0 397.5,112.0 405,112.0" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<a href="#n-s0" class="mg-node"><title>摘要</title><rect x="230" y="51.0" width="160" height="38.0" rx="7" fill="var(--tag-blue-bg)" stroke="var(--tag-blue-text)" stroke-width="1.5"/><text fill="var(--tag-blue-text)" font-size="14" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="239" y="74.9">摘要</tspan></text></a>
+<a href="#n-s0a" class="mg-node"><title>问题不是信息太少，而是消化太少</title><rect x="405" y="12.0" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="32.5">问题不是信息太少，而是消化太少</tspan></text></a>
+<a href="#n-s0b" class="mg-node"><title>信息多了，不会自动变成知识和智慧</title><rect x="405" y="54.0" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="74.5">信息多了，不会自动变成知识和智慧</tspan></text></a>
+<a href="#n-s0c" class="mg-node"><title>信息肥胖 → 数字节食 → 数字正义</title><rect x="405" y="96.0" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="116.5">信息肥胖 → 数字节食 → 数字正义</tspan></text></a>
+<path d="M 390,499.2 C 397.5,499.2 397.5,154.0 405,154.0" fill="none" stroke="var(--tag-purple-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,499.2 C 397.5,499.2 397.5,196.0 405,196.0" fill="none" stroke="var(--tag-purple-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,499.2 C 397.5,499.2 397.5,274.0 405,274.0" fill="none" stroke="var(--tag-purple-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,499.2 C 397.5,499.2 397.5,360.2 405,360.2" fill="none" stroke="var(--tag-purple-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,499.2 C 397.5,499.2 397.5,410.4 405,410.4" fill="none" stroke="var(--tag-purple-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,499.2 C 397.5,499.2 397.5,648.4 405,648.4" fill="none" stroke="var(--tag-purple-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<a href="#n-s1" class="mg-node"><title>一、信息肥胖</title><rect x="230" y="480.2" width="160" height="38.0" rx="7" fill="var(--tag-purple-bg)" stroke="var(--tag-purple-text)" stroke-width="1.5"/><text fill="var(--tag-purple-text)" font-size="14" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="239" y="504.1">一、信息肥胖</tspan></text></a>
+<a href="#n-s1a" class="mg-node"><title>嘲笑多吃，却纵容无知</title><rect x="405" y="138.0" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="158.6">嘲笑多吃，却纵容无知</tspan></text></a>
+<a href="#n-s1b" class="mg-node"><title>每天数百次信息选择</title><rect x="405" y="180.0" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="200.6">每天数百次信息选择</tspan></text></a>
+<path d="M 635,274.0 C 642.5,274.0 642.5,245.5 650,245.5" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,274.0 C 642.5,274.0 642.5,302.5 650,302.5" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<a href="#n-s1c" class="mg-node"><title>Google 是搜索引擎里的 Atkins 减肥法</title><rect x="405" y="249.8" width="230" height="48.4" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="269.4">Google 是搜索引擎里的 Atkins 减</tspan><tspan x="414" y="287.6">肥法</tspan></text></a>
+<a href="#n-s1c1" class="mg-node"><title>搜 postcolonialism → 维基百科泛泛词条</title><rect x="650" y="222.0" width="250" height="47.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="241.1">搜 postcolonialism → 维基百科泛泛</tspan><tspan x="659" y="258.6">词条</tspan></text></a>
+<a href="#n-s1c2" class="mg-node"><title>加上 Bhabha/Balibar/Spivak → 大学与专业作者</title><rect x="650" y="279.0" width="250" height="47.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="298.1">加上 Bhabha/Balibar/Spivak → 大学</tspan><tspan x="659" y="315.6">与专业作者</tspan></text></a>
+<a href="#n-s1d" class="mg-node"><title>病根不在 Google，在搜索者缺专业知识</title><rect x="405" y="336.0" width="230" height="48.4" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="355.6">病根不在 Google，在搜索者缺专业</tspan><tspan x="414" y="373.8">知识</tspan></text></a>
+<a href="#n-s1e" class="mg-node"><title>我们不知道我们不知道什么</title><rect x="405" y="394.4" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="414.9">我们不知道我们不知道什么</tspan></text></a>
+<path d="M 635,648.4 C 642.5,648.4 642.5,451.4 650,451.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,648.4 C 642.5,648.4 642.5,491.4 650,491.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,648.4 C 642.5,648.4 642.5,531.4 650,531.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,648.4 C 642.5,648.4 642.5,579.9 650,579.9" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,648.4 C 642.5,648.4 642.5,628.4 650,628.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,648.4 C 642.5,648.4 642.5,668.4 650,668.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,648.4 C 642.5,648.4 642.5,708.4 650,708.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,648.4 C 642.5,648.4 642.5,748.4 650,748.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,648.4 C 642.5,648.4 642.5,788.4 650,788.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,648.4 C 642.5,648.4 642.5,836.9 650,836.9" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<a href="#n-s1f" class="mg-node"><title>十条默认假设</title><rect x="405" y="632.4" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="652.9">十条默认假设</tspan></text></a>
+<a href="#n-b6d08e92342eb4f81384c25c" class="mg-node"><title>① 新的就是有用的</title><rect x="650" y="436.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="455.8">① 新的就是有用的</tspan></text></a>
+<a href="#n-a474d98ba2d3cb0917c3ac59" class="mg-node"><title>② 快的就是更好的</title><rect x="650" y="476.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="495.8">② 快的就是更好的</tspan></text></a>
+<a href="#n-273109212a12269740b90446" class="mg-node"><title>③ 容易的就是有用的</title><rect x="650" y="516.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="535.8">③ 容易的就是有用的</tspan></text></a>
+<a href="#n-26c8f5e9ec55a50bca30ed22" class="mg-node"><title>④ 用于休闲的门户、平台和媒体，天然有益于教育与职场</title><rect x="650" y="556.4" width="250" height="47.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="575.5">④ 用于休闲的门户、平台和媒体，天然有</tspan><tspan x="659" y="593.0">益于教育与职场</tspan></text></a>
+<a href="#n-b0c6f2cbe04a32648a95d785" class="mg-node"><title>⑤ 搜索就是研究，点击就是思考</title><rect x="650" y="613.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="632.8">⑤ 搜索就是研究，点击就是思考</tspan></text></a>
+<a href="#n-7a3ae43722c6c3543e8bccd3" class="mg-node"><title>⑥ 信息就是知识</title><rect x="650" y="653.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="672.8">⑥ 信息就是知识</tspan></text></a>
+<a href="#n-55cb8d14867d250c2df0d1bf" class="mg-node"><title>⑦ 复制粘贴就是做笔记</title><rect x="650" y="693.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="712.8">⑦ 复制粘贴就是做笔记</tspan></text></a>
+<a href="#n-e9f3a4f4d31df0a02c757790" class="mg-node"><title>⑧ 用搜索引擎替代信息素养专长</title><rect x="650" y="733.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="752.8">⑧ 用搜索引擎替代信息素养专长</tspan></text></a>
+<a href="#n-b82d9d593ece5fd66ddb835b" class="mg-node"><title>⑨ 媒体越多越好</title><rect x="650" y="773.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="792.8">⑨ 媒体越多越好</tspan></text></a>
+<a href="#n-3c631bf971c3b7d7e8ed78bf" class="mg-node"><title>⑩ 英美等国的「进步」必然惠及世界其它地方</title><rect x="650" y="813.4" width="250" height="47.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="832.5">⑩ 英美等国的「进步」必然惠及世界其它</tspan><tspan x="659" y="850.0">地方</tspan></text></a>
+<path d="M 390,1345.4 C 397.5,1345.4 397.5,886.4 405,886.4" fill="none" stroke="var(--tag-mint-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,1345.4 C 397.5,1345.4 397.5,955.9 405,955.9" fill="none" stroke="var(--tag-mint-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,1345.4 C 397.5,1345.4 397.5,1025.4 405,1025.4" fill="none" stroke="var(--tag-mint-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,1345.4 C 397.5,1345.4 397.5,1254.9 405,1254.9" fill="none" stroke="var(--tag-mint-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,1345.4 C 397.5,1345.4 397.5,1484.4 405,1484.4" fill="none" stroke="var(--tag-mint-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,1345.4 C 397.5,1345.4 397.5,1665.4 405,1665.4" fill="none" stroke="var(--tag-mint-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<a href="#n-s2" class="mg-node"><title>二、数字节食</title><rect x="230" y="1326.4" width="160" height="38.0" rx="7" fill="var(--tag-mint-bg)" stroke="var(--tag-mint-text)" stroke-width="1.5"/><text fill="var(--tag-mint-text)" font-size="14" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="239" y="1350.3">二、数字节食</tspan></text></a>
+<a href="#n-s2a" class="mg-node"><title>少搜一点，多学一点</title><rect x="405" y="870.4" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="890.9">少搜一点，多学一点</tspan></text></a>
+<path d="M 635,955.9 C 642.5,955.9 642.5,927.4 650,927.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,955.9 C 642.5,955.9 642.5,975.9 650,975.9" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<a href="#n-s2b" class="mg-node"><title>禁用 Google 和维基百科</title><rect x="405" y="939.9" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="960.4">禁用 Google 和维基百科</tspan></text></a>
+<a href="#n-s2b1" class="mg-node"><title>不是反技术，是逼学生找更好的信息</title><rect x="650" y="912.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="931.8">不是反技术，是逼学生找更好的信息</tspan></text></a>
+<a href="#n-s2b2" class="mg-node"><title>知道关键作者、扩大关键词后，Google 才好用</title><rect x="650" y="952.4" width="250" height="47.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="971.5">知道关键作者、扩大关键词后，Google </tspan><tspan x="659" y="989.0">才好用</tspan></text></a>
+<a href="#n-s2c" class="mg-node"><title>图书馆缺钱，教师自己准备读物</title><rect x="405" y="1009.4" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="1030.0">图书馆缺钱，教师自己准备读物</tspan></text></a>
+<path d="M 635,1254.9 C 642.5,1254.9 642.5,1066.4 650,1066.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,1254.9 C 642.5,1254.9 642.5,1106.4 650,1106.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,1254.9 C 642.5,1254.9 642.5,1146.4 650,1146.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,1254.9 C 642.5,1254.9 642.5,1194.9 650,1194.9" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,1254.9 C 642.5,1254.9 642.5,1243.4 650,1243.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,1254.9 C 642.5,1254.9 642.5,1283.4 650,1283.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,1254.9 C 642.5,1254.9 642.5,1323.4 650,1323.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,1254.9 C 642.5,1254.9 642.5,1363.4 650,1363.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,1254.9 C 642.5,1254.9 642.5,1403.4 650,1403.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,1254.9 C 642.5,1254.9 642.5,1443.4 650,1443.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<a href="#n-s2d" class="mg-node"><title>十问清单</title><rect x="405" y="1238.9" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="1259.5">十问清单</tspan></text></a>
+<a href="#n-e9eba6ad824246ab7f91b391" class="mg-node"><title>① 谁写的？</title><rect x="650" y="1051.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1070.8">① 谁写的？</tspan></text></a>
+<a href="#n-967e10869906ccb2a863dab0" class="mg-node"><title>② 作者有什么资格评论？</title><rect x="650" y="1091.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1110.8">② 作者有什么资格评论？</tspan></text></a>
+<a href="#n-8a1790794651ff1c6a10437d" class="mg-node"><title>③ 用了什么证据？有没有引用？</title><rect x="650" y="1131.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1150.8">③ 用了什么证据？有没有引用？</tspan></text></a>
+<a href="#n-794a69da7f7a137d2504129e" class="mg-node"><title>④ 是什么体裁：新闻／论文／博客／檄文？</title><rect x="650" y="1171.4" width="250" height="47.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1190.5">④ 是什么体裁：新闻／论文／博客／檄文</tspan><tspan x="659" y="1208.0">？</tspan></text></a>
+<a href="#n-5b6514d7c454b39c531539ea" class="mg-node"><title>⑤ 有没有机构资助？</title><rect x="650" y="1228.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1247.8">⑤ 有没有机构资助？</tspan></text></a>
+<a href="#n-b150b52da28e7bde89c051ea" class="mg-node"><title>⑥ 在提出什么论点？</title><rect x="650" y="1268.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1287.8">⑥ 在提出什么论点？</tspan></text></a>
+<a href="#n-84ffb7d9a61cd7ea741ee75b" class="mg-node"><title>⑦ 写于何时？</title><rect x="650" y="1308.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1327.8">⑦ 写于何时？</tspan></text></a>
+<a href="#n-789337f16683b5a3a0926859" class="mg-node"><title>⑧ 为什么在这时出现？</title><rect x="650" y="1348.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1367.8">⑧ 为什么在这时出现？</tspan></text></a>
+<a href="#n-66db80f458c87e0bd9074aa1" class="mg-node"><title>⑨ 受众是谁？</title><rect x="650" y="1388.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1407.8">⑨ 受众是谁？</tspan></text></a>
+<a href="#n-7bbab641950c68deffbc82cc" class="mg-node"><title>⑩ 什么没被讨论，缺席有什么政治后果？</title><rect x="650" y="1428.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1447.8">⑩ 什么没被讨论，缺席有什么政治后果？</tspan></text></a>
+<a href="#n-s2e" class="mg-node"><title>记笔记，不是划重点</title><rect x="405" y="1468.4" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="1489.0">记笔记，不是划重点</tspan></text></a>
+<path d="M 635,1665.4 C 642.5,1665.4 642.5,1525.4 650,1525.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,1665.4 C 642.5,1665.4 642.5,1565.4 650,1565.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,1665.4 C 642.5,1665.4 642.5,1605.4 650,1605.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,1665.4 C 642.5,1665.4 642.5,1645.4 650,1645.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,1665.4 C 642.5,1665.4 642.5,1685.4 650,1685.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,1665.4 C 642.5,1665.4 642.5,1725.4 650,1725.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,1665.4 C 642.5,1665.4 642.5,1765.4 650,1765.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,1665.4 C 642.5,1665.4 642.5,1805.4 650,1805.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<a href="#n-s2f" class="mg-node"><title>教学策略</title><rect x="405" y="1649.4" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="1670.0">教学策略</tspan></text></a>
+<a href="#n-s2f1" class="mg-node"><title>减少达成目标所需的媒体数量</title><rect x="650" y="1510.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1529.8">减少达成目标所需的媒体数量</tspan></text></a>
+<a href="#n-s2f2" class="mg-node"><title>少依赖 PPT 这类可搬来搬去的材料</title><rect x="650" y="1550.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1569.8">少依赖 PPT 这类可搬来搬去的材料</tspan></text></a>
+<a href="#n-s2f3" class="mg-node"><title>增加思考，减少复制粘贴</title><rect x="650" y="1590.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1609.8">增加思考，减少复制粘贴</tspan></text></a>
+<a href="#n-s2f4" class="mg-node"><title>用研究计划和注释书目搭脚手架</title><rect x="650" y="1630.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1649.8">用研究计划和注释书目搭脚手架</tspan></text></a>
+<a href="#n-s2f5" class="mg-node"><title>少而精的考核，替代多而碎</title><rect x="650" y="1670.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1689.8">少而精的考核，替代多而碎</tspan></text></a>
+<a href="#n-s2f6" class="mg-node"><title>核心读物要国际、前沿、卓越</title><rect x="650" y="1710.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1729.8">核心读物要国际、前沿、卓越</tspan></text></a>
+<a href="#n-s2f7" class="mg-node"><title>要求解读学者，而非复述观点</title><rect x="650" y="1750.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1769.8">要求解读学者，而非复述观点</tspan></text></a>
+<a href="#n-s2f8" class="mg-node"><title>建立互相关心彼此进步的学习共同体</title><rect x="650" y="1790.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1809.8">建立互相关心彼此进步的学习共同体</tspan></text></a>
+<path d="M 390,2118.6 C 397.5,2118.6 397.5,1846.4 405,1846.4" fill="none" stroke="var(--tag-peach-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,2118.6 C 397.5,2118.6 397.5,1888.4 405,1888.4" fill="none" stroke="var(--tag-peach-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,2118.6 C 397.5,2118.6 397.5,1949.4 405,1949.4" fill="none" stroke="var(--tag-peach-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,2118.6 C 397.5,2118.6 397.5,2010.4 405,2010.4" fill="none" stroke="var(--tag-peach-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,2118.6 C 397.5,2118.6 397.5,2052.4 405,2052.4" fill="none" stroke="var(--tag-peach-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,2118.6 C 397.5,2118.6 397.5,2102.6 405,2102.6" fill="none" stroke="var(--tag-peach-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,2118.6 C 397.5,2118.6 397.5,2271.8 405,2271.8" fill="none" stroke="var(--tag-peach-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<a href="#n-s3" class="mg-node"><title>三、数字正义</title><rect x="230" y="2099.6" width="160" height="38.0" rx="7" fill="var(--tag-peach-bg)" stroke="var(--tag-peach-text)" stroke-width="1.5"/><text fill="var(--tag-peach-text)" font-size="14" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="239" y="2123.5">三、数字正义</tspan></text></a>
+<a href="#n-s3a" class="mg-node"><title>数字鸿沟是被动描述，制造宿命感</title><rect x="405" y="1830.4" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="1851.0">数字鸿沟是被动描述，制造宿命感</tspan></text></a>
+<a href="#n-s3b" class="mg-node"><title>有电脑不等于会用：OLPC 的教训</title><rect x="405" y="1872.4" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="1893.0">有电脑不等于会用：OLPC 的教训</tspan></text></a>
+<path d="M 635,1949.4 C 642.5,1949.4 642.5,1929.4 650,1929.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,1949.4 C 642.5,1949.4 642.5,1969.4 650,1969.4" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<a href="#n-s3c" class="mg-node"><title>旧媒体＋新媒体＝Now Media</title><rect x="405" y="1933.4" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="1954.0">旧媒体＋新媒体＝Now Media</tspan></text></a>
+<a href="#n-s3c1" class="mg-node"><title>旧媒体是通往新环境的脚手架</title><rect x="650" y="1914.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1933.8">旧媒体是通往新环境的脚手架</tspan></text></a>
+<a href="#n-s3c2" class="mg-node"><title>信息素养可用书本练会，再迁移到网上</title><rect x="650" y="1954.4" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="1973.8">信息素养可用书本练会，再迁移到网上</tspan></text></a>
+<a href="#n-s3d" class="mg-node"><title>iPad 效应：买了再找理由</title><rect x="405" y="1994.4" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="2015.0">iPad 效应：买了再找理由</tspan></text></a>
+<a href="#n-s3e" class="mg-node"><title>进步和现代性都不止一种</title><rect x="405" y="2036.4" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="2057.0">进步和现代性都不止一种</tspan></text></a>
+<a href="#n-s3f" class="mg-node"><title>信息不想要自由，它想被标注、组织、过滤</title><rect x="405" y="2078.4" width="230" height="48.4" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="2098.1">信息不想要自由，它想被标注、组织</tspan><tspan x="414" y="2116.2">、过滤</tspan></text></a>
+<path d="M 635,2271.8 C 642.5,2271.8 642.5,2151.8 650,2151.8" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,2271.8 C 642.5,2271.8 642.5,2191.8 650,2191.8" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,2271.8 C 642.5,2271.8 642.5,2231.8 650,2231.8" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,2271.8 C 642.5,2271.8 642.5,2271.8 650,2271.8" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,2271.8 C 642.5,2271.8 642.5,2311.8 650,2311.8" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,2271.8 C 642.5,2271.8 642.5,2351.8 650,2351.8" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 635,2271.8 C 642.5,2271.8 642.5,2391.8 650,2391.8" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<a href="#n-s3g" class="mg-node"><title>承诺清单</title><rect x="405" y="2255.8" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="2276.4">承诺清单</tspan></text></a>
+<a href="#n-s3g1" class="mg-node"><title>有权获取高质量信息</title><rect x="650" y="2136.8" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="2156.2">有权获取高质量信息</tspan></text></a>
+<a href="#n-s3g2" class="mg-node"><title>有权具备信息与媒体素养</title><rect x="650" y="2176.8" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="2196.2">有权具备信息与媒体素养</tspan></text></a>
+<a href="#n-s3g3" class="mg-node"><title>开放获取材料就是更好的材料</title><rect x="650" y="2216.8" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="2236.2">开放获取材料就是更好的材料</tspan></text></a>
+<a href="#n-s3g4" class="mg-node"><title>教育非歧视；提问非回答</title><rect x="650" y="2256.8" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="2276.2">教育非歧视；提问非回答</tspan></text></a>
+<a href="#n-s3g5" class="mg-node"><title>倾听非言说；思考非假设</title><rect x="650" y="2296.8" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="2316.2">倾听非言说；思考非假设</tspan></text></a>
+<a href="#n-s3g6" class="mg-node"><title>旧金山要紧的，未必对全世界要紧</title><rect x="650" y="2336.8" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="2356.2">旧金山要紧的，未必对全世界要紧</tspan></text></a>
+<a href="#n-s3g7" class="mg-node"><title>多元文化是所有网络研究的基础</title><rect x="650" y="2376.8" width="250" height="30.0" rx="5" fill="var(--surface-2)" stroke="var(--border-soft)" stroke-width="1"/><text fill="var(--text-muted)" font-size="12.5" font-weight="500" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="659" y="2396.2">多元文化是所有网络研究的基础</tspan></text></a>
+<path d="M 390,2483.0 C 397.5,2483.0 397.5,2432.8 405,2432.8" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,2483.0 C 397.5,2483.0 397.5,2474.8 405,2474.8" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 390,2483.0 C 397.5,2483.0 397.5,2525.0 405,2525.0" fill="none" stroke="var(--tag-blue-text)" stroke-opacity="0.45" stroke-width="1.5"/>
+<a href="#n-s4" class="mg-node"><title>结语</title><rect x="230" y="2464.0" width="160" height="38.0" rx="7" fill="var(--tag-blue-bg)" stroke="var(--tag-blue-text)" stroke-width="1.5"/><text fill="var(--tag-blue-text)" font-size="14" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="239" y="2487.9">结语</tspan></text></a>
+<a href="#n-s4a" class="mg-node"><title>搬运信息的问题早已解决</title><rect x="405" y="2416.8" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="2437.4">搬运信息的问题早已解决</tspan></text></a>
+<a href="#n-s4b" class="mg-node"><title>把信息变成知识，再变成智慧</title><rect x="405" y="2458.8" width="230" height="32.0" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="2479.4">把信息变成知识，再变成智慧</tspan></text></a>
+<a href="#n-s4c" class="mg-node"><title>「这不是民主，这是装了硬盘的殖民主义」</title><rect x="405" y="2500.8" width="230" height="48.4" rx="6" fill="var(--surface)" stroke="var(--tag-blue-text)" stroke-width="1.2"/><text fill="var(--text)" font-size="13" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,Microsoft YaHei,sans-serif"><tspan x="414" y="2520.5">「这不是民主，这是装了硬盘的殖民</tspan><tspan x="414" y="2538.7">主义」</tspan></text></a>
+</svg>
+        </div>
+      </section>
+    </div>
+
+    <div class="wrap">
+      <div class="detail-layout">
+        <article class="article-body reveal">
+
+          <h2 id="n-s0">摘要</h2>
+          <p>作者从一句老话讲起：我们在知识里失去了智慧，在信息里失去了知识。她的判断是，<span id="n-s0b">信息变多，不会自动变成知识和智慧</span>。</p>
+          <p>她借饮食作比，把我们对信息的态度叫作"信息肥胖"。面对一份无限自助餐，人不停地搜、点、刷，越吃越难分辨好坏。病根不在搜索引擎，在我们自己：缺判断力，还意识不到自己缺。</p>
+          <p id="n-s0c">文章分三节。第一节用减肥研究讲选择过载，把"新的就好""搜索等于研究""信息等于知识"这些默认假设一条条拆开。第二节讲"数字节食"，核心是少搜一点、多学一点，靠放慢、设障碍、提问清单和记笔记，把吞下去的信息慢慢消化。第三节是"数字正义"，光给设备、给访问没用，素养才是关键。旧媒体也不是累赘，是通往新环境的脚手架。最后要做的，是把信息变成知识、把知识变成智慧。</p>
+          <p id="n-s0a">说到底，问题不在信息太少，在消化太少。</p>
+
+          <h2 id="n-s1">一、信息肥胖：我们嘲笑多吃，却不嘲笑无知</h2>
+          <p id="n-s1a">作者借 Kate Moss 那句"没有什么比瘦的感觉更好"，反问：为什么"吃"比"读"更重要？文化嘲讽多余的肉体，却纵容过度的无知。</p>
+          <p id="n-s1b">她把肥胖研究搬到了信息上。康奈尔大学 Brian Wansink 的实验发现，人每天要做两百多个关于"吃什么"的选择。今天在信息上同样如此：选哪本书、访问哪个网站、下载哪个播客，一天数百次。这些选择，加上"想着这些选择"，耗尽了注意力。</p>
+          <p id="n-s1c">在这套比喻里，Google 是"搜索引擎中的 Atkins 减肥法"。PageRank 帮你把选择砍下来，递到手上的却可能是"信息界的巨无霸套餐"。她做了个实验：<span id="n-s1c1">搜 postcolonialism（后殖民主义），第一条是维基百科的泛泛词条</span>；<span id="n-s1c2">再加上 Bhabha、Balibar、Spivak 三个名字，结果立刻换成大学官网和专业作者</span>。</p>
+          <p id="n-s1d">这说明信息肥胖的病根不在 Google，在搜索者缺少专业知识。</p>
+          <p id="n-s1e">南非一项研究也印证：学生不只信息素养不足，更麻烦的是他们意识不到自己的不足，也就是"我们不知道我们不知道什么"。</p>
+          <p id="n-s1f">作者列出十条默认假设，都是我们容易照单全收的：</p>
+          <ol class="cite-list">
+            <li id="n-b6d08e92342eb4f81384c25c">新的就是有用的</li>
+            <li id="n-a474d98ba2d3cb0917c3ac59">快的就是更好的</li>
+            <li id="n-273109212a12269740b90446">容易的就是有用的</li>
+            <li id="n-26c8f5e9ec55a50bca30ed22">用于休闲的门户、平台和媒体，天然有益于教育与职场</li>
+            <li id="n-b0c6f2cbe04a32648a95d785">搜索就是研究，点击就是思考</li>
+            <li id="n-7a3ae43722c6c3543e8bccd3">信息就是知识</li>
+            <li id="n-55cb8d14867d250c2df0d1bf">复制粘贴就是做笔记</li>
+            <li id="n-e9f3a4f4d31df0a02c757790">用搜索引擎替代信息素养专长</li>
+            <li id="n-b82d9d593ece5fd66ddb835b">媒体越多越好</li>
+            <li id="n-3c631bf971c3b7d7e8ed78bf">英美等国的"进步"必然惠及世界其它地方</li>
+          </ol>
+
+          <h2 id="n-s2">二、数字节食：少，即是多</h2>
+          <p id="n-s2a">"刷、冲浪、点链接"，都只是贴着知识表层滑行。作者的主张是 less is more：少搜一点，反而多学一点。</p>
+          <p id="n-s2b">她给大一新生设过一道障碍：禁用 Google 和维基百科。<span id="n-s2b1">这不是反技术，是逼学生去找更好的信息</span>。<span id="n-s2b2">等他们知道了领域里的关键作者、学会扩大关键词，Google 反而变得好用得多</span>。</p>
+          <p id="n-s2c">图书馆经费萎缩，教师只能自掏腰包、亲自给学生准备高质量读物，这成了教育公平的最后一道防线。</p>
+          <p id="n-s2d">她给学生一张"十问清单"，任何材料用之前都先过一遍：</p>
+          <ol class="cite-list">
+            <li id="n-e9eba6ad824246ab7f91b391">谁写的？</li>
+            <li id="n-967e10869906ccb2a863dab0">作者有什么资格评论？</li>
+            <li id="n-8a1790794651ff1c6a10437d">用了什么证据？有没有引用？</li>
+            <li id="n-794a69da7f7a137d2504129e">是什么体裁：新闻、论文、博客、檄文？</li>
+            <li id="n-5b6514d7c454b39c531539ea">有没有机构资助？</li>
+            <li id="n-b150b52da28e7bde89c051ea">在提出什么论点？</li>
+            <li id="n-84ffb7d9a61cd7ea741ee75b">写于何时？</li>
+            <li id="n-789337f16683b5a3a0926859">为什么在这时出现？</li>
+            <li id="n-66db80f458c87e0bd9074aa1">受众是谁？</li>
+            <li id="n-7bbab641950c68deffbc82cc">什么没被讨论，缺席有什么政治后果？</li>
+          </ol>
+          <p id="n-s2e">还有一步常被跳过：记笔记，而不是高亮。记笔记是做决定的时刻，判断什么重要，把原文放下，用自己的话留存。不记笔记，人就一直困在信息肥胖里，反复回到原文重新挑捡。</p>
+          <p id="n-s2f">落到教学上，她给了一串可执行的动作：</p>
+          <ol class="cite-list">
+            <li id="n-s2f1">减少达成目标所需的媒体数量</li>
+            <li id="n-s2f2">少依赖 PPT 这类可搬来搬去的材料</li>
+            <li id="n-s2f3">多思考，少复制粘贴</li>
+            <li id="n-s2f4">用研究计划和注释书目做脚手架</li>
+            <li id="n-s2f5">用少而精的考核替代多而碎</li>
+            <li id="n-s2f6">核心读物要国际、前沿、卓越</li>
+            <li id="n-s2f7">要求"解读"学者，而不是复述观点</li>
+            <li id="n-s2f8">建立互相关心彼此进步的学习共同体</li>
+          </ol>
+
+          <h2 id="n-s3">三、数字正义：这不是给设备，是给素养</h2>
+          <p id="n-s3a">"数字鸿沟"这个词太被动。它把不平等说成宿命，只描述差异，不推动行动，还默认"用上技术就是学会用技术"。</p>
+          <p id="n-s3b">"每个孩子一台笔记本"（OLPC）项目就是例子：以为发了电脑，自然会生出信息素养。Python 之父 Guido van Rossum 讽刺说，给发展中国家送笔记本，像"21 世纪给殖民地送圣经"。访问只是学习的第一步。</p>
+          <p id="n-s3c">作者有个关键判断：信息素养的很多本事，本来就能用书本和印刷材料练会，再迁移到网上。<span id="n-s3c1">书的目录、索引、参考文献，本身就是一种横向的"超文本"阅读</span>。她把这一点写成一个公式：旧媒体加新媒体，等于现在媒体（Old media + New Media = Now Media）。<span id="n-s3c2">旧媒体并不过时，它是通往新环境的脚手架</span>。</p>
+          <p id="n-s3d">她说的"iPad 效应"也是一回事：苹果在手机和笔记本之间人为造出一个位置，买的人再写文章、出书、开博客，寻找理由说服自己买得对。这本身就是信息肥胖。数字节食的起点，是问"我想达成什么"，不是问"我能用上什么新硬件"。</p>
+          <p id="n-s3e">最后她把视角拉到后殖民：不存在单一的进步路径，也不存在单一的现代性，她说，"有各种各样的流动与现代性，也有多个互联网和万维网"。关于数字民主、参与式文化、数字鸿沟的老套叙事，已经陈旧且天真。</p>
+          <p id="n-s3f">Goldsmith 和 Wu 的说法更实在：信息其实并不"想要自由"，它想被标注、被组织、被过滤，好让人找得到、能交叉参照、能消费。</p>
+          <p id="n-s3g">从"数字鸿沟"走向"数字正义"，她给了一份承诺清单：</p>
+          <ul class="cite-list">
+            <li id="n-s3g1">所有公民都有权获取高质量信息</li>
+            <li id="n-s3g2">所有公民都有权具备素养，包括信息素养和媒体素养</li>
+            <li id="n-s3g3">开放获取的材料就是更好的材料</li>
+            <li id="n-s3g4">后殖民互联网在世界各地建立对话、改进、质疑技术选择的网络，而不是把媒体、观念和态度强加于人</li>
+            <li id="n-s3g5">教育，不要歧视</li>
+            <li id="n-s3g6">提问，不要给答案</li>
+            <li id="n-s3g7">倾听，不要自说自话</li>
+          </ul>
+
+          <h2 id="n-s4">结语</h2>
+          <p id="n-s4a">文章用 T.S. Eliot 的诗收尾：我们在知识里失去了智慧，在信息里失去了知识。<span id="n-s4b">21 世纪要解决的，是怎么把信息变成知识、把知识变成智慧；怎么搬运信息，早就不是问题了</span>。做不到这一点，那些不上网、不"参与"的人就会继续隐形。用作者的话说：</p>
+          <p id="n-s4c"><em>"这不是民主，这是装了硬盘的殖民主义。"</em></p>
+
+          <div class="note-inline" style="margin-top:26px">
+            文章来源：Tara Brabazon, <em>Time for a Digital Detox? From Information Obesity to Digital Dieting</em>, Fast Capitalism, Vol. 9, Issue 1, Article 11. DOI: 10.32855/fcapital.201201.009.
+            <a href="https://mavmatrix.uta.edu/fastcapitalism/vol9/iss1/11" target="_blank" rel="noopener">查看原文 ↗</a>
+          </div>
+        </article>
+
+        <div class="article-end">
+          <a class="back-link" href="../index.html#digest">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            返回 post
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span><a href="#main">回到顶部 ↑</a></span>
+    </div>
+  </footer>
+
+  <script src="../assets/post.js"></script>
+</body>
+</html>
