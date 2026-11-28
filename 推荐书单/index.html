@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>推荐书单 · oo的主页</title>
-  <meta name="description" content="oo 的推荐书单：社会科学与自助两类值得一读的书，点击封面直达豆瓣。">
+  <meta name="description" content="oo 的推荐书单：跨多个领域值得一读的好书，点击封面直达豆瓣。">
   <style>
     /* ============ Design tokens（与主页同一套） ============ */
     :root {
@@ -398,11 +398,11 @@
       ];
 
       var UI = {
-        'zh-Hans': { themeDark: '切换到深色模式', themeLight: '切换到浅色模式', langAria: '切换语言', langMenuLabel: '语言', title: '推荐书单 · oo的主页', desc: 'oo 的推荐书单：社会科学与自助两类值得一读的书，点击封面直达豆瓣。' },
-        'zh-Hant': { themeDark: '切換到深色模式', themeLight: '切換到淺色模式', langAria: '切換語言', langMenuLabel: '語言', title: '推薦書單 · oo 的首頁', desc: 'oo 的推薦書單：社會科學與自助兩類值得一讀的書，點擊封面直達豆瓣。' },
-        'en': { themeDark: 'Switch to dark mode', themeLight: 'Switch to light mode', langAria: 'Change language', langMenuLabel: 'Language', title: "Reading list · oo's home", desc: "oo's reading list: social science and self-help books worth reading, click a cover to open Douban." },
-        'ko': { themeDark: '어두운 모드로 전환', themeLight: '밝은 모드로 전환', langAria: '언어 변경', langMenuLabel: '언어', title: '추천 도서 목록 · oo의 홈', desc: 'oo의 추천 도서 목록: 사회과학과 자기계발 분야의 좋은 책, 표지를 누르면 더우반으로 이동합니다.' },
-        'ja': { themeDark: 'ダークモードに切り替え', themeLight: 'ライトモードに切り替え', langAria: '言語を変更', langMenuLabel: '言語', title: '推薦図書リスト · oo のホーム', desc: 'oo の推薦図書リスト：社会科学と自己啓発の二分野から、読む価値のある本を。表紙をクリックすると豆瓣へ。' }
+        'zh-Hans': { themeDark: '切换到深色模式', themeLight: '切换到浅色模式', langAria: '切换语言', langMenuLabel: '语言', title: '推荐书单 · oo的主页', desc: 'oo 的推荐书单：跨多个领域值得一读的好书，点击封面直达豆瓣。' },
+        'zh-Hant': { themeDark: '切換到深色模式', themeLight: '切換到淺色模式', langAria: '切換語言', langMenuLabel: '語言', title: '推薦書單 · oo 的首頁', desc: 'oo 的推薦書單：跨多個領域值得一讀的好書，點擊封面直達豆瓣。' },
+        'en': { themeDark: 'Switch to dark mode', themeLight: 'Switch to light mode', langAria: 'Change language', langMenuLabel: 'Language', title: "Reading list · oo's home", desc: "oo's reading list: good books worth reading across many fields, click a cover to open Douban." },
+        'ko': { themeDark: '어두운 모드로 전환', themeLight: '밝은 모드로 전환', langAria: '언어 변경', langMenuLabel: '언어', title: '추천 도서 목록 · oo의 홈', desc: 'oo의 추천 도서 목록: 여러 분야의 읽을 만한 좋은 책, 표지를 누르면 더우반으로 이동합니다.' },
+        'ja': { themeDark: 'ダークモードに切り替え', themeLight: 'ライトモードに切り替え', langAria: '言語を変更', langMenuLabel: '言語', title: '推薦図書リスト · oo のホーム', desc: 'oo の推薦図書リスト：さまざまな分野から、読む価値のある本を。表紙をクリックすると豆瓣へ。' }
       };
 
       /* 书卡里的文字由 JS 渲染，切语言时按这里取词并重绘 */
@@ -515,7 +515,8 @@
         '历史':     { 'zh-Hant': '歷史', en: 'History', ko: '역사', ja: '歴史' },
         '商业':     { 'zh-Hant': '商業', en: 'Business', ko: '비즈니스', ja: 'ビジネス' },
         '纪实':     { 'zh-Hant': '紀實', en: 'Reportage', ko: '르포', ja: 'ルポ' },
-        '思考工具': { 'zh-Hant': '思考工具', en: 'Thinking tools', ko: '사고 도구', ja: '思考の道具' }
+        '思考工具': { 'zh-Hant': '思考工具', en: 'Thinking tools', ko: '사고 도구', ja: '思考の道具' },
+        '小说/散文/随笔': { 'zh-Hant': '小說/散文/隨筆', en: 'Fiction / Essays', ko: '소설/산문/수필', ja: '小説/エッセイ' }
       };
 
       var ALL_LABEL = {
