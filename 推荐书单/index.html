@@ -203,9 +203,40 @@
     }
     html[lang="ja"] .note blockquote { font-size: .95rem; }
 
+    /* ============ Year distribution ============ */
+    #years { padding: 12px 0 0; }
+    .years-head { margin-bottom: 24px; }
+    .years-head h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin: 0 0 6px; }
+    .years-head p { color: var(--text-muted); font-size: .9rem; margin: 0; }
+    .years-chart {
+      display: grid; grid-auto-flow: column; grid-auto-columns: minmax(30px, 1fr);
+      align-items: end; gap: 6px; height: 210px; padding: 10px 2px 0;
+      border-bottom: 2px solid var(--border-soft);
+    }
+    .year-col { display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; gap: 4px; }
+    .year-count { font-size: .75rem; font-weight: 700; color: var(--text-muted); min-height: 1.2em; }
+    .year-bar {
+      width: 100%; max-width: 40px; min-height: 3px;
+      background: var(--primary); border-radius: 4px 4px 0 0;
+      transition: height .5s ease, opacity .2s ease;
+    }
+    .year-col:hover .year-bar, .year-col.active .year-bar { background: var(--focus); }
+    .year-col.active .year-count { color: var(--focus); }
+    .year-label { font-size: .68rem; color: var(--text-muted); text-align: center; white-space: nowrap; padding-top: 8px; font-variant-numeric: tabular-nums; }
+    .year-col.active .year-label { color: var(--focus); font-weight: 800; }
+    .year-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 6px; margin-top: 10px; }
+    .year-btn {
+      appearance: none; border: 1px solid transparent; background: transparent; cursor: pointer;
+      font-family: inherit; font-size: .72rem; font-weight: 700; color: var(--primary);
+      padding: 4px 7px; border-radius: 6px; min-height: 32px;
+    }
+    .year-btn:hover { background: var(--surface-2); }
+    .year-btn.active { border-color: var(--focus); color: var(--focus); background: var(--surface-2); }
+    .years-summary { color: var(--text-muted); font-size: .85rem; margin: 14px 0 0; text-align: center; }
+
     /* ============ Sections ============ */
     section { padding: 88px 0; }
-    #list { padding: 56px 0 80px; }
+    #list { padding: 40px 0 80px; }
     .section-head { margin-bottom: 26px; max-width: 60ch; }
 
     /* ============ Tabs ============ */
@@ -351,6 +382,20 @@
         <p class="eyebrow">04 / 书单</p>
         <h1 id="page-title">推荐书单</h1>
         <div class="notes" id="quoteBoard" aria-label="摘录"></div>
+      </div>
+    </section>
+
+    <!-- YEAR DISTRIBUTION -->
+    <section id="years" aria-labelledby="years-title">
+      <div class="wrap">
+        <div class="years-head reveal">
+          <p class="eyebrow">出版年份分布</p>
+          <h2 id="years-title">什么时候出版的书，值得读</h2>
+          <p>按出版年份统计当前书单；点击年份可筛选该年出版的书。</p>
+        </div>
+        <div class="years-chart reveal" id="yearChart" role="img" aria-label="出版年份分布柱状图"></div>
+        <div class="year-btns reveal" id="yearBtns" role="group" aria-label="按年份筛选"></div>
+        <p class="years-summary" id="yearsSummary"></p>
       </div>
     </section>
 
@@ -588,11 +633,86 @@
         return a;
       }
 
+      // ===== 出版年份分布图（数据来自 books.js 的 year 字段） =====
+      var yearChartEl = document.getElementById('yearChart');
+      var yearBtnsEl = document.getElementById('yearBtns');
+      var yearsSummaryEl = document.getElementById('yearsSummary');
+      var activeYear = null;
+      var yearStats = (function () {
+        var m = {};
+        books.forEach(function (b) {
+          var y = parseInt(b.year, 10);
+          if (!isNaN(y) && y >= 1900 && y <= 2100) m[y] = (m[y] || 0) + 1;
+        });
+        return m;
+      })();
+      var YEAR_LABEL = {
+        'zh-Hans': { title: '出版年份分布', head: '什么时候出版的书，值得读', desc: '按出版年份统计当前书单；点击年份可筛选该年出版的书。', aria: '出版年份分布柱状图', group: '按年份筛选', all: '全部年份', summary: '共统计 {n} 本有出版年份的书，跨度 {a}–{b}；最多的一年是 {y}（{c} 本）。' },
+        'zh-Hant': { title: '出版年份分佈', head: '什麼時候出版的書，值得讀', desc: '按出版年份統計目前書單；點擊年份可篩選該年出版的書。', aria: '出版年份分佈長條圖', group: '依年份篩選', all: '全部年份', summary: '共統計 {n} 本有出版年份的書，跨度 {a}–{b}；最多的一年是 {y}（{c} 本）。' },
+        en: { title: 'Publication years', head: 'When were these books published?', desc: 'Distribution by publication year; click a year to filter the list.', aria: 'Bar chart of publication years', group: 'Filter by year', all: 'All years', summary: '{n} dated books spanning {a}–{b}; the peak year is {y} ({c} books).' },
+        ko: { title: '출판 연도 분포', head: '언제 나온 책이 읽을 만할까요?', desc: '출판 연도별 분포입니다. 연도를 누르면 해당 해의 책만 볼 수 있습니다.', aria: '출판 연도 분포 막대 그래프', group: '연도별 필터', all: '전체 연도', summary: '출판 연도가 있는 책 {n}권, {a}–{b}년 분포이며 가장 많은 해는 {y}년({c}권)입니다.' },
+        ja: { title: '出版年の分布', head: 'いつ出版された本が読む価値があるか', desc: '出版年ごとの分布です。年をクリックするとその年の本だけ表示します。', aria: '出版年の分布グラフ', group: '年で絞り込み', all: 'すべての年', summary: '出版年のある本は {n} 冊、{a}–{b} 年に分布。最多は {y} 年（{c} 冊）です。' }
+      };
+      function yearText(key) {
+        var L = YEAR_LABEL[currentLang] || YEAR_LABEL['zh-Hans'];
+        return L[key];
+      }
+      function renderYears() {
+        if (!yearChartEl || !yearBtnsEl) return;
+        var years = Object.keys(yearStats).map(Number).sort(function (a, b) { return a - b; });
+        if (!years.length) { yearChartEl.innerHTML = ''; yearBtnsEl.innerHTML = ''; return; }
+        var max = years.reduce(function (m, y) { return Math.max(m, yearStats[y]); }, 0);
+        var first = years[0], last = years[years.length - 1];
+        var peak = years.reduce(function (p, y) { return yearStats[y] > yearStats[p] ? y : p; }, first);
+
+        yearChartEl.innerHTML = '';
+        yearBtnsEl.innerHTML = '';
+        years.forEach(function (y) {
+          var n = yearStats[y];
+          var col = el('div', 'year-col' + (activeYear === y ? ' active' : ''));
+          col.appendChild(el('span', 'year-count', n > 0 ? String(n) : ''));
+          var bar = el('div', 'year-bar');
+          bar.style.height = (n / max * 100) + '%';
+          bar.setAttribute('aria-label', y + ': ' + n);
+          col.appendChild(bar);
+          col.appendChild(el('span', 'year-label', String(y)));
+          col.style.cursor = 'pointer';
+          col.title = y + ' · ' + n;
+          col.addEventListener('click', function () { toggleYear(y); });
+          yearChartEl.appendChild(col);
+
+          var btn = el('button', 'year-btn' + (activeYear === y ? ' active' : ''), String(y));
+          btn.type = 'button';
+          btn.setAttribute('aria-pressed', String(activeYear === y));
+          btn.addEventListener('click', function () { toggleYear(y); });
+          yearBtnsEl.appendChild(btn);
+        });
+        var allBtn = el('button', 'year-btn' + (activeYear === null ? ' active' : ''), yearText('all'));
+        allBtn.type = 'button';
+        allBtn.setAttribute('aria-pressed', String(activeYear === null));
+        allBtn.addEventListener('click', function () { toggleYear(null); });
+        yearBtnsEl.insertBefore(allBtn, yearBtnsEl.firstChild);
+
+        var total = years.reduce(function (s, y) { return s + yearStats[y]; }, 0);
+        var tpl = yearText('summary');
+        yearsSummaryEl.textContent = tpl.replace('{n}', total).replace('{a}', first).replace('{b}', last).replace('{y}', peak).replace('{c}', yearStats[peak]);
+        yearChartEl.setAttribute('aria-label', yearText('aria'));
+        yearBtnsEl.setAttribute('aria-label', yearText('group'));
+      }
+      function toggleYear(y) {
+        activeYear = (activeYear === y) ? null : y;
+        renderYears();
+        render(activeCat);
+      }
+
       function render(cat) {
         var L = BOOK_UI[currentLang] || BOOK_UI['zh-Hans'];
         grid.innerHTML = '';
         /* ALL 显示全部，其余按领域筛选；两种情况都按书名拼音排序 */
         var list = (cat === ALL) ? books.slice() : books.filter(function (b) { return b.cat === cat; });
+        if (activeYear !== null) {
+          list = list.filter(function (b) { return parseInt(b.year, 10) === activeYear; });
+        }
         list.sort(byTitle);
         if (!list.length) {
           grid.appendChild(el('p', 'book-empty', L.empty));
@@ -703,6 +823,15 @@
         applyTheme(theme);
         try { localStorage.setItem('oo-design-lang', code); } catch (e) {}
         renderQuotes(code);
+        /* 年份区块的静态文案（动态生成，不在 textNodes 采集范围内） */
+        var YL = YEAR_LABEL[code] || YEAR_LABEL['zh-Hans'];
+        var yEyebrow = document.querySelector('#years .eyebrow');
+        var yTitle = document.getElementById('years-title');
+        var yDesc = document.querySelector('.years-head p:last-child');
+        if (yEyebrow) yEyebrow.textContent = YL.title;
+        if (yTitle) yTitle.textContent = YL.head;
+        if (yDesc) yDesc.textContent = YL.desc;
+        renderYears();
         buildTabs();
         render(activeCat);
       }
